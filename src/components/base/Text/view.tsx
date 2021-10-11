@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text as RNText } from 'react-native';
-import styles, { fontStyles } from './style';
+import useStyles from './style';
 import { TextProps } from './props';
 
 const Text = (props: TextProps) => {
@@ -9,11 +9,14 @@ const Text = (props: TextProps) => {
     style = {},
     children,
     variant = 'body',
+    theme,
     ...textProps
   } = props;
+
+  const { styles, colors, fonts } = useStyles(theme);
   return (
     <View style={[styles.container, containerStyle]}>
-      <RNText {...textProps} style={[fontStyles[variant], style]}>
+      <RNText {...textProps} style={[fonts[variant], style]}>
         {children}
       </RNText>
     </View>

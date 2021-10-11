@@ -1,0 +1,14 @@
+import { storiesOf } from '@storybook/react-native';
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import {{ pascalCase name}} from '../../../src/components/{{type}}/{{ pascalCase name}}';
+
+const styles = StyleSheet.create({
+  container: { flex: 1, padding: 16 },
+});
+
+storiesOf('{{type}}/{{ pascalCase name}}', module).add('Summary', () => (
+  <View style={styles.container}>
+    <{{ pascalCase name}} />
+  </View>
+));
