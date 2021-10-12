@@ -1,5 +1,9 @@
 apply plugin: "com.android.application"
 
+// Additional steps for linking react-native-config
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+
+
 import com.android.build.OutputFile
 
 /**
