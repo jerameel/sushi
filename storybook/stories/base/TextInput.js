@@ -2,11 +2,12 @@ import { storiesOf } from '@storybook/react-native';
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import TextInput from '../../../src/components/base/TextInput';
+import { COLORS } from '../../../src/theme';
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16 },
+  container: { flex: 1, padding: 16, backgroundColor: COLORS.LIGHT.BACKGROUND },
   darkBackground: {
-    backgroundColor: '#000',
+    backgroundColor: COLORS.DARK.BACKGROUND,
   },
 });
 

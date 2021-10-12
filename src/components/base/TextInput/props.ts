@@ -6,6 +6,7 @@ export interface TextInputProps {
   theme?: Theme;
   style?: ViewStyle;
   label?: string;
+  placeholder?: string;
   value?: string;
   onChangeText?: (value: string) => void;
 }

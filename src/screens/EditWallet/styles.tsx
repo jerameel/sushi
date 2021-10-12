@@ -8,17 +8,28 @@ const useStyles = () => {
   const colors = COLORS[theme.base];
   const STYLES = getGlobalStyles(theme.base);
   const styles = StyleSheet.create({
-    container: { ...STYLES.CONTAINER, padding: 16 },
+    container: STYLES.CONTAINER,
     header: STYLES.HEADER,
-    headerTitle: STYLES.HEADER_TITLE,
+    headerTitleContainer: {
+      marginLeft: 8,
+    },
+    headerBackAction: {
+      width: 40,
+      height: 40,
+      justifyContent: 'center',
+      alignItems: 'flex-start',
+    },
     content: {
       flex: 1,
     },
     contentScroll: {
-      paddingHorizontal: 16,
+      padding: 16,
     },
-    settingItem: {
+    textFieldContainer: {
       marginTop: 16,
+    },
+    actionsContainer: {
+      padding: 16,
     },
   });
   return { styles, colors, theme };
