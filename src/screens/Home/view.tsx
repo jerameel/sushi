@@ -6,9 +6,24 @@ import useStyles from './styles';
 import { HomeProps } from './props';
 import WalletCard from 'components/module/WalletCard';
 import { Add } from 'components/base/SVG';
+import TransactionCard from 'components/module/TransactionCard';
+
+const SubHeader = (props: { onPressAdd: () => void; label: string }) => {
+  const { styles, theme, colors } = useStyles();
+  return (
+    <View style={styles.contentHeader}>
+      <Text variant="subtitle">{props.label}</Text>
+      <TouchableOpacity
+        style={styles.contentHeaderAction}
+        onPress={props.onPressAdd}>
+        <Add fill={colors.PRIMARY_TEXT} width={24} height={24} />
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 const HomeView = (props: HomeProps) => {
-  const { navigation, wallets } = props;
+  const { navigation, wallets, transactions } = props;
   const { styles, theme, colors } = useStyles();
 
   return (
@@ -18,29 +33,50 @@ const HomeView = (props: HomeProps) => {
         barStyle={theme.base === 'Dark' ? 'light-content' : 'dark-content'}
       />
       <View style={styles.content}>
-        <View style={styles.walletsHeader}>
-          <Text variant="subtitle">My Wallets</Text>
-          <TouchableOpacity
-            style={styles.addWalletAction}
-            onPress={() => {
-              navigation.navigate('EDIT_WALLET');
-            }}>
-            <Add fill={colors.PRIMARY_TEXT} width={24} height={24} />
-          </TouchableOpacity>
+        <View>
+          <SubHeader
+            label="My Wallets"
+            onPressAdd={() => navigation.navigate('CREATE_WALLET')}
+          />
+          <View style={styles.walletsScrollContainer}>
+            <ScrollView
+              contentContainerStyle={styles.contentScroll}
+              horizontal
+              showsHorizontalScrollIndicator={false}>
+              {Object.keys(wallets).map((key) => {
+                const wallet = wallets[key];
+                return (
+                  <WalletCard
+                    containerStyle={styles.walletCard}
+                    key={key}
+                    label={wallet.label}
+                    balance={wallet.initialAmount}
+                  />
+                );
+              })}
+            </ScrollView>
+          </View>
         </View>
-        <ScrollView contentContainerStyle={styles.contentScroll}>
-          {Object.keys(wallets).map((key) => {
-            const wallet = wallets[key];
-            return (
-              <WalletCard
-                containerStyle={styles.walletCard}
-                key={key}
-                label={wallet.label}
-                balance={wallet.initialAmount}
-              />
-            );
-          })}
-        </ScrollView>
+
+        <View style={styles.transactionsContainer}>
+          <SubHeader
+            label="Transactions"
+            onPressAdd={() => navigation.navigate('CREATE_TRANSACTION')}
+          />
+          <ScrollView contentContainerStyle={styles.contentScroll}>
+            {Object.keys(transactions).map((key) => {
+              const transaction = transactions[key];
+              return (
+                <TransactionCard
+                  containerStyle={styles.transactionCard}
+                  key={key}
+                  category={transaction.category}
+                  amount={transaction.amount}
+                />
+              );
+            })}
+          </ScrollView>
+        </View>
       </View>
     </SafeAreaView>
   );

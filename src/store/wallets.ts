@@ -16,13 +16,7 @@ const walletsSlice = createSlice({
   name: 'wallets',
   initialState,
   reducers: {
-    createWallet(
-      state,
-      action: PayloadAction<{
-        label: string;
-        initialAmount: number;
-      }>,
-    ) {
+    createWallet(state, action: PayloadAction<Omit<Wallet, 'id'>>) {
       return produce(state, (draft) => {
         const id = uuidv1();
         draft[id] = {

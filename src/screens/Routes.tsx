@@ -2,7 +2,8 @@
 import React, { useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from 'screens/Home';
-import EditWalletScreen from 'screens/EditWallet';
+import CreateWalletScreen from 'screens/CreateWallet';
+import CreateTransactionScreen from 'screens/CreateTransaction';
 import { MainStackParamList } from 'types/Route';
 
 const MainStack = createNativeStackNavigator<MainStackParamList>();
@@ -21,8 +22,13 @@ const Routes = () => {
       />
       <MainStack.Screen
         options={{ headerShown: false }}
-        name="EDIT_WALLET"
-        component={EditWalletScreen}
+        name="CREATE_WALLET"
+        component={CreateWalletScreen}
+      />
+      <MainStack.Screen
+        options={{ headerShown: false }}
+        name="CREATE_TRANSACTION"
+        component={CreateTransactionScreen}
       />
     </MainStack.Navigator>
   );

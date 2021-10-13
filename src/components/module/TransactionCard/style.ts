@@ -10,9 +10,7 @@ const useStyles = (theme: Theme = DEFAULT_THEME) => {
     container: {
       padding: 16,
       borderRadius: 10,
-      width: 150,
       backgroundColor: colors.AREA_HIGHLIGHT,
-      justifyContent: 'space-between',
     },
   });
 

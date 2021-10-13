@@ -1,4 +1,5 @@
 export type MainStackParamList = {
   HOME?: {};
-  EDIT_WALLET?: {};
+  CREATE_WALLET?: {};
+  CREATE_TRANSACTION?: {};
 };

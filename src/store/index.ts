@@ -14,10 +14,12 @@ import createSagaMiddleware from 'redux-saga';
 
 import themeReducer from './theme';
 import walletsReducer from './wallets';
+import transactionsReducer from './transactions';
 
 const rootReducer = combineReducers({
   theme: themeReducer,
   wallets: walletsReducer,
+  transactions: transactionsReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
@@ -26,7 +28,7 @@ const persistConfig = {
   key: 'root',
   version: 1,
   storage: AsyncStorage,
-  whitelist: ['theme', 'wallets'],
+  whitelist: ['theme', 'wallets', 'transactions'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

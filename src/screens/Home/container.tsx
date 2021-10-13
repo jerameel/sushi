@@ -7,9 +7,11 @@ import HomeView from './view';
 
 const HomeContainer = (props: HomePublicProps) => {
   const wallets = useSelector((state: RootState) => state.wallets);
+  const transactions = useSelector((state: RootState) => state.transactions);
 
   const generatedProps: HomePrivateProps = {
     wallets,
+    transactions,
   };
 
   return <HomeView {...props} {...generatedProps} />;

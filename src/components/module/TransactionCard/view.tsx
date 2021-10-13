@@ -3,21 +3,20 @@ import { View } from 'react-native';
 import numbro from 'numbro';
 import Text from 'components/base/Text';
 import useStyles from './style';
-import { WalletCardProps } from './props';
+import { TransactionCardProps } from './props';
 
-const WalletCard = (props: WalletCardProps) => {
-  const { containerStyle = {}, theme, label, balance } = props;
+const TransactionCard = (props: TransactionCardProps) => {
+  const { containerStyle = {}, theme, category, amount } = props;
 
   const { styles, colors } = useStyles(theme);
-
   return (
     <View style={[styles.container, containerStyle]}>
+      <Text>{category}</Text>
       <Text variant="subtitle">
-        {numbro(balance).formatCurrency({ mantissa: 2, average: true })}
+        {numbro(amount).formatCurrency({ mantissa: 2, average: true })}
       </Text>
-      <Text>{label}</Text>
     </View>
   );
 };
 
-export default WalletCard;
+export default TransactionCard;

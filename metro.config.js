@@ -3,7 +3,10 @@ module.exports = {
     getTransformOptions: async () => ({
       transform: {
         experimentalImportSupport: false,
-        inlineRequires: true,
+
+        // setting Disabled due to
+        // https://github.com/facebook/metro/issues/682
+        inlineRequires: false,
       },
     }),
   },

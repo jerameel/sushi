@@ -10,37 +10,26 @@ const useStyles = () => {
   const styles = StyleSheet.create({
     container: STYLES.CONTAINER,
     header: STYLES.HEADER,
+    headerTitleContainer: {
+      marginLeft: 8,
+    },
+    headerBackAction: {
+      width: 40,
+      height: 40,
+      justifyContent: 'center',
+      alignItems: 'flex-start',
+    },
     content: {
       flex: 1,
     },
     contentScroll: {
-      paddingHorizontal: 16,
-      paddingBottom: 8,
+      padding: 16,
     },
-    contentHeader: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'flex-end',
-      paddingHorizontal: 16,
-      paddingVertical: 8,
+    textFieldContainer: {
+      marginTop: 16,
     },
-    contentHeaderAction: {
-      width: 40,
-      height: 40,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    walletsScrollContainer: {
-      height: 125,
-    },
-    walletCard: {
-      marginLeft: 8,
-    },
-    transactionsContainer: {
-      flex: 1,
-    },
-    transactionCard: {
-      marginTop: 8,
+    actionsContainer: {
+      padding: 16,
     },
   });
   return { styles, colors, theme };
