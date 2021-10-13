@@ -7,12 +7,25 @@ import { CreateTransactionProps } from './props';
 import { Back } from 'components/base/SVG';
 import TextInput from 'components/base/TextInput';
 import Button from 'components/base/Button';
+import Picker from 'components/base/Picker';
 
 const CreateTransactionView = (props: CreateTransactionProps) => {
-  const { navigation, createTransaction } = props;
+  const { navigation, createTransaction, wallets } = props;
   const { styles, theme, colors } = useStyles();
 
+  const walletOptions = Object.keys(wallets).map((key) => {
+    const wallet = wallets[key];
+    return {
+      label: wallet.label,
+      value: wallet.id,
+    };
+  });
+
   const [category, setCategory] = useState('');
+  const [sourceWalletId, setSourceWalletId] = useState<string | null>(null);
+  const [destinationWalletId, setDestinationWalletId] = useState<string | null>(
+    null,
+  );
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
 
@@ -37,20 +50,51 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
       <View style={styles.content}>
         <ScrollView style={styles.contentScroll}>
           <TextInput
-            containerStyle={styles.textFieldContainer}
+            containerStyle={styles.inputContainer}
             label="Category"
             value={category}
             onChangeText={(text) => setCategory(text)}
           />
+
+          <View style={styles.categorySuggestionsContainer}>
+            <TouchableOpacity
+              style={styles.categorySuggestionBadge}
+              onPress={() => {
+                setCategory('Transfer');
+              }}>
+              <Text style={styles.categorySuggestionText} variant="label">
+                Transfer
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          <Picker
+            containerStyle={styles.inputContainer}
+            label="Source Wallet"
+            selectedValue={sourceWalletId || undefined}
+            onSelect={(value) => setSourceWalletId(value)}
+            options={walletOptions}
+          />
+
+          {category === 'Transfer' && (
+            <Picker
+              containerStyle={styles.inputContainer}
+              label="Destination Wallet"
+              selectedValue={destinationWalletId || undefined}
+              onSelect={(value) => setDestinationWalletId(value)}
+              options={walletOptions}
+            />
+          )}
+
           <TextInput
-            containerStyle={styles.textFieldContainer}
+            containerStyle={styles.inputContainer}
             label="Short Description"
             value={description}
             onChangeText={(text) => setDescription(text)}
           />
 
           <TextInput
-            containerStyle={styles.textFieldContainer}
+            containerStyle={styles.inputContainer}
             label="Amount"
             value={amount}
             onChangeText={(text) => setAmount(text)}
@@ -64,8 +108,8 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
                 category: category || 'others',
                 description: description || '',
                 amount: Number(amount) || 0,
-                sourceWalletId: null,
-                destinationWalletId: null,
+                sourceWalletId,
+                destinationWalletId,
               })
             }
             label="Create Transaction"

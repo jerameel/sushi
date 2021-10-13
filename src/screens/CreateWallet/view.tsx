@@ -40,7 +40,6 @@ const CreateWalletView = (props: CreateWalletProps) => {
             label="Label"
             value={label}
             onChangeText={(text) => setLabel(text)}
-            placeholder={'Ex. "Bank Z" or "Card 123"'}
           />
 
           <TextInput

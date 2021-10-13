@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const TextWrapper = (props) => {
+const TextInputWrapper = (props) => {
   const [text, setText] = useState('');
   return <TextInput {...props} value={text} onChangeText={(v) => setText(v)} />;
 };
@@ -19,7 +19,7 @@ const TextWrapper = (props) => {
 storiesOf('base/TextInput', module).add('Summary', () => {
   return (
     <View style={styles.container}>
-      <TextWrapper label="Plain Text Input" />
+      <TextInputWrapper label="Plain Text Input" />
     </View>
   );
 });
@@ -31,7 +31,7 @@ const DARK_THEME = {
 storiesOf('base/TextInput', module).add('Summary (Dark)', () => {
   return (
     <View style={[styles.container, styles.darkBackground]}>
-      <TextWrapper theme={DARK_THEME} label="Plain Text Input" />
+      <TextInputWrapper theme={DARK_THEME} label="Plain Text Input" />
     </View>
   );
 });

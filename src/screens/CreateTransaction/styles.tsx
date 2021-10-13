@@ -25,8 +25,25 @@ const useStyles = () => {
     contentScroll: {
       padding: 16,
     },
-    textFieldContainer: {
+    inputContainer: {
       marginTop: 16,
+    },
+    categorySuggestionsContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      flexWrap: 'wrap',
+      marginTop: 8,
+    },
+    categorySuggestionBadge: {
+      paddingVertical: 4,
+      paddingHorizontal: 8,
+      backgroundColor: colors.AREA_HIGHLIGHT,
+      borderRadius: 9,
+      borderWidth: 1,
+      borderColor: colors.BORDER,
+    },
+    categorySuggestionText: {
+      color: colors.PRIMARY,
     },
     actionsContainer: {
       padding: 16,
