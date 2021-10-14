@@ -1,4 +1,4 @@
-import { ViewStyle } from 'react-native';
+import { KeyboardTypeOptions, ViewStyle } from 'react-native';
 import { Theme } from 'store/theme';
 
 export interface TextInputProps {
@@ -9,4 +9,6 @@ export interface TextInputProps {
   placeholder?: string;
   value?: string;
   onChangeText?: (value: string) => void;
+  onBlur?: () => void;
+  keyboardType?: KeyboardTypeOptions;
 }

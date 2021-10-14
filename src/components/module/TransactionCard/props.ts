@@ -6,4 +6,7 @@ export interface TransactionCardProps {
   theme?: Theme;
   category: string;
   amount: number;
+  sourceWallet: string;
+  destinationWallet?: string;
+  createdAt: string;
 }

@@ -9,7 +9,8 @@ export type Theme = {
 };
 
 const initialState: Theme = {
-  base: Appearance.getColorScheme() === 'dark' ? 'Dark' : 'Light',
+  // base: Appearance.getColorScheme() === 'dark' ? 'Dark' : 'Light',
+  base: 'Light',
 };
 
 const themeSlice = createSlice({

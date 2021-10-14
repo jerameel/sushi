@@ -45,12 +45,31 @@ const HomeView = (props: HomeProps) => {
               showsHorizontalScrollIndicator={false}>
               {Object.keys(wallets).map((key) => {
                 const wallet = wallets[key];
+                const walletTransactions = Object.keys(transactions)
+                  .map((key) => transactions[key])
+                  .filter(
+                    (transaction) =>
+                      transaction.sourceWalletId === wallet.id ||
+                      transaction.destinationWalletId === wallet.id,
+                  );
+                const totalTransactionAmount = walletTransactions.reduce(
+                  (currentTotal: number, transaction) => {
+                    if (transaction.destinationWalletId === wallet.id) {
+                      return currentTotal + -transaction.amount;
+                    }
+                    return currentTotal + transaction.amount;
+                  },
+                  0,
+                );
+
+                const currentBalance =
+                  wallet.initialAmount + totalTransactionAmount;
                 return (
                   <WalletCard
                     containerStyle={styles.walletCard}
                     key={key}
                     label={wallet.label}
-                    balance={wallet.initialAmount}
+                    balance={currentBalance}
                   />
                 );
               })}
@@ -66,12 +85,19 @@ const HomeView = (props: HomeProps) => {
           <ScrollView contentContainerStyle={styles.contentScroll}>
             {Object.keys(transactions).map((key) => {
               const transaction = transactions[key];
+              const sourceWallet = wallets[transaction.sourceWalletId];
+              const destinationWallet = transaction.destinationWalletId
+                ? wallets[transaction.destinationWalletId]
+                : null;
               return (
                 <TransactionCard
                   containerStyle={styles.transactionCard}
                   key={key}
                   category={transaction.category}
                   amount={transaction.amount}
+                  sourceWallet={sourceWallet.label}
+                  destinationWallet={destinationWallet?.label}
+                  createdAt={transaction.createdAt}
                 />
               );
             })}

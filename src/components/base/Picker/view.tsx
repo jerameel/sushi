@@ -34,7 +34,9 @@ const Picker = (props: PickerProps) => {
           style={styles.inputContainer}
           activeOpacity={0.6}
           onPress={() => {
-            setShowModal(true);
+            if (options.length > 0) {
+              setShowModal(true);
+            }
           }}>
           <Text variant="body" style={styles.value}>
             {selectedOption?.label || placeholder || ''}

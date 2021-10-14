@@ -12,6 +12,20 @@ const useStyles = (theme: Theme = DEFAULT_THEME) => {
       borderRadius: 10,
       backgroundColor: colors.AREA_HIGHLIGHT,
     },
+    row: {
+      flexDirection: 'row',
+      alignItems: 'flex-start',
+    },
+    rowColumnLeft: {
+      flex: 1,
+    },
+    rowColumnRight: {
+      flex: 1,
+      alignItems: 'flex-end',
+    },
+    dateText: {
+      color: colors.DISABLE,
+    },
   });
 
   return { styles, colors, theme };

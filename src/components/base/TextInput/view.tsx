@@ -13,6 +13,8 @@ const TextInput = (props: TextInputProps) => {
     value = '',
     placeholder = '',
     onChangeText,
+    keyboardType,
+    onBlur,
   } = props;
   const { styles, colors } = useStyles(theme);
   const [isSelected, setIsSelected] = useState(false);
@@ -35,10 +37,14 @@ const TextInput = (props: TextInputProps) => {
             setIsSelected(true);
           }}
           onBlur={() => {
+            if (onBlur) {
+              onBlur();
+            }
             setIsSelected(false);
           }}
           placeholder={placeholder}
           placeholderTextColor={colors.PLACE_HOLDER}
+          keyboardType={keyboardType}
         />
       </View>
     </View>

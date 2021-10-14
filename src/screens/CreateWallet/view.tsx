@@ -48,6 +48,12 @@ const CreateWalletView = (props: CreateWalletProps) => {
             value={initialAmount}
             onChangeText={(text) => setInitialAmount(text)}
             placeholder="0"
+            keyboardType="decimal-pad"
+            onBlur={() => {
+              setInitialAmount((previousValue) =>
+                (parseFloat(previousValue) || 0).toString(),
+              );
+            }}
           />
         </ScrollView>
         <View style={styles.actionsContainer}>
@@ -55,7 +61,7 @@ const CreateWalletView = (props: CreateWalletProps) => {
             onPress={() =>
               createWallet({
                 label: label || 'New Wallet',
-                initialAmount: Number(initialAmount) || 0,
+                initialAmount: parseFloat(initialAmount) || 0,
               })
             }
             label="Create Wallet"
