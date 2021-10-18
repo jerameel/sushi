@@ -133,6 +133,11 @@ const HomeView = (props: HomeProps) => {
                     key={wallet.id}
                     label={wallet.label}
                     balance={currentWalletBalance}
+                    onPress={() =>
+                      navigation.navigate('WALLET_DETAILS', {
+                        walletId: wallet.id,
+                      })
+                    }
                   />
                 );
               })}

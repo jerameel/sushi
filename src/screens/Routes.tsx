@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from 'screens/Home';
 import CreateWalletScreen from 'screens/CreateWallet';
 import CreateTransactionScreen from 'screens/CreateTransaction';
+import WalletDetailsScreen from 'screens/WalletDetails';
 import { MainStackParamList } from 'types/Route';
 
 const MainStack = createNativeStackNavigator<MainStackParamList>();
@@ -29,6 +30,11 @@ const Routes = () => {
         options={{ headerShown: false }}
         name="CREATE_TRANSACTION"
         component={CreateTransactionScreen}
+      />
+      <MainStack.Screen
+        options={{ headerShown: false }}
+        name="WALLET_DETAILS"
+        component={WalletDetailsScreen}
       />
     </MainStack.Navigator>
   );

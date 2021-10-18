@@ -6,4 +6,5 @@ export interface WalletCardProps {
   theme?: Theme;
   label: string;
   balance: number;
+  onPress?: () => void;
 }
