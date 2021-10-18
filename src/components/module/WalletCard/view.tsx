@@ -13,7 +13,11 @@ const WalletCard = (props: WalletCardProps) => {
   return (
     <View style={[styles.container, containerStyle]}>
       <Text variant="subtitle">
-        {numbro(balance).formatCurrency({ mantissa: 2, average: true })}
+        {numbro(balance).formatCurrency({
+          mantissa: 2,
+          spaceSeparated: true,
+          thousandSeparated: true,
+        })}
       </Text>
       <Text>{label}</Text>
     </View>

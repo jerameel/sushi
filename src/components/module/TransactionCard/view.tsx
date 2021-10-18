@@ -27,7 +27,8 @@ const TransactionCard = (props: TransactionCardProps) => {
         <Text containerStyle={styles.rowColumnRight} variant="subtitle">
           {`${amount > 0 ? '+' : ''}${numbro(amount).formatCurrency({
             mantissa: 2,
-            average: true,
+            spaceSeparated: true,
+            thousandSeparated: true,
           })}`}
         </Text>
       </View>

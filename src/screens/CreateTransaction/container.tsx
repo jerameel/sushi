@@ -17,12 +17,14 @@ const CreateTransactionContainer = (props: CreateTransactionPublicProps) => {
     payload: Omit<Transaction, 'id' | 'createdAt'>,
   ) => {
     // TODO: Improve validation structure
+    const isTransfer = payload.category.toUpperCase() === 'TRANSFER';
     if (
       payload.category &&
       payload.sourceWalletId &&
-      ((payload.category.toUpperCase() === 'TRANSFER' &&
-        payload.destinationWalletId) ||
-        payload.category !== 'TRANSFER')
+      ((isTransfer &&
+        payload.destinationWalletId &&
+        payload.destinationWalletId !== payload.sourceWalletId) ||
+        !isTransfer)
     ) {
       dispatch(createTransactionAction(payload));
       props.navigation.goBack();

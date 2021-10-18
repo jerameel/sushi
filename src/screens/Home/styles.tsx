@@ -9,7 +9,20 @@ const useStyles = () => {
   const STYLES = getGlobalStyles(theme.base);
   const styles = StyleSheet.create({
     container: STYLES.CONTAINER,
-    header: STYLES.HEADER,
+    header: {
+      padding: 8,
+    },
+    balanceContainer: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingHorizontal: 16,
+      paddingVertical: 8,
+      borderBottomWidth: 1,
+      borderBottomColor: colors.DIVIDER,
+    },
+    breakdownContainer: {
+      marginTop: 16,
+    },
     content: {
       flex: 1,
     },
@@ -34,7 +47,7 @@ const useStyles = () => {
       height: 125,
     },
     walletCard: {
-      marginLeft: 8,
+      marginRight: 8,
     },
     transactionsContainer: {
       flex: 1,
