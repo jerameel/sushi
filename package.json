@@ -9,7 +9,11 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "generate": "plop"
+    "generate": "plop",
+    "android:debug": "npm run android:bundle-js && npm run android:build-debug-apk",
+    "android:release": "cd android && ./gradlew bundleRelease && cd ..",
+    "android:bundle-js": "react-native bundle --dev false --platform android --entry-file index.js --bundle-output ./android/app/src/main/assets/index.android.bundle --assets-dest ./android/app/src/main/res",
+    "android:build-debug-apk": "cd android && ./gradlew assembleDebug && cd .."
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.15.8",
