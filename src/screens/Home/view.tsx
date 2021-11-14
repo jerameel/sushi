@@ -21,7 +21,7 @@ const SubHeader = (props: { onPressAdd: () => void; label: string }) => {
       <TouchableOpacity
         style={styles.contentHeaderAction}
         onPress={props.onPressAdd}>
-        <Add fill={colors.PRIMARY_TEXT} width={24} height={24} />
+        <Add fill={colors.PRIMARY} width={18} height={18} />
       </TouchableOpacity>
     </View>
   );

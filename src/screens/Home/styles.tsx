@@ -38,10 +38,14 @@ const useStyles = () => {
       paddingVertical: 8,
     },
     contentHeaderAction: {
-      width: 28,
-      height: 28,
-      justifyContent: 'center',
+      backgroundColor: colors.AREA_HIGHLIGHT,
+      height: 32,
       alignItems: 'center',
+      borderWidth: 1,
+      borderRadius: 12,
+      borderColor: colors.BORDER,
+      paddingHorizontal: 8,
+      flexDirection: 'row',
     },
     walletsScrollContainer: {
       height: 125,
