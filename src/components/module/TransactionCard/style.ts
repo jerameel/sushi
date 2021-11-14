@@ -11,6 +11,20 @@ const useStyles = (theme: Theme = DEFAULT_THEME) => {
       padding: 16,
       borderRadius: 10,
       backgroundColor: colors.AREA_HIGHLIGHT,
+      flexDirection: 'row',
+    },
+    imageContainer: {
+      width: 48,
+      height: 48,
+      borderWidth: 1,
+      borderRadius: 16,
+      borderColor: colors.BORDER,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    detailsContainer: {
+      marginLeft: 16,
+      flex: 1,
     },
     row: {
       flexDirection: 'row',
