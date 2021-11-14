@@ -2,12 +2,13 @@ import { storiesOf } from '@storybook/react-native';
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import Button from '../../../src/components/base/Button';
+import { COLORS } from '../../../src/theme';
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16 },
+  container: { flex: 1, padding: 16, backgroundColor: COLORS.LIGHT.BACKGROUND },
   button: { marginTop: 8 },
   darkBackground: {
-    backgroundColor: '#000',
+    backgroundColor: COLORS.DARK.BACKGROUND,
   },
 });
 

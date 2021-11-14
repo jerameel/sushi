@@ -1,5 +1,8 @@
-import { EditorProps } from 'screens/Editor/props';
-
 export type MainStackParamList = {
-  EDITOR: EditorProps;
+  HOME?: {};
+  CREATE_WALLET?: {};
+  CREATE_TRANSACTION?: {};
+  WALLET_DETAILS?: {
+    walletId: string;
+  };
 };

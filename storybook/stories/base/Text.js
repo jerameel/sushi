@@ -2,16 +2,17 @@ import { storiesOf } from '@storybook/react-native';
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import Text from '../../../src/components/base/Text';
+import { COLORS } from '../../../src/theme';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.LIGHT.BACKGROUND,
   },
   darkBackground: {
-    backgroundColor: '#000',
+    backgroundColor: COLORS.DARK.BACKGROUND,
   },
 });
 

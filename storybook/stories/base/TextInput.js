@@ -2,15 +2,16 @@ import { storiesOf } from '@storybook/react-native';
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import TextInput from '../../../src/components/base/TextInput';
+import { COLORS } from '../../../src/theme';
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16 },
+  container: { flex: 1, padding: 16, backgroundColor: COLORS.LIGHT.BACKGROUND },
   darkBackground: {
-    backgroundColor: '#000',
+    backgroundColor: COLORS.DARK.BACKGROUND,
   },
 });
 
-const TextWrapper = (props) => {
+const TextInputWrapper = (props) => {
   const [text, setText] = useState('');
   return <TextInput {...props} value={text} onChangeText={(v) => setText(v)} />;
 };
@@ -18,7 +19,7 @@ const TextWrapper = (props) => {
 storiesOf('base/TextInput', module).add('Summary', () => {
   return (
     <View style={styles.container}>
-      <TextWrapper label="Plain Text Input" />
+      <TextInputWrapper label="Plain Text Input" />
     </View>
   );
 });
@@ -30,7 +31,7 @@ const DARK_THEME = {
 storiesOf('base/TextInput', module).add('Summary (Dark)', () => {
   return (
     <View style={[styles.container, styles.darkBackground]}>
-      <TextWrapper theme={DARK_THEME} label="Plain Text Input" />
+      <TextInputWrapper theme={DARK_THEME} label="Plain Text Input" />
     </View>
   );
 });

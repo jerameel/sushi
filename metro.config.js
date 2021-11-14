@@ -1,16 +1,12 @@
-/**
- * Metro configuration for React Native
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 module.exports = {
   transformer: {
     getTransformOptions: async () => ({
       transform: {
         experimentalImportSupport: false,
-        inlineRequires: true,
+
+        // setting Disabled due to
+        // https://github.com/facebook/metro/issues/682
+        inlineRequires: false,
       },
     }),
   },

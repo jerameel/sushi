@@ -6,26 +6,27 @@ import { COLORS } from 'theme';
 const useStyles = (theme: Theme = DEFAULT_THEME) => {
   const colors = COLORS[theme.base];
   const styles = StyleSheet.create({
-    container: {
+    container: {},
+    inputContainer: {
+      marginTop: 2,
       borderWidth: 2,
       borderColor: colors.BORDER,
-      backgroundColor: colors.PRIMARY + '07',
+      backgroundColor: colors.AREA_HIGHLIGHT,
       borderRadius: 5,
-      padding: 5,
+      padding: 2,
     },
-    containerActive: {
+    inputContainerActive: {
       borderColor: colors.PRIMARY,
-      // backgroundColor: colors.AREA_HIGHLIGHT,
     },
     label: {
-      color: colors.PRIMARY,
+      color: colors.PRIMARY_TEXT,
     },
     input: {
       height: 40,
       fontFamily: 'Heebo-Regular',
       fontSize: 16,
       letterSpacing: 0.5,
-      color: colors.SECONDARY_TEXT,
+      color: colors.PRIMARY_TEXT,
     },
   });
 

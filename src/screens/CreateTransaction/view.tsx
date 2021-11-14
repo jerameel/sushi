@@ -1,0 +1,181 @@
+import React, { useEffect, useReducer, useState } from 'react';
+import Text from 'components/base/Text';
+import { ScrollView, View, StatusBar, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import useStyles from './styles';
+import { CreateTransactionProps } from './props';
+import { Back } from 'components/base/SVG';
+import TextInput from 'components/base/TextInput';
+import Button from 'components/base/Button';
+import Picker from 'components/base/Picker';
+import {
+  formatCategory,
+  getCategorySuggestions,
+  toWalletOptions,
+} from './transforms';
+
+const TRANSACTION_TYPES: {
+  label: string;
+  value: 'IN' | 'OUT';
+}[] = [
+  {
+    label: '-',
+    value: 'OUT',
+  },
+  {
+    label: '+',
+    value: 'IN',
+  },
+];
+
+const CreateTransactionView = (props: CreateTransactionProps) => {
+  const { navigation, createTransaction, wallets, transactions } = props;
+  const { styles, theme, colors } = useStyles();
+
+  const walletOptions = toWalletOptions(wallets);
+
+  const [category, setCategory] = useState('');
+  const [sourceWalletId, setSourceWalletId] = useState<string | null>(null);
+  const [destinationWalletId, setDestinationWalletId] = useState<string | null>(
+    null,
+  );
+  const [description, setDescription] = useState('');
+  const [amount, setAmount] = useState('');
+  const [transactionType, setTransactionType] = useState<'IN' | 'OUT'>('OUT');
+
+  const categorySuggestions = getCategorySuggestions(transactions).filter(
+    (suggestion) => suggestion.toUpperCase().includes(category.toUpperCase()),
+  );
+
+  useEffect(() => {
+    if (category.toUpperCase() === 'TRANSFER') {
+      setTransactionType('OUT');
+    }
+  }, [category]);
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <StatusBar
+        backgroundColor={colors.BACKGROUND}
+        barStyle={theme.base === 'Dark' ? 'light-content' : 'dark-content'}
+      />
+      <View style={styles.header}>
+        <TouchableOpacity
+          style={styles.headerBackAction}
+          onPress={() => {
+            navigation.goBack();
+          }}>
+          <Back fill={colors.PRIMARY_TEXT} width={24} height={24} />
+        </TouchableOpacity>
+        <Text containerStyle={styles.headerTitleContainer} variant="title">
+          New Transaction
+        </Text>
+      </View>
+      <View style={styles.content}>
+        <ScrollView style={styles.contentScroll}>
+          <TextInput
+            containerStyle={styles.inputContainer}
+            label="Category"
+            value={category}
+            onChangeText={(text) => setCategory(text)}
+          />
+
+          <View style={styles.categorySuggestionsContainer}>
+            {categorySuggestions.map((categorySuggestion) => (
+              <TouchableOpacity
+                key={categorySuggestion}
+                style={styles.categorySuggestionBadge}
+                onPress={() => {
+                  setCategory(categorySuggestion);
+                }}>
+                <Text style={styles.categorySuggestionText} variant="label">
+                  {categorySuggestion}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+
+          <Picker
+            containerStyle={styles.inputContainer}
+            label="Source Wallet"
+            selectedValue={sourceWalletId || undefined}
+            onSelect={(value) => setSourceWalletId(value)}
+            options={walletOptions}
+          />
+
+          {category.toUpperCase() === 'TRANSFER' && (
+            <Picker
+              containerStyle={styles.inputContainer}
+              label="Destination Wallet"
+              selectedValue={destinationWalletId || undefined}
+              onSelect={(value) => setDestinationWalletId(value)}
+              options={walletOptions}
+            />
+          )}
+
+          <TextInput
+            containerStyle={styles.inputContainer}
+            label="Short Description"
+            value={description}
+            onChangeText={(text) => setDescription(text)}
+          />
+
+          <TextInput
+            containerStyle={styles.inputContainer}
+            label="Amount"
+            value={amount}
+            onChangeText={(text) => setAmount(text)}
+            placeholder="0"
+            keyboardType="decimal-pad"
+            onBlur={() => {
+              setAmount((previousValue) =>
+                (parseFloat(previousValue) || 0).toString(),
+              );
+            }}
+          />
+
+          {category.toUpperCase() !== 'TRANSFER' && (
+            <View style={styles.transactionTypeContainer}>
+              {TRANSACTION_TYPES.map(({ label, value }) => (
+                <TouchableOpacity
+                  key={value}
+                  style={[
+                    styles.transactionTypeBadge,
+                    transactionType === value
+                      ? styles.transactionTypeBadgeSelected
+                      : {},
+                  ]}
+                  onPress={() => {
+                    setTransactionType(value);
+                  }}>
+                  <Text style={styles.transactionTypeText} variant="label">
+                    {label}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          )}
+        </ScrollView>
+        <View style={styles.actionsContainer}>
+          <Button
+            onPress={() =>
+              createTransaction({
+                category: formatCategory(category || 'Others'),
+                description: description || '',
+                amount:
+                  parseFloat(
+                    `${transactionType === 'IN' ? '+' : '-'}${amount}`,
+                  ) || 0,
+                sourceWalletId: sourceWalletId || '',
+                destinationWalletId,
+              })
+            }
+            label="Create Transaction"
+          />
+        </View>
+      </View>
+    </SafeAreaView>
+  );
+};
+
+export default CreateTransactionView;

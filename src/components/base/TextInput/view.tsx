@@ -11,34 +11,42 @@ const TextInput = (props: TextInputProps) => {
     theme,
     label = '',
     value = '',
+    placeholder = '',
     onChangeText,
+    keyboardType,
+    onBlur,
   } = props;
   const { styles, colors } = useStyles(theme);
   const [isSelected, setIsSelected] = useState(false);
   return (
-    <View
-      style={[
-        styles.container,
-        isSelected ? styles.containerActive : {},
-        containerStyle,
-      ]}>
+    <View style={[styles.container, containerStyle]}>
       <Text variant="label" style={styles.label}>
-        {isSelected || value.length > 0 ? label : ''}
+        {label}
       </Text>
 
-      <RNTextInput
-        style={[styles.input, style]}
-        value={value}
-        onChangeText={onChangeText}
-        onFocus={() => {
-          setIsSelected(true);
-        }}
-        onBlur={() => {
-          setIsSelected(false);
-        }}
-        placeholder={isSelected ? '' : label.toUpperCase()}
-        placeholderTextColor={colors.PLACE_HOLDER}
-      />
+      <View
+        style={[
+          styles.inputContainer,
+          isSelected ? styles.inputContainerActive : {},
+        ]}>
+        <RNTextInput
+          style={[styles.input, style]}
+          value={value}
+          onChangeText={onChangeText}
+          onFocus={() => {
+            setIsSelected(true);
+          }}
+          onBlur={() => {
+            if (onBlur) {
+              onBlur();
+            }
+            setIsSelected(false);
+          }}
+          placeholder={placeholder}
+          placeholderTextColor={colors.PLACE_HOLDER}
+          keyboardType={keyboardType}
+        />
+      </View>
     </View>
   );
 };

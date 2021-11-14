@@ -1,4 +1,5 @@
-import React from 'react';
+import 'react-native-get-random-values';
+import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';

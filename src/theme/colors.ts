@@ -1,5 +1,8 @@
 const LIGHT = {
-  PRIMARY: '#fa8c16',
+  PRIMARY: '#e15f41',
+  POSITIVE: '#3dc1d3',
+  NEGATIVE: '#c44569',
+  NEUTRAL: '#303952',
   TITLE: '#1f1f1f',
   PRIMARY_TEXT: '#434343',
   SECONDARY_TEXT: '#595959',
@@ -9,11 +12,14 @@ const LIGHT = {
   PLACE_HOLDER: '#8c8c8c',
   BACKGROUND: '#f5f5f5',
   AREA_HIGHLIGHT: '#fafafa',
-  ERROR: '#ff4d4f',
+  ERROR: '#c44569',
 };
 
 export const DARK = {
-  PRIMARY: '#fa8c16',
+  PRIMARY: '#e15f41',
+  POSITIVE: '#3dc1d3',
+  NEGATIVE: '#c44569',
+  NEUTRAL: '#303952',
   TITLE: '#fafafa',
   PRIMARY_TEXT: '#f5f5f5',
   SECONDARY_TEXT: '#d9d9d9',
@@ -23,7 +29,7 @@ export const DARK = {
   PLACE_HOLDER: '#595959',
   BACKGROUND: '#1f1f1f',
   AREA_HIGHLIGHT: '#141414',
-  ERROR: '#a8071a',
+  ERROR: '#c44569',
 };
 
 export default {
