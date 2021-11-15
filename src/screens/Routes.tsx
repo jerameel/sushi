@@ -1,4 +1,4 @@
-// import SplashScreen from 'react-native-splash-screen';
+import SplashScreen from 'react-native-splash-screen';
 import React, { useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from 'screens/Home';
@@ -10,9 +10,9 @@ import { MainStackParamList } from 'types/Route';
 const MainStack = createNativeStackNavigator<MainStackParamList>();
 
 const Routes = () => {
-  // useEffect(() => {
-  //   SplashScreen.hide();
-  // }, []);
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
 
   return (
     <MainStack.Navigator initialRouteName="HOME">
