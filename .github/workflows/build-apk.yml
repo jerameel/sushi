@@ -10,6 +10,26 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install npm dependencies
         run: npm install
+  generate-aab:
+    needs: setup-node
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v2
+      - name: Setup keystore
+        run: |
+          mkdir -p ~/.gradle/
+          echo "${{secrets.GRADLE_PROPERTIES}}" > ~/.gradle/gradle.properties
+          echo "${{secrets.ANDROID_KEYSTORE}}" > android/app/sushi.keystore.encoded
+          base64 -d android/app/sushi.keystore.encoded > android/app/sushi.keystore
+      - name: Install npm dependencies
+        run: npm install
+      - name: Build Release AAB
+        run: npm run android:release
+      - name: Upload AAB Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: app-release.aab
+          path: android/app/build/outputs/bundle/release/
   generate-apk:
     needs: setup-node
     runs-on: ubuntu-latest

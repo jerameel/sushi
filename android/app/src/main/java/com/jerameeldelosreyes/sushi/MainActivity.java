@@ -1,4 +1,4 @@
-package com.sushi;
+package com.jerameeldelosreyes.sushi;
 
 import com.facebook.react.ReactActivity;
 import android.os.Bundle;

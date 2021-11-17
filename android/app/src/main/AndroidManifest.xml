@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.sushi">
+  package="com.jerameeldelosreyes.sushi">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
