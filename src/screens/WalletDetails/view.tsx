@@ -151,6 +151,11 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
                   sourceWallet={sourceWallet.label}
                   destinationWallet={destinationWallet?.label}
                   createdAt={transaction.createdAt}
+                  onPress={() =>
+                    navigation.navigate('TRANSACTION_DETAILS', {
+                      transactionId: transaction.id,
+                    })
+                  }
                 />
               );
             })}

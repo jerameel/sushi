@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import numbro from 'numbro';
 import moment from 'moment';
 import Text from 'components/base/Text';
@@ -16,6 +16,7 @@ const TransactionCard = (props: TransactionCardProps) => {
     sourceWallet,
     destinationWallet,
     createdAt,
+    onPress,
   } = props;
 
   const { styles, colors } = useStyles(theme);
@@ -36,7 +37,10 @@ const TransactionCard = (props: TransactionCardProps) => {
     return <UpDown width={24} height={24} fill={colors.NEUTRAL} />;
   })();
   return (
-    <View style={[styles.container, containerStyle]}>
+    <TouchableOpacity
+      style={[styles.container, containerStyle]}
+      onPress={onPress}
+      activeOpacity={0.6}>
       <View style={styles.imageContainer}>{Icon}</View>
       <View style={styles.detailsContainer}>
         <View style={styles.row}>
@@ -58,7 +62,7 @@ const TransactionCard = (props: TransactionCardProps) => {
           {moment(createdAt).format('MMM DD, YYYY hh:mm a')}
         </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

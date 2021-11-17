@@ -5,4 +5,7 @@ export type MainStackParamList = {
   WALLET_DETAILS?: {
     walletId: string;
   };
+  TRANSACTION_DETAILS?: {
+    transactionId: string;
+  };
 };

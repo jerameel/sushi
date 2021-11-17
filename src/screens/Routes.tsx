@@ -6,6 +6,7 @@ import CreateWalletScreen from 'screens/CreateWallet';
 import CreateTransactionScreen from 'screens/CreateTransaction';
 import WalletDetailsScreen from 'screens/WalletDetails';
 import { MainStackParamList } from 'types/Route';
+import TransactionDetailsScreen from './TransactionDetails';
 
 const MainStack = createNativeStackNavigator<MainStackParamList>();
 
@@ -35,6 +36,11 @@ const Routes = () => {
         options={{ headerShown: false }}
         name="WALLET_DETAILS"
         component={WalletDetailsScreen}
+      />
+      <MainStack.Screen
+        options={{ headerShown: false }}
+        name="TRANSACTION_DETAILS"
+        component={TransactionDetailsScreen}
       />
     </MainStack.Navigator>
   );
