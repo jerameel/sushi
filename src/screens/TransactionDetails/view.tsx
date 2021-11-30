@@ -7,14 +7,22 @@ import { ScrollView, View, StatusBar, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useStyles from './styles';
 import { TransactionDetailsProps } from './props';
-import { Back, DownLeft, UpDown, UpRight } from 'components/base/SVG';
+import { Back, Delete } from 'components/base/SVG';
 import { Transaction } from 'store/transactions';
 import TransactionCard from 'components/module/TransactionCard';
 import moment from 'moment';
+import AlertModal from 'components/module/AlertModal';
 
 const TransactionDetailsView = (props: TransactionDetailsProps) => {
-  const { navigation, transaction, sourceWallet, destinationWallet } = props;
+  const {
+    navigation,
+    transaction,
+    sourceWallet,
+    destinationWallet,
+    deleteTransaction,
+  } = props;
   const { styles, theme, colors } = useStyles();
+  const [showDelete, setShowDelete] = useState(false);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -24,7 +32,7 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
       />
       <View style={styles.header}>
         <TouchableOpacity
-          style={styles.headerBackAction}
+          style={styles.headerLeftAction}
           onPress={() => {
             navigation.goBack();
           }}>
@@ -33,6 +41,13 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
         <Text containerStyle={styles.headerTitleContainer} variant="title">
           Transaction Details
         </Text>
+        <TouchableOpacity
+          style={styles.headerRightAction}
+          onPress={() => {
+            setShowDelete(true);
+          }}>
+          <Delete fill={colors.PRIMARY_TEXT} width={24} height={24} />
+        </TouchableOpacity>
       </View>
       <View style={styles.content}>
         <View style={styles.amountCard}>
@@ -79,6 +94,27 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
           </Text>
         </View>
       </View>
+      <AlertModal
+        theme={theme}
+        title="Delete Transaction?"
+        description={'This will permanently delete the transaction record.'}
+        visible={showDelete}
+        actions={[
+          {
+            label: 'Cancel',
+            onPress: () => {
+              setShowDelete(false);
+            },
+          },
+          {
+            label: 'Delete',
+            onPress: () => {
+              setShowDelete(false);
+              deleteTransaction();
+            },
+          },
+        ]}
+      />
     </SafeAreaView>
   );
 };
