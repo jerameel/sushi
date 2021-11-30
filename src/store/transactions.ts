@@ -34,10 +34,18 @@ const transactionsSlice = createSlice({
         };
       });
     },
+    deleteTransaction(state, action: PayloadAction<string>) {
+      return produce(state, (draft) => {
+        const id = action.payload;
+        delete draft[id];
+      });
+    },
   },
 });
 
-export const { createTransaction: createTransactionAction } =
-  transactionsSlice.actions;
+export const {
+  createTransaction: createTransactionAction,
+  deleteTransaction: deleteTransactionAction,
+} = transactionsSlice.actions;
 
 export default transactionsSlice.reducer;

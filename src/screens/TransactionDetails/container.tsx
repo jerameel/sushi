@@ -7,9 +7,12 @@ import {
   TransactionDetailsPrivateProps,
   TransactionDetailsPublicProps,
 } from './props';
+
+import { deleteTransactionAction } from 'store/transactions';
 import TransactionDetailsView from './view';
 
 const TransactionDetailsContainer = (props: TransactionDetailsPublicProps) => {
+  const dispatch = useDispatch();
   const transactionId = props.route.params?.transactionId || '';
 
   const wallets = useSelector((state: RootState) => state.wallets);
@@ -24,10 +27,16 @@ const TransactionDetailsContainer = (props: TransactionDetailsPublicProps) => {
   const destinationWallet = transaction.destinationWalletId
     ? wallets[transaction.destinationWalletId]
     : null;
+
+  const deleteTransaction = () => {
+    dispatch(deleteTransactionAction(transaction.id));
+    props.navigation.goBack();
+  };
   const generatedProps: TransactionDetailsPrivateProps = {
     transaction,
     sourceWallet,
     destinationWallet,
+    deleteTransaction,
   };
 
   return <TransactionDetailsView {...props} {...generatedProps} />;

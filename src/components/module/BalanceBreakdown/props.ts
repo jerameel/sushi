@@ -3,7 +3,7 @@ import { Theme } from 'store/theme';
 
 export interface BalanceBreakdownProps {
   containerStyle?: ViewStyle;
-  theme?: Theme
+  theme?: Theme;
   income: number;
   expenses: number;
 }
