@@ -1,4 +1,4 @@
-name: react-native-android-build
+name: android build pipeline
 on:
   push:
     branches:
