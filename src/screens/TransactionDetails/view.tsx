@@ -52,11 +52,11 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
       <View style={styles.content}>
         <View style={styles.amountCard}>
           <Text variant="subtitle" style={styles.amountText}>
-            {numbro(transaction.amount).formatCurrency({
+            {`${numbro(Math.abs(transaction.amount)).formatCurrency({
               mantissa: 2,
               spaceSeparated: true,
               thousandSeparated: true,
-            })}
+            })}`}
           </Text>
         </View>
         {transaction.description.length > 0 && (
