@@ -48,7 +48,9 @@ const TransactionCard = (props: TransactionCardProps) => {
             {category}
           </Text>
           <Text containerStyle={styles.rowColumnRight} variant="subtitle">
-            {`${amount > 0 ? '+' : ''}${numbro(amount).formatCurrency({
+            {`${amount > 0 ? '+' : ''}${numbro(
+              destinationWallet ? Math.abs(amount) : amount,
+            ).formatCurrency({
               mantissa: 2,
               spaceSeparated: true,
               thousandSeparated: true,

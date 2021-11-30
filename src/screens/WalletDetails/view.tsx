@@ -7,12 +7,13 @@ import { ScrollView, View, StatusBar, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useStyles from './styles';
 import { WalletDetailsProps } from './props';
-import { Back } from 'components/base/SVG';
+import { Back, Delete } from 'components/base/SVG';
 import { Transaction } from 'store/transactions';
 import TransactionCard from 'components/module/TransactionCard';
+import AlertModal from 'components/module/AlertModal';
 
 const WalletDetailsView = (props: WalletDetailsProps) => {
-  const { navigation, wallet, transactions, wallets } = props;
+  const { navigation, wallet, transactions, wallets, deleteWallet } = props;
   const { styles, theme, colors } = useStyles();
 
   const walletTransactions = Object.keys(transactions)
@@ -74,6 +75,8 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
     sortTransactionByDate(walletTransactions),
   );
 
+  const [showDelete, setShowDelete] = useState(false);
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar
@@ -82,7 +85,7 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
       />
       <View style={styles.header}>
         <TouchableOpacity
-          style={styles.headerBackAction}
+          style={styles.headerLeftAction}
           onPress={() => {
             navigation.goBack();
           }}>
@@ -91,6 +94,13 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
         <Text containerStyle={styles.headerTitleContainer} variant="title">
           Wallet Details
         </Text>
+        <TouchableOpacity
+          style={styles.headerRightAction}
+          onPress={() => {
+            setShowDelete(true);
+          }}>
+          <Delete fill={colors.PRIMARY_TEXT} width={24} height={24} />
+        </TouchableOpacity>
       </View>
       <View style={styles.content}>
         <View style={styles.detailsCard}>
@@ -162,6 +172,27 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
           </ScrollView>
         </View>
       </View>
+      <AlertModal
+        theme={theme}
+        title="Delete Wallet?"
+        description={`This will permanently delete the ${wallet.label} wallet including ${walletTransactions.length} linked transactions.`}
+        visible={showDelete}
+        actions={[
+          {
+            label: 'Cancel',
+            onPress: () => {
+              setShowDelete(false);
+            },
+          },
+          {
+            label: 'Delete',
+            onPress: () => {
+              setShowDelete(false);
+              deleteWallet();
+            },
+          },
+        ]}
+      />
     </SafeAreaView>
   );
 };

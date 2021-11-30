@@ -10,6 +10,7 @@ export interface WalletDetailsPrivateProps {
   wallet: Wallet;
   wallets: Wallets;
   transactions: Transactions;
+  deleteWallet: () => void;
 }
 
 export interface WalletDetailsProps

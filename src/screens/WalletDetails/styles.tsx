@@ -12,12 +12,20 @@ const useStyles = () => {
     header: STYLES.HEADER,
     headerTitleContainer: {
       marginLeft: 8,
+      flex: 1,
+      marginRight: 8,
     },
-    headerBackAction: {
+    headerLeftAction: {
       width: 40,
       height: 40,
       justifyContent: 'center',
       alignItems: 'flex-start',
+    },
+    headerRightAction: {
+      width: 40,
+      height: 40,
+      justifyContent: 'center',
+      alignItems: 'flex-end',
     },
     content: {
       flex: 1,

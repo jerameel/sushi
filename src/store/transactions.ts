@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import produce from 'immer';
 import { v1 as uuidv1 } from 'uuid';
+import { deleteWalletAction } from './wallets';
 
 export type Transaction = {
   id: string;
@@ -40,6 +41,21 @@ const transactionsSlice = createSlice({
         delete draft[id];
       });
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(deleteWalletAction, (state, action) => {
+      return produce(state, (draft) => {
+        const walletId = action.payload;
+        const transactionIds = Object.keys(draft).filter(
+          (key) =>
+            draft[key].sourceWalletId === walletId ||
+            draft[key].destinationWalletId === walletId,
+        );
+        transactionIds.forEach((transactionId) => {
+          delete draft[transactionId];
+        });
+      });
+    });
   },
 });
 

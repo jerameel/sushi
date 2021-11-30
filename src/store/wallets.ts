@@ -26,9 +26,18 @@ const walletsSlice = createSlice({
         };
       });
     },
+    deleteWallet(state, action: PayloadAction<string>) {
+      return produce(state, (draft) => {
+        const id = action.payload;
+        delete draft[id];
+      });
+    },
   },
 });
 
-export const { createWallet: createWalletAction } = walletsSlice.actions;
+export const {
+  createWallet: createWalletAction,
+  deleteWallet: deleteWalletAction,
+} = walletsSlice.actions;
 
 export default walletsSlice.reducer;
