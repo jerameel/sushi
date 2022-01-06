@@ -18,8 +18,6 @@ const WalletCard = (props: WalletCardProps) => {
       <Text variant="subtitle">
         {numbro(balance).formatCurrency({
           mantissa: 2,
-          spaceSeparated: true,
-          thousandSeparated: true,
         })}
       </Text>
       <Text>{label}</Text>

@@ -1,4 +1,9 @@
 import numbro from 'numbro';
+let numbroLanguages = require('numbro/dist/languages.min.js');
+
+Object.values(numbroLanguages).forEach((each: any) =>
+  numbro.registerLanguage(each),
+);
 
 numbro.registerLanguage({
   languageTag: 'fil-PH',
@@ -58,5 +63,3 @@ numbro.registerLanguage({
     },
   },
 });
-
-numbro.setLanguage('fil-PH');

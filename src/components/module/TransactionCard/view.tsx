@@ -52,8 +52,6 @@ const TransactionCard = (props: TransactionCardProps) => {
               destinationWallet ? Math.abs(amount) : amount,
             ).formatCurrency({
               mantissa: 2,
-              spaceSeparated: true,
-              thousandSeparated: true,
             })}`}
           </Text>
         </View>

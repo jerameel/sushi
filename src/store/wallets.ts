@@ -6,7 +6,6 @@ export type Wallet = {
   id: string;
   label: string;
   initialAmount: number;
-  type: number;
 };
 
 export type Wallets = Record<string, Wallet>;

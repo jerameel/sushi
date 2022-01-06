@@ -1,12 +1,13 @@
 import SplashScreen from 'react-native-splash-screen';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HomeScreen from 'screens/Home';
-import CreateWalletScreen from 'screens/CreateWallet';
-import CreateTransactionScreen from 'screens/CreateTransaction';
-import WalletDetailsScreen from 'screens/WalletDetails';
 import { MainStackParamList } from 'types/Route';
+import HomeScreen from './Home';
+import CreateWalletScreen from './CreateWallet';
+import CreateTransactionScreen from './CreateTransaction';
+import WalletDetailsScreen from './WalletDetails';
 import TransactionDetailsScreen from './TransactionDetails';
+import SettingsScreen from './Settings';
 
 const MainStack = createNativeStackNavigator<MainStackParamList>();
 
@@ -14,7 +15,6 @@ const Routes = () => {
   useEffect(() => {
     SplashScreen.hide();
   }, []);
-
   return (
     <MainStack.Navigator initialRouteName="HOME">
       <MainStack.Screen
@@ -41,6 +41,11 @@ const Routes = () => {
         options={{ headerShown: false }}
         name="TRANSACTION_DETAILS"
         component={TransactionDetailsScreen}
+      />
+      <MainStack.Screen
+        options={{ headerShown: false }}
+        name="SETTINGS"
+        component={SettingsScreen}
       />
     </MainStack.Navigator>
   );

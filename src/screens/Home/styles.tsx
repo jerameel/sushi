@@ -10,15 +10,23 @@ const useStyles = () => {
   const styles = StyleSheet.create({
     container: STYLES.CONTAINER,
     header: {
-      padding: 8,
+      paddingBottom: 8,
+      marginHorizontal: 8,
+      flexDirection: 'row',
+      borderBottomWidth: 1,
+      borderBottomColor: colors.DIVIDER,
+    },
+    headerActionContainer: {
+      width: 48,
+      height: 48,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     balanceContainer: {
+      flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
       paddingHorizontal: 16,
-      paddingVertical: 8,
-      borderBottomWidth: 1,
-      borderBottomColor: colors.DIVIDER,
     },
     breakdownContainer: {
       marginTop: 16,

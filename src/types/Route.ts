@@ -8,4 +8,5 @@ export type MainStackParamList = {
   TRANSACTION_DETAILS?: {
     transactionId: string;
   };
+  SETTINGS?: {};
 };

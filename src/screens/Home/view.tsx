@@ -8,7 +8,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import useStyles from './styles';
 import { HomeProps } from './props';
 import WalletCard from 'components/module/WalletCard';
-import { Add } from 'components/base/SVG';
+import { Add, Settings } from 'components/base/SVG';
 import TransactionCard from 'components/module/TransactionCard';
 import BalanceBreakdown from 'components/module/BalanceBreakdown';
 import { Transaction } from 'store/transactions';
@@ -81,21 +81,27 @@ const HomeView = (props: HomeProps) => {
         barStyle={theme.base === 'Dark' ? 'light-content' : 'dark-content'}
       />
       <View style={styles.header}>
+        <View style={styles.headerActionContainer} />
         <View style={styles.balanceContainer}>
           <Text variant="title">
             {numbro(currentBalance).formatCurrency({
               mantissa: 2,
-              spaceSeparated: true,
-              thousandSeparated: true,
             })}
           </Text>
         </View>
-        <BalanceBreakdown
-          containerStyle={styles.breakdownContainer}
-          income={balanceBreakdown.income}
-          expenses={balanceBreakdown.expenses}
-        />
+        <TouchableOpacity
+          style={styles.headerActionContainer}
+          onPress={() => {
+            navigation.navigate('SETTINGS');
+          }}>
+          <Settings width={24} height={24} fill={colors.PRIMARY_TEXT} />
+        </TouchableOpacity>
       </View>
+      <BalanceBreakdown
+        containerStyle={styles.breakdownContainer}
+        income={balanceBreakdown.income}
+        expenses={balanceBreakdown.expenses}
+      />
       <View style={styles.content}>
         <View>
           <SubHeader

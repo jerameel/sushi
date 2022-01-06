@@ -18,8 +18,6 @@ const BalanceBreakdown = (props: BalanceBreakdownProps) => {
         <Text variant="subtitle">
           {numbro(income).formatCurrency({
             mantissa: 2,
-            spaceSeparated: true,
-            thousandSeparated: true,
           })}
         </Text>
       </View>
@@ -30,8 +28,6 @@ const BalanceBreakdown = (props: BalanceBreakdownProps) => {
         <Text variant="subtitle">
           {numbro(expenses).formatCurrency({
             mantissa: 2,
-            spaceSeparated: true,
-            thousandSeparated: true,
           })}
         </Text>
       </View>

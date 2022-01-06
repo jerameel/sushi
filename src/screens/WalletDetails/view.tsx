@@ -109,8 +109,6 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
             <Text variant="subtitle">
               {numbro(currentBalance).formatCurrency({
                 mantissa: 2,
-                spaceSeparated: true,
-                thousandSeparated: true,
               })}
             </Text>
           </View>
@@ -119,8 +117,6 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
             <Text variant="body">
               {numbro(wallet.initialAmount).formatCurrency({
                 mantissa: 2,
-                spaceSeparated: true,
-                thousandSeparated: true,
               })}
             </Text>
           </View>
@@ -129,8 +125,6 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
             <Text variant="body">
               {numbro(balanceBreakdown.income).formatCurrency({
                 mantissa: 2,
-                spaceSeparated: true,
-                thousandSeparated: true,
               })}
             </Text>
           </View>
@@ -139,8 +133,6 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
             <Text variant="body">
               {numbro(balanceBreakdown.expenses).formatCurrency({
                 mantissa: 2,
-                spaceSeparated: true,
-                thousandSeparated: true,
               })}
             </Text>
           </View>

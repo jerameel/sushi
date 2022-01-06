@@ -54,8 +54,6 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
           <Text variant="subtitle" style={styles.amountText}>
             {`${numbro(Math.abs(transaction.amount)).formatCurrency({
               mantissa: 2,
-              spaceSeparated: true,
-              thousandSeparated: true,
             })}`}
           </Text>
         </View>
