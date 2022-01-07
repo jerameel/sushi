@@ -29,7 +29,10 @@ const CreateWalletView = (props: CreateWalletProps) => {
           }}>
           <Back fill={colors.PRIMARY_TEXT} width={24} height={24} />
         </TouchableOpacity>
-        <Text containerStyle={styles.headerTitleContainer} variant="title">
+        <Text
+          containerStyle={styles.headerTitleContainer}
+          variant="title"
+          theme={theme}>
           New Wallet
         </Text>
       </View>
@@ -40,6 +43,7 @@ const CreateWalletView = (props: CreateWalletProps) => {
             label="Label"
             value={label}
             onChangeText={(text) => setLabel(text)}
+            theme={theme}
           />
 
           <TextInput
@@ -54,6 +58,7 @@ const CreateWalletView = (props: CreateWalletProps) => {
                 (parseFloat(previousValue) || 0).toString(),
               );
             }}
+            theme={theme}
           />
         </ScrollView>
         <View style={styles.actionsContainer}>
@@ -65,6 +70,7 @@ const CreateWalletView = (props: CreateWalletProps) => {
               })
             }
             label="Create Wallet"
+            theme={theme}
           />
         </View>
       </View>

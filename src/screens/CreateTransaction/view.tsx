@@ -67,7 +67,10 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
           }}>
           <Back fill={colors.PRIMARY_TEXT} width={24} height={24} />
         </TouchableOpacity>
-        <Text containerStyle={styles.headerTitleContainer} variant="title">
+        <Text
+          containerStyle={styles.headerTitleContainer}
+          variant="title"
+          theme={theme}>
           New Transaction
         </Text>
       </View>
@@ -78,6 +81,7 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
             label="Category"
             value={category}
             onChangeText={(text) => setCategory(text)}
+            theme={theme}
           />
 
           <View style={styles.categorySuggestionsContainer}>
@@ -88,7 +92,10 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
                 onPress={() => {
                   setCategory(categorySuggestion);
                 }}>
-                <Text style={styles.categorySuggestionText} variant="label">
+                <Text
+                  style={styles.categorySuggestionText}
+                  variant="label"
+                  theme={theme}>
                   {categorySuggestion}
                 </Text>
               </TouchableOpacity>
@@ -101,6 +108,7 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
             selectedValue={sourceWalletId || undefined}
             onSelect={(value) => setSourceWalletId(value)}
             options={walletOptions}
+            theme={theme}
           />
 
           {category.toUpperCase() === 'TRANSFER' && (
@@ -110,6 +118,7 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
               selectedValue={destinationWalletId || undefined}
               onSelect={(value) => setDestinationWalletId(value)}
               options={walletOptions}
+              theme={theme}
             />
           )}
 
@@ -118,6 +127,7 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
             label="Short Description"
             value={description}
             onChangeText={(text) => setDescription(text)}
+            theme={theme}
           />
 
           <TextInput
@@ -132,6 +142,7 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
                 (parseFloat(previousValue) || 0).toString(),
               );
             }}
+            theme={theme}
           />
 
           {category.toUpperCase() !== 'TRANSFER' && (
@@ -148,7 +159,10 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
                   onPress={() => {
                     setTransactionType(value);
                   }}>
-                  <Text style={styles.transactionTypeText} variant="label">
+                  <Text
+                    style={styles.transactionTypeText}
+                    variant="label"
+                    theme={theme}>
                     {label}
                   </Text>
                 </TouchableOpacity>
@@ -171,6 +185,7 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
               })
             }
             label="Create Transaction"
+            theme={theme}
           />
         </View>
       </View>

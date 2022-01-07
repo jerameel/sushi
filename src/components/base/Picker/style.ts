@@ -47,6 +47,16 @@ const useStyles = (theme: Theme = DEFAULT_THEME) => {
     },
     modalTitleContainer: {
       padding: 16,
+      flexDirection: 'row',
+    },
+    modalTitleTextContainer: {
+      flex: 1,
+    },
+    modalTitleAction: {
+      width: 32,
+      height: 32,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     modalItemContainer: {
       padding: 16,

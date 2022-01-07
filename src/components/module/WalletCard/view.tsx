@@ -15,12 +15,12 @@ const WalletCard = (props: WalletCardProps) => {
       onPress={onPress}
       style={[styles.container, containerStyle]}
       activeOpacity={0.6}>
-      <Text variant="subtitle">
+      <Text variant="subtitle" theme={theme}>
         {numbro(balance).formatCurrency({
           mantissa: 2,
         })}
       </Text>
-      <Text>{label}</Text>
+      <Text theme={theme}>{label}</Text>
     </TouchableOpacity>
   );
 };

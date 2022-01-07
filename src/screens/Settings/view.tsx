@@ -11,7 +11,13 @@ import Button from 'components/base/Button';
 import Picker from 'components/base/Picker';
 
 const SettingsView = (props: SettingsProps) => {
-  const { navigation, setCurrencyLanguage, currencyLanguage } = props;
+  const {
+    navigation,
+    setCurrencyLanguage,
+    currencyLanguage,
+    baseTheme,
+    setBaseTheme,
+  } = props;
   const { styles, theme, colors } = useStyles();
 
   const numbroLanguages = numbro.languages();
@@ -43,7 +49,10 @@ const SettingsView = (props: SettingsProps) => {
           }}>
           <Back fill={colors.PRIMARY_TEXT} width={24} height={24} />
         </TouchableOpacity>
-        <Text containerStyle={styles.headerTitleContainer} variant="title">
+        <Text
+          containerStyle={styles.headerTitleContainer}
+          variant="title"
+          theme={theme}>
           Settings
         </Text>
       </View>
@@ -55,6 +64,28 @@ const SettingsView = (props: SettingsProps) => {
             selectedValue={currencyLanguage}
             onSelect={(value) => setCurrencyLanguage(value)}
             options={currencyLanguageOptions}
+            theme={theme}
+          />
+
+          <Picker
+            containerStyle={styles.inputContainer}
+            label="Theme"
+            selectedValue={baseTheme}
+            onSelect={(value) => {
+              // @ts-ignore
+              setBaseTheme(value);
+            }}
+            options={[
+              {
+                label: 'Light',
+                value: 'Light',
+              },
+              {
+                label: 'Dark',
+                value: 'Dark',
+              },
+            ]}
+            theme={theme}
           />
         </ScrollView>
       </View>

@@ -3,7 +3,7 @@ import { Modal, View, TouchableOpacity, ScrollView } from 'react-native';
 import Text from 'components/base/Text';
 import useStyles from './style';
 import { PickerProps } from './props';
-import { Down } from '../SVG';
+import { Down, Close } from 'components/base/SVG';
 
 const Picker = (props: PickerProps) => {
   const {
@@ -49,9 +49,19 @@ const Picker = (props: PickerProps) => {
         <View style={[styles.modalContainer, containerStyle]}>
           <View style={styles.modalContentArea}>
             <View style={styles.modalTitleContainer}>
-              <Text variant="title" style={styles.modalTitle}>
+              <Text
+                variant="title"
+                containerStyle={styles.modalTitleTextContainer}
+                style={styles.modalTitle}>
                 {label}
               </Text>
+              <TouchableOpacity
+                style={styles.modalTitleAction}
+                onPress={() => {
+                  setShowModal(false);
+                }}>
+                <Close fill={colors.PRIMARY_TEXT} width={24} height={24} />
+              </TouchableOpacity>
             </View>
             <ScrollView>
               {options.map((option) => (

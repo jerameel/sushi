@@ -28,8 +28,8 @@ const useStyles = () => {
     textFieldContainer: {
       marginTop: 16,
     },
-    actionsContainer: {
-      padding: 16,
+    inputContainer: {
+      marginTop: 16,
     },
   });
   return { styles, colors, theme };

@@ -44,10 +44,16 @@ const TransactionCard = (props: TransactionCardProps) => {
       <View style={styles.imageContainer}>{Icon}</View>
       <View style={styles.detailsContainer}>
         <View style={styles.row}>
-          <Text containerStyle={styles.rowColumnLeft} variant="subtitle">
+          <Text
+            containerStyle={styles.rowColumnLeft}
+            variant="subtitle"
+            theme={theme}>
             {category}
           </Text>
-          <Text containerStyle={styles.rowColumnRight} variant="subtitle">
+          <Text
+            containerStyle={styles.rowColumnRight}
+            variant="subtitle"
+            theme={theme}>
             {`${amount > 0 ? '+' : ''}${numbro(
               destinationWallet ? Math.abs(amount) : amount,
             ).formatCurrency({
@@ -55,10 +61,10 @@ const TransactionCard = (props: TransactionCardProps) => {
             })}`}
           </Text>
         </View>
-        <Text variant="body">{`${sourceWallet}${
+        <Text variant="body" theme={theme}>{`${sourceWallet}${
           destinationWallet ? ` to ${destinationWallet}` : ''
         }`}</Text>
-        <Text variant="label" style={styles.dateText}>
+        <Text variant="label" style={styles.dateText} theme={theme}>
           {moment(createdAt).format('MMM DD, YYYY hh:mm a')}
         </Text>
       </View>

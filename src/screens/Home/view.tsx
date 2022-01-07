@@ -17,11 +17,13 @@ const SubHeader = (props: { onPressAdd: () => void; label: string }) => {
   const { styles, theme, colors } = useStyles();
   return (
     <View style={styles.contentHeader}>
-      <Text variant="subtitle">{props.label}</Text>
+      <Text variant="subtitle" theme={theme}>
+        {props.label}
+      </Text>
       <TouchableOpacity
         style={styles.contentHeaderAction}
         onPress={props.onPressAdd}>
-        <Add fill={colors.PRIMARY} width={18} height={18} />
+        <Add fill={colors.PRIMARY_TEXT} width={18} height={18} />
       </TouchableOpacity>
     </View>
   );
@@ -83,7 +85,7 @@ const HomeView = (props: HomeProps) => {
       <View style={styles.header}>
         <View style={styles.headerActionContainer} />
         <View style={styles.balanceContainer}>
-          <Text variant="title">
+          <Text variant="title" theme={theme}>
             {numbro(currentBalance).formatCurrency({
               mantissa: 2,
             })}
@@ -101,6 +103,7 @@ const HomeView = (props: HomeProps) => {
         containerStyle={styles.breakdownContainer}
         income={balanceBreakdown.income}
         expenses={balanceBreakdown.expenses}
+        theme={theme}
       />
       <View style={styles.content}>
         <View>
@@ -144,6 +147,7 @@ const HomeView = (props: HomeProps) => {
                         walletId: wallet.id,
                       })
                     }
+                    theme={theme}
                   />
                 );
               })}
@@ -176,6 +180,7 @@ const HomeView = (props: HomeProps) => {
                       transactionId: transaction.id,
                     })
                   }
+                  theme={theme}
                 />
               );
             })}

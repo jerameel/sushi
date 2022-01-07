@@ -12,20 +12,20 @@ const BalanceBreakdown = (props: BalanceBreakdownProps) => {
   return (
     <View style={[styles.container, containerStyle]}>
       <View style={styles.card}>
-        <Text variant="label" style={styles.cardLabelText}>
+        <Text variant="label" style={styles.cardLabelText} theme={theme}>
           Income
         </Text>
-        <Text variant="subtitle">
+        <Text variant="subtitle" theme={theme}>
           {numbro(income).formatCurrency({
             mantissa: 2,
           })}
         </Text>
       </View>
       <View style={styles.card}>
-        <Text variant="label" style={styles.cardLabelText}>
+        <Text variant="label" style={styles.cardLabelText} theme={theme}>
           Expenses
         </Text>
-        <Text variant="subtitle">
+        <Text variant="subtitle" theme={theme}>
           {numbro(expenses).formatCurrency({
             mantissa: 2,
           })}

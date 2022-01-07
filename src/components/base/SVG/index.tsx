@@ -1,4 +1,5 @@
 /* PLOP_INJECT_IMPORT */
+export { default as Close } from './Close';
 export { default as Settings } from './Settings';
 export { default as Delete } from './Delete';
 export { default as UpDown } from './UpDown';

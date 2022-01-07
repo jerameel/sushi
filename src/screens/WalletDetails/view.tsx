@@ -91,7 +91,10 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
           }}>
           <Back fill={colors.PRIMARY_TEXT} width={24} height={24} />
         </TouchableOpacity>
-        <Text containerStyle={styles.headerTitleContainer} variant="title">
+        <Text
+          containerStyle={styles.headerTitleContainer}
+          variant="title"
+          theme={theme}>
           Wallet Details
         </Text>
         <TouchableOpacity
@@ -105,32 +108,38 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
       <View style={styles.content}>
         <View style={styles.detailsCard}>
           <View style={styles.detailsCardRow}>
-            <Text>{wallet.label}</Text>
-            <Text variant="subtitle">
+            <Text theme={theme}>{wallet.label}</Text>
+            <Text variant="subtitle" theme={theme}>
               {numbro(currentBalance).formatCurrency({
                 mantissa: 2,
               })}
             </Text>
           </View>
           <View style={styles.detailsCardRow}>
-            <Text variant="label">Initial Balance</Text>
-            <Text variant="body">
+            <Text variant="label" theme={theme}>
+              Initial Balance
+            </Text>
+            <Text variant="body" theme={theme}>
               {numbro(wallet.initialAmount).formatCurrency({
                 mantissa: 2,
               })}
             </Text>
           </View>
           <View style={styles.detailsCardRow}>
-            <Text variant="label">Income</Text>
-            <Text variant="body">
+            <Text variant="label" theme={theme}>
+              Income
+            </Text>
+            <Text variant="body" theme={theme}>
               {numbro(balanceBreakdown.income).formatCurrency({
                 mantissa: 2,
               })}
             </Text>
           </View>
           <View style={styles.detailsCardRow}>
-            <Text variant="label">Expenses</Text>
-            <Text variant="body">
+            <Text variant="label" theme={theme}>
+              Expenses
+            </Text>
+            <Text variant="body" theme={theme}>
               {numbro(balanceBreakdown.expenses).formatCurrency({
                 mantissa: 2,
               })}
@@ -158,6 +167,7 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
                       transactionId: transaction.id,
                     })
                   }
+                  theme={theme}
                 />
               );
             })}
@@ -171,7 +181,7 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
         visible={showDelete}
         actions={[
           {
-            label: 'Cancel',
+            label: 'Keep',
             onPress: () => {
               setShowDelete(false);
             },
