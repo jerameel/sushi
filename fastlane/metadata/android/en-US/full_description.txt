@@ -1,0 +1,5 @@
+An open source mobile application to help you easily manage multiple wallets and record transactions.
+
+From expenses like Groceries, Online Shopping, Subscriptions, for your savings and income, and even wallet transfers... you can list them on Sushi.
+
+Manage your personal finances with Sushi.
