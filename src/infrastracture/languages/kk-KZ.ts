@@ -1,13 +1,7 @@
 import numbro from 'numbro';
-import kk_KZ from './languages/kk-KZ';
-let numbroLanguages = require('numbro/dist/languages.min.js');
 
-Object.values(numbroLanguages).forEach((each: any) =>
-  numbro.registerLanguage(each),
-);
-
-numbro.registerLanguage({
-  languageTag: 'fil-PH',
+export default {
+  languageTag: 'kk-KZ',
   delimiters: {
     thousands: ',',
     decimal: '.',
@@ -24,17 +18,17 @@ numbro.registerLanguage({
     return ~~((number % 100) / 10) === 1
       ? 'th'
       : b === 1
-      ? 'st'
-      : b === 2
-      ? 'nd'
-      : b === 3
-      ? 'rd'
-      : 'th';
+        ? 'st'
+        : b === 2
+          ? 'nd'
+          : b === 3
+            ? 'rd'
+            : 'th';
   },
   currency: {
-    position: 'prefix',
-    symbol: '₱',
-    code: 'PHP',
+    position: 'postfix',
+    symbol: '₸',
+    code: 'KZT',
   },
   currencyFormat: {
     thousandSeparated: true,
@@ -63,6 +57,4 @@ numbro.registerLanguage({
       mantissa: 0,
     },
   },
-});
-
-numbro.registerLanguage(kk_KZ);
+} as numbro.NumbroLanguage;
