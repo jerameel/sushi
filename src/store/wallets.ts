@@ -6,6 +6,8 @@ export type Wallet = {
   id: string;
   label: string;
   initialAmount: number;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type Wallets = Record<string, Wallet>;
@@ -16,12 +18,26 @@ const walletsSlice = createSlice({
   name: 'wallets',
   initialState,
   reducers: {
-    createWallet(state, action: PayloadAction<Omit<Wallet, 'id'>>) {
+    createWallet(
+      state,
+      action: PayloadAction<Omit<Wallet, 'id' | 'createdAt'>>,
+    ) {
       return produce(state, (draft) => {
         const id = uuidv1();
+        const createdAt = new Date().toISOString();
         draft[id] = {
           id,
+          createdAt,
           ...action.payload,
+        };
+      });
+    },
+    editWallet(state, action: PayloadAction<Wallet>) {
+      return produce(state, (draft) => {
+        const updatedAt = new Date().toISOString();
+        draft[action.payload.id] = {
+          ...action.payload,
+          updatedAt,
         };
       });
     },
@@ -36,6 +52,7 @@ const walletsSlice = createSlice({
 
 export const {
   createWallet: createWalletAction,
+  editWallet: editWalletAction,
   deleteWallet: deleteWalletAction,
 } = walletsSlice.actions;
 

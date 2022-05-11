@@ -11,6 +11,7 @@ export type Transaction = {
   description: string;
   amount: number;
   createdAt: string;
+  updatedAt: string;
 };
 
 export type Transactions = Record<string, Transaction>;
@@ -32,6 +33,15 @@ const transactionsSlice = createSlice({
           id,
           createdAt,
           ...action.payload,
+        };
+      });
+    },
+    editTransaction(state, action: PayloadAction<Transaction>) {
+      return produce(state, (draft) => {
+        const updatedAt = new Date().toISOString();
+        draft[action.payload.id] = {
+          ...action.payload,
+          updatedAt,
         };
       });
     },
@@ -61,6 +71,7 @@ const transactionsSlice = createSlice({
 
 export const {
   createTransaction: createTransactionAction,
+  editTransaction: editTransactionAction,
   deleteTransaction: deleteTransactionAction,
 } = transactionsSlice.actions;
 

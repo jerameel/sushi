@@ -4,7 +4,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { MainStackParamList } from 'types/Route';
 import HomeScreen from './Home';
 import CreateWalletScreen from './CreateWallet';
+import EditWalletScreen from './EditWallet';
 import CreateTransactionScreen from './CreateTransaction';
+import EditTransactionScreen from './EditTransaction';
 import WalletDetailsScreen from './WalletDetails';
 import TransactionDetailsScreen from './TransactionDetails';
 import SettingsScreen from './Settings';
@@ -29,8 +31,18 @@ const Routes = () => {
       />
       <MainStack.Screen
         options={{ headerShown: false }}
+        name="EDIT_WALLET"
+        component={EditWalletScreen}
+      />
+      <MainStack.Screen
+        options={{ headerShown: false }}
         name="CREATE_TRANSACTION"
         component={CreateTransactionScreen}
+      />
+      <MainStack.Screen
+        options={{ headerShown: false }}
+        name="EDIT_TRANSACTION"
+        component={EditTransactionScreen}
       />
       <MainStack.Screen
         options={{ headerShown: false }}

@@ -7,7 +7,7 @@ import { ScrollView, View, StatusBar, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useStyles from './styles';
 import { WalletDetailsProps } from './props';
-import { Back, Delete } from 'components/base/SVG';
+import { Back, Delete, Edit } from 'components/base/SVG';
 import { Transaction } from 'store/transactions';
 import TransactionCard from 'components/module/TransactionCard';
 import AlertModal from 'components/module/AlertModal';
@@ -97,6 +97,15 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
           theme={theme}>
           Wallet Details
         </Text>
+        <TouchableOpacity
+          style={styles.headerRightAction}
+          onPress={() => {
+            navigation.navigate('EDIT_WALLET', {
+              walletId: wallet.id,
+            });
+          }}>
+          <Edit fill={colors.PRIMARY_TEXT} width={24} height={24} />
+        </TouchableOpacity>
         <TouchableOpacity
           style={styles.headerRightAction}
           onPress={() => {

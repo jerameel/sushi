@@ -7,7 +7,7 @@ import { ScrollView, View, StatusBar, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useStyles from './styles';
 import { TransactionDetailsProps } from './props';
-import { Back, Delete } from 'components/base/SVG';
+import { Back, Delete, Edit } from 'components/base/SVG';
 import { Transaction } from 'store/transactions';
 import TransactionCard from 'components/module/TransactionCard';
 import moment from 'moment';
@@ -44,6 +44,15 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
           theme={theme}>
           Transaction Details
         </Text>
+        <TouchableOpacity
+          style={styles.headerRightAction}
+          onPress={() => {
+            navigation.navigate('EDIT_TRANSACTION', {
+              transactionId: transaction.id,
+            });
+          }}>
+          <Edit fill={colors.PRIMARY_TEXT} width={24} height={24} />
+        </TouchableOpacity>
         <TouchableOpacity
           style={styles.headerRightAction}
           onPress={() => {
@@ -112,6 +121,19 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
             {moment(transaction.createdAt).format('DD MMM YYYY hh:mm a')}
           </Text>
         </View>
+        {!!transaction.updatedAt && (
+          <View style={styles.detailCard}>
+            <Text variant="label" theme={theme}>
+              Date Updated
+            </Text>
+            <Text
+              variant="subtitle"
+              containerStyle={{ marginTop: 2 }}
+              theme={theme}>
+              {moment(transaction.updatedAt).format('DD MMM YYYY hh:mm a')}
+            </Text>
+          </View>
+        )}
       </View>
       <AlertModal
         theme={theme}
