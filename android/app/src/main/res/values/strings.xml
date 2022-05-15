@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Sushi</string>
+    <string name="splash_text">Sushi - Personal Finance</string>
 </resources>
