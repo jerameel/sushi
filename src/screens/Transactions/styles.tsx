@@ -9,28 +9,17 @@ const useStyles = () => {
   const STYLES = getGlobalStyles(theme.base);
   const styles = StyleSheet.create({
     container: STYLES.CONTAINER,
-    header: {
-      paddingBottom: 8,
-      marginHorizontal: 8,
-      flexDirection: 'row',
-      borderBottomWidth: 1,
-      borderBottomColor: colors.DIVIDER,
-    },
-    headerActionContainer: {
-      width: 48,
-      height: 48,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    balanceContainer: {
+    header: STYLES.HEADER,
+    headerTitleContainer: {
+      marginLeft: 8,
       flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      paddingHorizontal: 16,
+      marginRight: 8,
     },
-    breakdownContainer: {
-      marginTop: 16,
-      marginBottom: 8,
+    headerLeftAction: {
+      width: 40,
+      height: 40,
+      justifyContent: 'center',
+      alignItems: 'flex-start',
     },
     content: {
       flex: 1,
@@ -50,21 +39,11 @@ const useStyles = () => {
       color: colors.PRIMARY,
       textTransform: 'none',
     },
-    walletsScrollContainer: {
-      height: 125,
-    },
-    walletCard: {
-      marginRight: 8,
-    },
     transactionsContainer: {
       flex: 1,
     },
     transactionCard: {
       marginTop: 8,
-    },
-    actionsContainer: {
-      padding: 16,
-      backgroundColor: colors.AREA_HIGHLIGHT,
     },
   });
   return { styles, colors, theme };

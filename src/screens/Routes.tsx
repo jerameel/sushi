@@ -10,6 +10,7 @@ import EditTransactionScreen from './EditTransaction';
 import WalletDetailsScreen from './WalletDetails';
 import TransactionDetailsScreen from './TransactionDetails';
 import SettingsScreen from './Settings';
+import TransactionsScreen from './Transactions';
 
 const MainStack = createNativeStackNavigator<MainStackParamList>();
 
@@ -25,6 +26,11 @@ const Routes = () => {
         options={{ headerShown: false }}
         name="HOME"
         component={HomeScreen}
+      />
+      <MainStack.Screen
+        options={{ headerShown: false }}
+        name="TRANSACTIONS"
+        component={TransactionsScreen}
       />
       <MainStack.Screen
         options={{ headerShown: false }}
