@@ -35,7 +35,7 @@ const EditWalletView = (props: EditWalletProps) => {
           containerStyle={styles.headerTitleContainer}
           variant="title"
           theme={theme}>
-          New Wallet
+          Edit Wallet
         </Text>
       </View>
       <View style={styles.content}>
@@ -72,7 +72,7 @@ const EditWalletView = (props: EditWalletProps) => {
                 initialAmount: parseFloat(initialAmount) || 0,
               })
             }
-            label="Create Wallet"
+            label="Update Wallet"
             theme={theme}
           />
         </View>
