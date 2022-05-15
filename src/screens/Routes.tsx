@@ -15,7 +15,9 @@ const MainStack = createNativeStackNavigator<MainStackParamList>();
 
 const Routes = () => {
   useEffect(() => {
-    SplashScreen.hide();
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 500);
   }, []);
   return (
     <MainStack.Navigator initialRouteName="HOME">
