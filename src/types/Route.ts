@@ -1,5 +1,6 @@
 export type MainStackParamList = {
   HOME?: {};
+  TRANSACTIONS?: {};
   CREATE_WALLET?: {};
   EDIT_WALLET?: {
     walletId: string;

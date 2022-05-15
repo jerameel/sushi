@@ -12,19 +12,30 @@ import { Add, Settings } from 'components/base/SVG';
 import TransactionCard from 'components/module/TransactionCard';
 import BalanceBreakdown from 'components/module/BalanceBreakdown';
 import { Transaction } from 'store/transactions';
+import Button from 'components/base/Button';
 
-const SubHeader = (props: { onPressAdd: () => void; label: string }) => {
+const SubHeader = (props: {
+  label: string;
+  action?: () => void;
+  actionText?: string;
+}) => {
   const { styles, theme, colors } = useStyles();
   return (
     <View style={styles.contentHeader}>
       <Text variant="subtitle" theme={theme}>
         {props.label}
       </Text>
-      <TouchableOpacity
-        style={styles.contentHeaderAction}
-        onPress={props.onPressAdd}>
-        <Add fill={colors.PRIMARY_TEXT} width={18} height={18} />
-      </TouchableOpacity>
+
+      {!!props.actionText && (
+        <TouchableOpacity onPress={props.action}>
+          <Text
+            style={styles.contentHeaderAction}
+            variant="label"
+            theme={theme}>
+            {props.actionText}
+          </Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
@@ -107,15 +118,21 @@ const HomeView = (props: HomeProps) => {
       />
       <View style={styles.content}>
         <View>
-          <SubHeader
-            label="My Wallets"
-            onPressAdd={() => navigation.navigate('CREATE_WALLET')}
-          />
+          <SubHeader label="My Wallets" />
           <View style={styles.walletsScrollContainer}>
             <ScrollView
               contentContainerStyle={styles.contentScroll}
               horizontal
               showsHorizontalScrollIndicator={false}>
+              <WalletCard
+                containerStyle={styles.walletCard}
+                key={'create_wallet'}
+                label={''}
+                balance={0}
+                onPress={() => navigation.navigate('CREATE_WALLET')}
+                template
+                theme={theme}
+              />
               {walletsArray.map((wallet) => {
                 const walletTransactions = Object.keys(transactions)
                   .map((key) => transactions[key])
@@ -158,10 +175,13 @@ const HomeView = (props: HomeProps) => {
         <View style={styles.transactionsContainer}>
           <SubHeader
             label="Recent Transactions"
-            onPressAdd={() => navigation.navigate('CREATE_TRANSACTION')}
+            actionText="See All"
+            action={() => {
+              navigation.navigate('TRANSACTIONS');
+            }}
           />
           <ScrollView contentContainerStyle={styles.contentScroll}>
-            {sortedTransactionsArray.map((transaction) => {
+            {sortedTransactionsArray.slice(0, 5).map((transaction) => {
               const sourceWallet = wallets[transaction.sourceWalletId];
               const destinationWallet = transaction.destinationWalletId
                 ? wallets[transaction.destinationWalletId]
@@ -185,6 +205,15 @@ const HomeView = (props: HomeProps) => {
               );
             })}
           </ScrollView>
+        </View>
+
+        <View style={styles.actionsContainer}>
+          <Button
+            outline
+            onPress={() => navigation.navigate('CREATE_TRANSACTION')}
+            label="New Transaction"
+            theme={theme}
+          />
         </View>
       </View>
     </SafeAreaView>
