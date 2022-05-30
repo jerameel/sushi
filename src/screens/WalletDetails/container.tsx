@@ -9,7 +9,7 @@ import WalletDetailsView from './view';
 const WalletDetailsContainer = (props: WalletDetailsPublicProps) => {
   const dispatch = useDispatch();
   const walletId = props.route.params?.walletId || '';
-
+  const language = useSelector((state: RootState) => state.currency.language);
   const wallets = useSelector((state: RootState) => state.wallets);
   const transactions = useSelector((state: RootState) => state.transactions);
   const wallet = wallets[walletId];
@@ -28,6 +28,7 @@ const WalletDetailsContainer = (props: WalletDetailsPublicProps) => {
     wallets,
     transactions,
     deleteWallet,
+    language,
   };
 
   return <WalletDetailsView {...props} {...generatedProps} />;

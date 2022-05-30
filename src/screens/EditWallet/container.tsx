@@ -21,7 +21,7 @@ const EditWalletContainer = (props: EditWalletPublicProps) => {
 
   const generatedProps: EditWalletPrivateProps = {
     editWallet,
-    wallet
+    wallet,
   };
 
   return <EditWalletView {...props} {...generatedProps} />;

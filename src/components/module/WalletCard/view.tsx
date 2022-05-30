@@ -1,10 +1,10 @@
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import numbro from 'numbro';
 import Text from 'components/base/Text';
 import useStyles from './style';
 import { WalletCardProps } from './props';
 import { Add } from 'components/base/SVG';
+import { formatCurrency } from 'utils/formatCurrency';
 
 const WalletCard = (props: WalletCardProps) => {
   const {
@@ -14,6 +14,7 @@ const WalletCard = (props: WalletCardProps) => {
     balance,
     template,
     onPress,
+    language,
   } = props;
 
   const { styles, colors } = useStyles(theme, props);
@@ -35,9 +36,7 @@ const WalletCard = (props: WalletCardProps) => {
       style={[styles.container, containerStyle]}
       activeOpacity={0.6}>
       <Text variant="subtitle" theme={theme}>
-        {numbro(balance).formatCurrency({
-          mantissa: 2,
-        })}
+        {formatCurrency(balance, { language })}
       </Text>
       <Text theme={theme}>{label}</Text>
     </TouchableOpacity>

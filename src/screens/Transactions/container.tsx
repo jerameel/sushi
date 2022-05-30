@@ -7,11 +7,14 @@ import TransactionsView from './view';
 
 const TransactionsContainer = (props: TransactionsPublicProps) => {
   const wallets = useSelector((state: RootState) => state.wallets);
+
+  const language = useSelector((state: RootState) => state.currency.language);
   const transactions = useSelector((state: RootState) => state.transactions);
 
   const generatedProps: TransactionsPrivateProps = {
     wallets,
     transactions,
+    language,
   };
 
   return <TransactionsView {...props} {...generatedProps} />;

@@ -1,5 +1,4 @@
 import React, { useReducer, useState } from 'react';
-import numbro from 'numbro';
 import sortBy from 'ramda/es/sortBy';
 import reverse from 'ramda/es/reverse';
 import Text from 'components/base/Text';
@@ -11,9 +10,11 @@ import { Back, Delete, Edit } from 'components/base/SVG';
 import { Transaction } from 'store/transactions';
 import TransactionCard from 'components/module/TransactionCard';
 import AlertModal from 'components/module/AlertModal';
+import { formatCurrency } from 'utils/formatCurrency';
 
 const WalletDetailsView = (props: WalletDetailsProps) => {
-  const { navigation, wallet, transactions, wallets, deleteWallet } = props;
+  const { navigation, wallet, transactions, wallets, deleteWallet, language } =
+    props;
   const { styles, theme, colors } = useStyles();
 
   const walletTransactions = Object.keys(transactions)
@@ -119,9 +120,7 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
           <View style={styles.detailsCardRow}>
             <Text theme={theme}>{wallet.label}</Text>
             <Text variant="subtitle" theme={theme}>
-              {numbro(currentBalance).formatCurrency({
-                mantissa: 2,
-              })}
+              {formatCurrency(currentBalance, { language })}
             </Text>
           </View>
           <View style={styles.detailsCardRow}>
@@ -129,9 +128,7 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
               Initial Balance
             </Text>
             <Text variant="body" theme={theme}>
-              {numbro(wallet.initialAmount).formatCurrency({
-                mantissa: 2,
-              })}
+              {formatCurrency(wallet.initialAmount, { language })}
             </Text>
           </View>
           <View style={styles.detailsCardRow}>
@@ -139,9 +136,7 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
               Income
             </Text>
             <Text variant="body" theme={theme}>
-              {numbro(balanceBreakdown.income).formatCurrency({
-                mantissa: 2,
-              })}
+              {formatCurrency(balanceBreakdown.income, { language })}
             </Text>
           </View>
           <View style={styles.detailsCardRow}>
@@ -149,9 +144,7 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
               Expenses
             </Text>
             <Text variant="body" theme={theme}>
-              {numbro(balanceBreakdown.expenses).formatCurrency({
-                mantissa: 2,
-              })}
+              {formatCurrency(balanceBreakdown.expenses, { language })}
             </Text>
           </View>
         </View>
@@ -177,6 +170,7 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
                     })
                   }
                   theme={theme}
+                  language={language}
                 />
               );
             })}

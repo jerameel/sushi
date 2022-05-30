@@ -14,7 +14,7 @@ import TransactionDetailsView from './view';
 const TransactionDetailsContainer = (props: TransactionDetailsPublicProps) => {
   const dispatch = useDispatch();
   const transactionId = props.route.params?.transactionId || '';
-
+  const language = useSelector((state: RootState) => state.currency.language);
   const wallets = useSelector((state: RootState) => state.wallets);
   const transactions = useSelector((state: RootState) => state.transactions);
   const transaction = transactions[transactionId];
@@ -37,6 +37,7 @@ const TransactionDetailsContainer = (props: TransactionDetailsPublicProps) => {
     sourceWallet,
     destinationWallet,
     deleteTransaction,
+    language,
   };
 
   return <TransactionDetailsView {...props} {...generatedProps} />;

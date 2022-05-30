@@ -1,11 +1,11 @@
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import numbro from 'numbro';
 import moment from 'moment';
 import Text from 'components/base/Text';
 import useStyles from './style';
 import { TransactionCardProps } from './props';
 import { UpRight, DownLeft, UpDown } from 'components/base/SVG';
+import { formatCurrency } from 'utils/formatCurrency';
 
 const TransactionCard = (props: TransactionCardProps) => {
   const {
@@ -17,6 +17,7 @@ const TransactionCard = (props: TransactionCardProps) => {
     destinationWallet,
     createdAt,
     onPress,
+    language,
   } = props;
 
   const { styles, colors } = useStyles(theme);
@@ -54,11 +55,10 @@ const TransactionCard = (props: TransactionCardProps) => {
             containerStyle={styles.rowColumnRight}
             variant="subtitle"
             theme={theme}>
-            {`${amount > 0 ? '+' : ''}${numbro(
+            {`${amount > 0 ? '+' : ''}${formatCurrency(
               destinationWallet ? Math.abs(amount) : amount,
-            ).formatCurrency({
-              mantissa: 2,
-            })}`}
+              { language },
+            )}`}
           </Text>
         </View>
         <Text variant="body" theme={theme}>{`${sourceWallet}${

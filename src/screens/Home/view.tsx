@@ -1,5 +1,4 @@
 import React from 'react';
-import numbro from 'numbro';
 import sortBy from 'ramda/es/sortBy';
 import reverse from 'ramda/es/reverse';
 import Text from 'components/base/Text';
@@ -13,6 +12,7 @@ import TransactionCard from 'components/module/TransactionCard';
 import BalanceBreakdown from 'components/module/BalanceBreakdown';
 import { Transaction } from 'store/transactions';
 import Button from 'components/base/Button';
+import { formatCurrency } from 'utils/formatCurrency';
 
 const SubHeader = (props: {
   label: string;
@@ -41,7 +41,7 @@ const SubHeader = (props: {
 };
 
 const HomeView = (props: HomeProps) => {
-  const { navigation, wallets, transactions } = props;
+  const { navigation, wallets, transactions, language } = props;
   const { styles, theme, colors } = useStyles();
 
   const sortTransactionByDate = sortBy(
@@ -97,9 +97,7 @@ const HomeView = (props: HomeProps) => {
         <View style={styles.headerActionContainer} />
         <View style={styles.balanceContainer}>
           <Text variant="title" theme={theme}>
-            {numbro(currentBalance).formatCurrency({
-              mantissa: 2,
-            })}
+            {formatCurrency(currentBalance, { language })}
           </Text>
         </View>
         <TouchableOpacity
@@ -115,6 +113,7 @@ const HomeView = (props: HomeProps) => {
         income={balanceBreakdown.income}
         expenses={balanceBreakdown.expenses}
         theme={theme}
+        language={language}
       />
       <View style={styles.content}>
         <View>
@@ -132,6 +131,7 @@ const HomeView = (props: HomeProps) => {
                 onPress={() => navigation.navigate('CREATE_WALLET')}
                 template
                 theme={theme}
+                language={language}
               />
               {walletsArray.map((wallet) => {
                 const walletTransactions = Object.keys(transactions)
@@ -165,6 +165,7 @@ const HomeView = (props: HomeProps) => {
                       })
                     }
                     theme={theme}
+                    language={language}
                   />
                 );
               })}
@@ -201,6 +202,7 @@ const HomeView = (props: HomeProps) => {
                     })
                   }
                   theme={theme}
+                  language={language}
                 />
               );
             })}

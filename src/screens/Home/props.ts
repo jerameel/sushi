@@ -9,6 +9,7 @@ export interface HomePublicProps
 export interface HomePrivateProps {
   wallets: Wallets;
   transactions: Transactions;
+  language: string;
 }
 
 export interface HomeProps extends HomePublicProps, HomePrivateProps {}
