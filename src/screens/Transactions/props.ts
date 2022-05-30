@@ -9,6 +9,7 @@ export interface TransactionsPublicProps
 export interface TransactionsPrivateProps {
   wallets: Wallets;
   transactions: Transactions;
+  language: string;
 }
 
 export interface TransactionsProps

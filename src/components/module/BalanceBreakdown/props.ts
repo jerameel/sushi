@@ -6,4 +6,5 @@ export interface BalanceBreakdownProps {
   theme?: Theme;
   income: number;
   expenses: number;
+  language: string;
 }

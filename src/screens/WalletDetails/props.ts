@@ -11,6 +11,7 @@ export interface WalletDetailsPrivateProps {
   wallets: Wallets;
   transactions: Transactions;
   deleteWallet: () => void;
+  language: string;
 }
 
 export interface WalletDetailsProps

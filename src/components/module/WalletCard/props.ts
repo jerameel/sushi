@@ -8,4 +8,5 @@ export interface WalletCardProps {
   balance: number;
   onPress?: () => void;
   template?: boolean;
+  language: string;
 }

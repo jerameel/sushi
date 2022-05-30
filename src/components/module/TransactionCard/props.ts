@@ -10,4 +10,5 @@ export interface TransactionCardProps {
   destinationWallet?: string;
   createdAt: string;
   onPress?: () => void;
+  language: string;
 }

@@ -3,10 +3,10 @@ import { View } from 'react-native';
 import useStyles from './style';
 import { BalanceBreakdownProps } from './props';
 import Text from 'components/base/Text';
-import numbro from 'numbro';
+import { formatCurrency } from 'utils/formatCurrency';
 
 const BalanceBreakdown = (props: BalanceBreakdownProps) => {
-  const { containerStyle = {}, theme, income, expenses } = props;
+  const { containerStyle = {}, theme, income, expenses, language } = props;
 
   const { styles, colors } = useStyles(theme);
   return (
@@ -16,9 +16,7 @@ const BalanceBreakdown = (props: BalanceBreakdownProps) => {
           Income
         </Text>
         <Text variant="subtitle" theme={theme}>
-          {numbro(income).formatCurrency({
-            mantissa: 2,
-          })}
+          {formatCurrency(income, { language })}
         </Text>
       </View>
       <View style={styles.card}>
@@ -26,9 +24,7 @@ const BalanceBreakdown = (props: BalanceBreakdownProps) => {
           Expenses
         </Text>
         <Text variant="subtitle" theme={theme}>
-          {numbro(expenses).formatCurrency({
-            mantissa: 2,
-          })}
+          {formatCurrency(expenses, { language })}
         </Text>
       </View>
     </View>

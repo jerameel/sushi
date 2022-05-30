@@ -2,6 +2,7 @@ import { DEFAULT_THEME } from 'theme';
 import { StyleSheet } from 'react-native';
 import { Theme } from 'store/theme';
 import { getGlobalStyles, COLORS } from 'theme';
+import { WalletCardProps } from './props';
 
 const useStyles = (theme: Theme = DEFAULT_THEME, props: WalletCardProps) => {
   const colors = COLORS[theme.base];

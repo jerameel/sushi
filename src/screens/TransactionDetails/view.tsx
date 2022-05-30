@@ -1,5 +1,4 @@
 import React, { useReducer, useState } from 'react';
-import numbro from 'numbro';
 import sortBy from 'ramda/es/sortBy';
 import reverse from 'ramda/es/reverse';
 import Text from 'components/base/Text';
@@ -12,6 +11,7 @@ import { Transaction } from 'store/transactions';
 import TransactionCard from 'components/module/TransactionCard';
 import moment from 'moment';
 import AlertModal from 'components/module/AlertModal';
+import { formatCurrency } from 'utils/formatCurrency';
 
 const TransactionDetailsView = (props: TransactionDetailsProps) => {
   const {
@@ -20,6 +20,7 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
     sourceWallet,
     destinationWallet,
     deleteTransaction,
+    language,
   } = props;
   const { styles, theme, colors } = useStyles();
   const [showDelete, setShowDelete] = useState(false);
@@ -64,9 +65,7 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
       <View style={styles.content}>
         <View style={styles.amountCard}>
           <Text variant="subtitle" style={styles.amountText} theme={theme}>
-            {`${numbro(Math.abs(transaction.amount)).formatCurrency({
-              mantissa: 2,
-            })}`}
+            {`${formatCurrency(Math.abs(transaction.amount, { language }))}`}
           </Text>
         </View>
         {transaction.description.length > 0 && (

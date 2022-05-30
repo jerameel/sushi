@@ -19,7 +19,7 @@ import { Transaction } from 'store/transactions';
 import Button from 'components/base/Button';
 
 const TransactionsView = (props: TransactionsProps) => {
-  const { navigation, wallets, transactions } = props;
+  const { navigation, wallets, transactions, language } = props;
   const { styles, theme, colors } = useStyles();
 
   const sortTransactionByDate = sortBy(
@@ -51,6 +51,7 @@ const TransactionsView = (props: TransactionsProps) => {
           })
         }
         theme={theme}
+        language={language}
       />
     );
   };
