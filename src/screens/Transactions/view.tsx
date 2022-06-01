@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import numbro from 'numbro';
 import sortBy from 'ramda/es/sortBy';
 import reverse from 'ramda/es/reverse';
@@ -17,11 +17,16 @@ import { Add, Back, Settings } from 'components/base/SVG';
 import TransactionCard from 'components/module/TransactionCard';
 import { Transaction } from 'store/transactions';
 import Button from 'components/base/Button';
+import { Calendar } from 'react-native-calendars';
+import DatePicker from 'components/module/DatePicker';
+import isWithinInterval from 'date-fns/isWithinInterval';
 
 const TransactionsView = (props: TransactionsProps) => {
   const { navigation, wallets, transactions, language } = props;
   const { styles, theme, colors } = useStyles();
 
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
   const sortTransactionByDate = sortBy(
     (transaction: Transaction) => transaction.createdAt,
   );
@@ -30,6 +35,16 @@ const TransactionsView = (props: TransactionsProps) => {
       Object.keys(transactions).map((key) => transactions[key]),
     ),
   );
+
+  const filteredTransactionsArray =
+    startDate && endDate
+      ? sortedTransactionsArray.filter((t) =>
+          isWithinInterval(new Date(t.createdAt), {
+            start: startDate,
+            end: endDate,
+          }),
+        )
+      : sortedTransactionsArray;
 
   const renderTransaction = ({ item: transaction }: { item: Transaction }) => {
     const sourceWallet = wallets[transaction.sourceWalletId];
@@ -80,9 +95,18 @@ const TransactionsView = (props: TransactionsProps) => {
 
       <View style={styles.content}>
         <View style={styles.transactionsContainer}>
+          <DatePicker
+            label="Date Filter"
+            startDate={startDate}
+            setStartDate={setStartDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
+            placeholder="Show All"
+            theme={theme}
+          />
           <FlatList
             contentContainerStyle={styles.contentScroll}
-            data={sortedTransactionsArray}
+            data={filteredTransactionsArray}
             renderItem={renderTransaction}
             keyExtractor={(item) => item.id}
           />
