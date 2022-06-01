@@ -9,9 +9,9 @@ import { TransactionDetailsProps } from './props';
 import { Back, Delete, Edit } from 'components/base/SVG';
 import { Transaction } from 'store/transactions';
 import TransactionCard from 'components/module/TransactionCard';
-import moment from 'moment';
 import AlertModal from 'components/module/AlertModal';
 import { formatCurrency } from 'utils/formatCurrency';
+import { formatDate } from 'utils/formatDate';
 
 const TransactionDetailsView = (props: TransactionDetailsProps) => {
   const {
@@ -117,7 +117,7 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
             variant="subtitle"
             containerStyle={{ marginTop: 2 }}
             theme={theme}>
-            {moment(transaction.createdAt).format('DD MMM YYYY hh:mm a')}
+            {formatDate(transaction.createdAt)}
           </Text>
         </View>
         {!!transaction.updatedAt && (
@@ -129,7 +129,7 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
               variant="subtitle"
               containerStyle={{ marginTop: 2 }}
               theme={theme}>
-              {moment(transaction.updatedAt).format('DD MMM YYYY hh:mm a')}
+              {formatDate(transaction.updatedAt)}
             </Text>
           </View>
         )}

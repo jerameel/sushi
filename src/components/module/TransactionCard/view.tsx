@@ -1,11 +1,11 @@
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import moment from 'moment';
 import Text from 'components/base/Text';
 import useStyles from './style';
 import { TransactionCardProps } from './props';
 import { UpRight, DownLeft, UpDown } from 'components/base/SVG';
 import { formatCurrency } from 'utils/formatCurrency';
+import { formatDate } from 'utils/formatDate';
 
 const TransactionCard = (props: TransactionCardProps) => {
   const {
@@ -65,7 +65,7 @@ const TransactionCard = (props: TransactionCardProps) => {
           destinationWallet ? ` to ${destinationWallet}` : ''
         }`}</Text>
         <Text variant="label" style={styles.dateText} theme={theme}>
-          {moment(createdAt).format('MMM DD, YYYY hh:mm a')}
+          {formatDate(createdAt)}
         </Text>
       </View>
     </TouchableOpacity>

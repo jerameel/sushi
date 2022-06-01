@@ -23,9 +23,9 @@ const useStyles = () => {
     },
     content: {
       flex: 1,
+      paddingHorizontal: 16,
     },
     contentScroll: {
-      paddingHorizontal: 16,
       paddingBottom: 8,
     },
     contentHeader: {
