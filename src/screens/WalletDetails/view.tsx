@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from 'react';
+import React, { useState } from 'react';
 import sortBy from 'ramda/es/sortBy';
 import reverse from 'ramda/es/reverse';
 import Text from 'components/base/Text';

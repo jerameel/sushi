@@ -14,6 +14,11 @@ export type Transaction = {
   updatedAt: string;
 };
 
+export type CreateTransactionInput = Omit<
+  Transaction,
+  'id' | 'createdAt' | 'updatedAt'
+>;
+
 export type Transactions = Record<string, Transaction>;
 
 const initialState: Transactions = {};
@@ -22,16 +27,15 @@ const transactionsSlice = createSlice({
   name: 'transactions',
   initialState,
   reducers: {
-    createTransaction(
-      state,
-      action: PayloadAction<Omit<Transaction, 'id' | 'createdAt'>>,
-    ) {
+    createTransaction(state, action: PayloadAction<CreateTransactionInput>) {
       return produce(state, (draft) => {
         const id = uuidv1();
         const createdAt = new Date().toISOString();
+        const updatedAt = createdAt;
         draft[id] = {
           id,
           createdAt,
+          updatedAt,
           ...action.payload,
         };
       });

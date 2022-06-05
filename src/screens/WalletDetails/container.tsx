@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store';
-import { createWalletAction, deleteWalletAction, Wallet } from 'store/wallets';
+import { deleteWalletAction } from 'store/wallets';
 
 import { WalletDetailsPrivateProps, WalletDetailsPublicProps } from './props';
 import WalletDetailsView from './view';

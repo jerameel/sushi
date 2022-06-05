@@ -1,7 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store';
-import { Wallet } from 'store/wallets';
 import { setLanguageAction } from 'store/currency';
 
 import { SettingsPrivateProps, SettingsPublicProps } from './props';

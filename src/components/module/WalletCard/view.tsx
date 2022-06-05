@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import Text from 'components/base/Text';
 import useStyles from './style';
 import { WalletCardProps } from './props';

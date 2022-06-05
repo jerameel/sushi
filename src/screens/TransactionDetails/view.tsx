@@ -1,14 +1,10 @@
-import React, { useReducer, useState } from 'react';
-import sortBy from 'ramda/es/sortBy';
-import reverse from 'ramda/es/reverse';
+import React, { useState } from 'react';
 import Text from 'components/base/Text';
-import { ScrollView, View, StatusBar, TouchableOpacity } from 'react-native';
+import { View, StatusBar, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useStyles from './styles';
 import { TransactionDetailsProps } from './props';
 import { Back, Delete, Edit } from 'components/base/SVG';
-import { Transaction } from 'store/transactions';
-import TransactionCard from 'components/module/TransactionCard';
 import AlertModal from 'components/module/AlertModal';
 import { formatCurrency } from 'utils/formatCurrency';
 import { formatDate } from 'utils/formatDate';
@@ -65,7 +61,7 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
       <View style={styles.content}>
         <View style={styles.amountCard}>
           <Text variant="subtitle" style={styles.amountText} theme={theme}>
-            {`${formatCurrency(Math.abs(transaction.amount, { language }))}`}
+            {`${formatCurrency(Math.abs(transaction.amount), { language })}`}
           </Text>
         </View>
         {transaction.description.length > 0 && (
@@ -80,7 +76,7 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
           </Text>
           <Text
             variant="subtitle"
-            containerStyle={{ marginTop: 2 }}
+            containerStyle={styles.detailCardSubtitle}
             theme={theme}>
             {transaction.category}
           </Text>
@@ -91,7 +87,7 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
           </Text>
           <Text
             variant="subtitle"
-            containerStyle={{ marginTop: 2 }}
+            containerStyle={styles.detailCardSubtitle}
             theme={theme}>
             {sourceWallet.label}
           </Text>
@@ -103,7 +99,7 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
             </Text>
             <Text
               variant="subtitle"
-              containerStyle={{ marginTop: 2 }}
+              containerStyle={styles.detailCardSubtitle}
               theme={theme}>
               {destinationWallet.label}
             </Text>
@@ -115,7 +111,7 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
           </Text>
           <Text
             variant="subtitle"
-            containerStyle={{ marginTop: 2 }}
+            containerStyle={styles.detailCardSubtitle}
             theme={theme}>
             {formatDate(transaction.createdAt)}
           </Text>
@@ -127,7 +123,7 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
             </Text>
             <Text
               variant="subtitle"
-              containerStyle={{ marginTop: 2 }}
+              containerStyle={styles.detailCardSubtitle}
               theme={theme}>
               {formatDate(transaction.updatedAt)}
             </Text>

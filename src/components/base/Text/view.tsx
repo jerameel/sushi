@@ -13,7 +13,7 @@ const Text = (props: TextProps) => {
     ...textProps
   } = props;
 
-  const { styles, colors, fonts } = useStyles(theme);
+  const { styles, fonts } = useStyles(theme);
   return (
     <View style={[styles.container, containerStyle]}>
       <RNText {...textProps} style={[fonts[variant], style]}>

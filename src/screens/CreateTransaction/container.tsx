@@ -1,7 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store';
-import { createTransactionAction, Transaction } from 'store/transactions';
+import {
+  createTransactionAction,
+  CreateTransactionInput,
+} from 'store/transactions';
 
 import {
   CreateTransactionPrivateProps,
@@ -13,9 +16,7 @@ const CreateTransactionContainer = (props: CreateTransactionPublicProps) => {
   const dispatch = useDispatch();
   const wallets = useSelector((state: RootState) => state.wallets);
   const transactions = useSelector((state: RootState) => state.transactions);
-  const createTransaction = (
-    payload: Omit<Transaction, 'id' | 'createdAt'>,
-  ) => {
+  const createTransaction = (payload: CreateTransactionInput) => {
     // TODO: Improve validation structure
     const isTransfer = payload.category.toUpperCase() === 'TRANSFER';
     if (
@@ -26,7 +27,12 @@ const CreateTransactionContainer = (props: CreateTransactionPublicProps) => {
         payload.destinationWalletId !== payload.sourceWalletId) ||
         !isTransfer)
     ) {
-      dispatch(createTransactionAction(payload));
+      dispatch(
+        createTransactionAction({
+          ...payload,
+          destinationWalletId: isTransfer ? payload.destinationWalletId : null,
+        }),
+      );
       props.navigation.goBack();
     }
   };

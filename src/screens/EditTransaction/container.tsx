@@ -32,7 +32,12 @@ const EditTransactionContainer = (props: EditTransactionPublicProps) => {
         payload.destinationWalletId !== payload.sourceWalletId) ||
         !isTransfer)
     ) {
-      dispatch(editTransactionAction(payload));
+      dispatch(
+        editTransactionAction({
+          ...payload,
+          destinationWalletId: isTransfer ? payload.destinationWalletId : null,
+        }),
+      );
       props.navigation.goBack();
     }
   };

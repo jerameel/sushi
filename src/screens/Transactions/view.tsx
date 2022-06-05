@@ -1,25 +1,40 @@
 import React, { useState } from 'react';
-import numbro from 'numbro';
-import sortBy from 'ramda/es/sortBy';
-import reverse from 'ramda/es/reverse';
+import { allPass, partial, sortBy, reverse } from 'ramda';
 import Text from 'components/base/Text';
-import {
-  ScrollView,
-  View,
-  StatusBar,
-  TouchableOpacity,
-  FlatList,
-} from 'react-native';
+import { View, StatusBar, TouchableOpacity, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useStyles from './styles';
-import { TransactionsProps } from './props';
-import { Add, Back, Settings } from 'components/base/SVG';
+import { TransactionFilter, TransactionsProps } from './props';
+import { Back } from 'components/base/SVG';
 import TransactionCard from 'components/module/TransactionCard';
 import { Transaction } from 'store/transactions';
-import Button from 'components/base/Button';
-import { Calendar } from 'react-native-calendars';
 import DatePicker from 'components/module/DatePicker';
 import isWithinInterval from 'date-fns/isWithinInterval';
+import { endOfDay, startOfDay } from 'date-fns';
+import TextInput from 'components/base/TextInput';
+
+const isSearchTermMatch = (filter: TransactionFilter, t: Transaction) => {
+  const filterSearchTerm = filter.searchTerm.toLowerCase();
+  const description = t.description.toLowerCase();
+  const category = t.category.toLowerCase();
+  return `${category} ${description}`.includes(filterSearchTerm);
+};
+
+const isDateRangeMatch = (filter: TransactionFilter, t: Transaction) => {
+  if (filter.startDate) {
+    const startDate = startOfDay(filter.startDate);
+    const endDate = endOfDay(
+      filter.endDate ? filter.endDate : filter.startDate,
+    );
+    return isWithinInterval(new Date(t.createdAt), {
+      start: startDate,
+      end: endDate,
+    });
+  }
+
+  // no filter
+  return true;
+};
 
 const TransactionsView = (props: TransactionsProps) => {
   const { navigation, wallets, transactions, language } = props;
@@ -27,6 +42,13 @@ const TransactionsView = (props: TransactionsProps) => {
 
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const filter: TransactionFilter = {
+    startDate,
+    endDate,
+    searchTerm,
+  };
   const sortTransactionByDate = sortBy(
     (transaction: Transaction) => transaction.createdAt,
   );
@@ -36,15 +58,12 @@ const TransactionsView = (props: TransactionsProps) => {
     ),
   );
 
-  const filteredTransactionsArray =
-    startDate && endDate
-      ? sortedTransactionsArray.filter((t) =>
-          isWithinInterval(new Date(t.createdAt), {
-            start: startDate,
-            end: endDate,
-          }),
-        )
-      : sortedTransactionsArray;
+  const filteredTransactionsArray = sortedTransactionsArray.filter(
+    allPass([
+      partial(isSearchTermMatch, [filter]),
+      partial(isDateRangeMatch, [filter]),
+    ]),
+  );
 
   const renderTransaction = ({ item: transaction }: { item: Transaction }) => {
     const sourceWallet = wallets[transaction.sourceWalletId];
@@ -95,8 +114,15 @@ const TransactionsView = (props: TransactionsProps) => {
 
       <View style={styles.content}>
         <View style={styles.transactionsContainer}>
+          <TextInput
+            label="Search"
+            value={searchTerm}
+            onChangeText={(text) => setSearchTerm(text)}
+            theme={theme}
+          />
           <DatePicker
-            label="Date Filter"
+            containerStyle={styles.textFieldContainer}
+            label="Date Range"
             startDate={startDate}
             setStartDate={setStartDate}
             endDate={endDate}

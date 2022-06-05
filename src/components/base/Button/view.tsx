@@ -13,7 +13,7 @@ const Button = (props: ButtonProps) => {
     disabled,
   } = props;
 
-  const { styles, colors } = useStyles(theme);
+  const { styles } = useStyles(theme);
   return (
     <TouchableOpacity
       disabled={disabled}

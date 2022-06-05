@@ -1,6 +1,6 @@
 import 'react-native-get-random-values';
-import React, { useEffect, useState } from 'react';
-import { Provider, useSelector } from 'react-redux';
+import React from 'react';
+import { Provider } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Routes from 'screens/Routes';
