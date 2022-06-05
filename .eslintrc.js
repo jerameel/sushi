@@ -7,4 +7,5 @@ module.exports = {
     'import/no-unresolved': 'off',
     '@typescript-eslint/no-unused-vars': 'warn',
   },
+  ignorePatterns: ['plopfile.js'],
 };

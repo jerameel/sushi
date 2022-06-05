@@ -12,22 +12,23 @@ export type Wallet = {
 
 export type Wallets = Record<string, Wallet>;
 
+export type CreateWalletInput = Omit<Wallet, 'id' | 'createdAt' | 'updatedAt'>;
+
 const initialState: Wallets = {};
 
 const walletsSlice = createSlice({
   name: 'wallets',
   initialState,
   reducers: {
-    createWallet(
-      state,
-      action: PayloadAction<Omit<Wallet, 'id' | 'createdAt'>>,
-    ) {
+    createWallet(state, action: PayloadAction<CreateWalletInput>) {
       return produce(state, (draft) => {
         const id = uuidv1();
         const createdAt = new Date().toISOString();
+        const updatedAt = createdAt;
         draft[id] = {
           id,
           createdAt,
+          updatedAt,
           ...action.payload,
         };
       });

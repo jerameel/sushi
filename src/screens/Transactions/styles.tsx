@@ -26,6 +26,7 @@ const useStyles = () => {
       paddingHorizontal: 16,
     },
     contentScroll: {
+      paddingTop: 8,
       paddingBottom: 8,
     },
     contentHeader: {
@@ -44,6 +45,9 @@ const useStyles = () => {
     },
     transactionCard: {
       marginTop: 8,
+    },
+    textFieldContainer: {
+      marginTop: 16,
     },
   });
   return { styles, colors, theme };

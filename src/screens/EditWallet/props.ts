@@ -3,7 +3,7 @@ import { Wallet } from 'store/wallets';
 import { MainStackParamList } from 'types/Route';
 
 export interface EditWalletPublicProps
-  extends NativeStackScreenProps<MainStackParamList, 'CREATE_WALLET'> {}
+  extends NativeStackScreenProps<MainStackParamList, 'EDIT_WALLET'> {}
 
 export interface EditWalletPrivateProps {
   wallet: Wallet;

@@ -7,7 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import useStyles from './styles';
 import { HomeProps } from './props';
 import WalletCard from 'components/module/WalletCard';
-import { Add, Settings } from 'components/base/SVG';
+import { Settings } from 'components/base/SVG';
 import TransactionCard from 'components/module/TransactionCard';
 import BalanceBreakdown from 'components/module/BalanceBreakdown';
 import { Transaction } from 'store/transactions';
@@ -19,7 +19,7 @@ const SubHeader = (props: {
   action?: () => void;
   actionText?: string;
 }) => {
-  const { styles, theme, colors } = useStyles();
+  const { styles, theme } = useStyles();
   return (
     <View style={styles.contentHeader}>
       <Text variant="subtitle" theme={theme}>

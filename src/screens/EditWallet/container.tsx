@@ -11,7 +11,6 @@ const EditWalletContainer = (props: EditWalletPublicProps) => {
   const walletId = props.route.params?.walletId || '';
 
   const wallets = useSelector((state: RootState) => state.wallets);
-  const transactions = useSelector((state: RootState) => state.transactions);
   const wallet = wallets[walletId];
 
   const editWallet = (payload: Wallet) => {

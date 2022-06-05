@@ -7,6 +7,7 @@ import { Down, Close } from 'components/base/SVG';
 import { Calendar } from 'react-native-calendars';
 import eachDayOfInterval from 'date-fns/eachDayOfInterval';
 import format from 'date-fns/format';
+import Button from 'components/base/Button';
 
 const DatePicker = (props: DatePickerProps) => {
   const {
@@ -138,6 +139,19 @@ const DatePicker = (props: DatePickerProps) => {
                     }
                   }
                 }}
+              />
+              <Button
+                containerStyle={styles.actionContainer}
+                onPress={() => {
+                  if (setEndDate) {
+                    setEndDate(null);
+                  }
+
+                  setStartDate(null);
+                }}
+                label="Show All"
+                outline
+                theme={theme}
               />
             </ScrollView>
           </View>

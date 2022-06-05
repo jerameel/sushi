@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React from 'react';
 import numbro from 'numbro';
 import Text from 'components/base/Text';
 import { ScrollView, View, StatusBar, TouchableOpacity } from 'react-native';
@@ -6,8 +6,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import useStyles from './styles';
 import { SettingsProps } from './props';
 import { Back } from 'components/base/SVG';
-import TextInput from 'components/base/TextInput';
-import Button from 'components/base/Button';
 import Picker from 'components/base/Picker';
 
 const SettingsView = (props: SettingsProps) => {

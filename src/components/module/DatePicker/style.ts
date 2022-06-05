@@ -1,11 +1,11 @@
 import { DEFAULT_THEME } from 'theme';
 import { StyleSheet } from 'react-native';
 import { Theme } from 'store/theme';
-import { getGlobalStyles, COLORS } from 'theme';
+import { COLORS } from 'theme';
 
 const useStyles = (theme: Theme = DEFAULT_THEME) => {
   const colors = COLORS[theme.base];
-  const STYLES = getGlobalStyles(theme.base);
+  // const STYLES = getGlobalStyles(theme.base);
   const styles = StyleSheet.create({
     container: {},
     inputContainer: {
@@ -66,6 +66,9 @@ const useStyles = (theme: Theme = DEFAULT_THEME) => {
     },
     modalItemLabelActive: {
       color: colors.PRIMARY,
+    },
+    actionContainer: {
+      marginTop: 8,
     },
   });
 

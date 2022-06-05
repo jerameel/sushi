@@ -1,12 +1,12 @@
 import { DEFAULT_THEME } from 'theme';
 import { StyleSheet } from 'react-native';
 import { Theme } from 'store/theme';
-import { getGlobalStyles, COLORS } from 'theme';
+import { COLORS } from 'theme';
 import { WalletCardProps } from './props';
 
-const useStyles = (theme: Theme = DEFAULT_THEME, props: WalletCardProps) => {
+const useStyles = (theme: Theme = DEFAULT_THEME, _props: WalletCardProps) => {
   const colors = COLORS[theme.base];
-  const STYLES = getGlobalStyles(theme.base);
+  // const STYLES = getGlobalStyles(theme.base);
   const styles = StyleSheet.create({
     container: {
       padding: 16,

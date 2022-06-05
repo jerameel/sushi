@@ -8,7 +8,7 @@ import { formatCurrency } from 'utils/formatCurrency';
 const BalanceBreakdown = (props: BalanceBreakdownProps) => {
   const { containerStyle = {}, theme, income, expenses, language } = props;
 
-  const { styles, colors } = useStyles(theme);
+  const { styles } = useStyles(theme);
   return (
     <View style={[styles.container, containerStyle]}>
       <View style={styles.card}>

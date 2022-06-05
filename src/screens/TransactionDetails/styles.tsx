@@ -59,6 +59,9 @@ const useStyles = () => {
       marginHorizontal: 16,
       marginTop: 16,
     },
+    detailCardSubtitle: {
+      marginTop: 2,
+    },
   });
   return { styles, colors, theme };
 };

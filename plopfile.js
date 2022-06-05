@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 module.exports = function (plop) {
   const COMPONENT_TYPES = ['base', 'module'];
   plop.setGenerator('component', {
@@ -58,7 +56,7 @@ module.exports = function (plop) {
           type: 'append',
           path: `${STORYBOOK_PATH}/index.js`,
           pattern: '/* PLOP_INJECT_IMPORT */',
-          template: `require('./{{pascalCase name}}');`,
+          template: "require('./{{pascalCase name}}');",
         },
       ];
 
@@ -71,7 +69,7 @@ module.exports = function (plop) {
       const { name } = await inquirer.prompt({
         type: 'input',
         name: 'name',
-        message: `Enter SVG name...`,
+        message: 'Enter SVG name...',
       });
 
       return Promise.resolve({
