@@ -7,14 +7,25 @@ import useStyles from './styles';
 import { SettingsProps } from './props';
 import { Back } from 'components/base/SVG';
 import Picker from 'components/base/Picker';
+import { getTranslationString, TRANSLATIONS } from 'constants/translations';
+
+const LANGUAGE_OPTIONS = Object.keys(TRANSLATIONS).map((value) => {
+  const typedValue = value as keyof typeof TRANSLATIONS;
+  return {
+    label: getTranslationString(typedValue, 'label'),
+    value,
+  };
+});
 
 const SettingsView = (props: SettingsProps) => {
   const {
     navigation,
-    setCurrencyLanguage,
-    currencyLanguage,
     baseTheme,
     setBaseTheme,
+    currencyLanguage,
+    setCurrencyLanguage,
+    selectedLanguage,
+    setSelectedLanguage,
   } = props;
   const { styles, theme, colors } = useStyles();
 
@@ -58,10 +69,19 @@ const SettingsView = (props: SettingsProps) => {
         <ScrollView style={styles.contentScroll}>
           <Picker
             // containerStyle={styles.inputContainer}
-            label="Currency Language"
+            label="Currency"
             selectedValue={currencyLanguage}
             onSelect={(value) => setCurrencyLanguage(value)}
             options={currencyLanguageOptions}
+            theme={theme}
+          />
+
+          <Picker
+            containerStyle={styles.inputContainer}
+            label="Language"
+            selectedValue={selectedLanguage}
+            onSelect={(value) => setSelectedLanguage(value)}
+            options={LANGUAGE_OPTIONS}
             theme={theme}
           />
 

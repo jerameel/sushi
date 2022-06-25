@@ -6,10 +6,12 @@ export interface SettingsPublicProps
   extends NativeStackScreenProps<MainStackParamList, 'CREATE_WALLET'> {}
 
 export interface SettingsPrivateProps {
-  setCurrencyLanguage: (payload: string) => void;
-  currencyLanguage: string;
   baseTheme: string;
   setBaseTheme: (payload: THEME_OPTION) => void;
+  currencyLanguage: string;
+  setCurrencyLanguage: (payload: string) => void;
+  selectedLanguage: string;
+  setSelectedLanguage: (payload: string) => void;
 }
 
 export interface SettingsProps

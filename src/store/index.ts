@@ -16,12 +16,14 @@ import themeReducer from './theme';
 import walletsReducer from './wallets';
 import transactionsReducer from './transactions';
 import currencyReducer from './currency';
+import languageReducer from './language';
 
 const rootReducer = combineReducers({
   theme: themeReducer,
   wallets: walletsReducer,
   transactions: transactionsReducer,
   currency: currencyReducer,
+  language: languageReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
@@ -30,7 +32,7 @@ const persistConfig = {
   key: 'root',
   version: 1,
   storage: AsyncStorage,
-  whitelist: ['theme', 'wallets', 'transactions', 'currency'],
+  whitelist: ['theme', 'wallets', 'transactions', 'currency', 'language'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
