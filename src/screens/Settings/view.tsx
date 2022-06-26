@@ -7,12 +7,12 @@ import useStyles from './styles';
 import { SettingsProps } from './props';
 import { Back } from 'components/base/SVG';
 import Picker from 'components/base/Picker';
-import { getTranslationString, TRANSLATIONS } from 'constants/translations';
+import { TRANSLATIONS } from 'constants/translations';
 
 const LANGUAGE_OPTIONS = Object.keys(TRANSLATIONS).map((value) => {
   const typedValue = value as keyof typeof TRANSLATIONS;
   return {
-    label: getTranslationString(typedValue, 'label'),
+    label: TRANSLATIONS[typedValue].TRANSLATION_NAME,
     value,
   };
 });
