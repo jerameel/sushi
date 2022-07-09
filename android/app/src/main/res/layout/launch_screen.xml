@@ -7,22 +7,10 @@ android:background="#1f1f1f" >
 
     <ImageView
         android:id="@+id/splash_logo"
-        android:layout_width="192dp"
-        android:layout_height="192dp"
+        android:layout_width="128dp"
+        android:layout_height="64dp"
         android:layout_centerInParent="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_logo" />
-
-    <TextView
-        android:id="@+id/splash_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="32dp"
-        android:fontFamily="@font/heebo_light"
-        android:text="@string/splash_text"
-        android:textColor="#d9d9d9"
-        android:textSize="18sp" />
+        android:scaleType="fitCenter"
+        android:src="@drawable/splash_logo" />
 
 </RelativeLayout>
