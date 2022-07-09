@@ -78,7 +78,7 @@ const SettingsView = (props: SettingsProps) => {
 
           <Picker
             containerStyle={styles.inputContainer}
-            label="Language"
+            label="Language (Beta)"
             selectedValue={selectedLanguage}
             onSelect={(value) => setSelectedLanguage(value)}
             options={LANGUAGE_OPTIONS}
