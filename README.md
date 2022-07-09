@@ -18,4 +18,22 @@ A personal finance management app built with react-native.
 
 ## Development
 
-This app is built using `react-native`, make sure to have it setup to get started.
+This app is built using `react-native`, make sure to have it setup to get started. Currently only Android is supported. 
+
+Note: Support for iOS would come after polishing essential features of the App. However, testers/contributors are still welcome.
+
+## Contributing
+Help Sushi - Personal Finance improve, please create an issue for bugs or feature request.
+
+Pull requests are welcome as well. 
+
+### Language/Translation
+Integrating the translation data for each screen is still in progress. [Click here](src/constants/translations) for available translations and feel free to add/update translations.
+
+### Currency
+This uses [numbro](https://github.com/BenjaminVanRyseghem/numbro) internally for available currencies. If you don't find your currency in the App, please check on `numbro` first before creating a new issue.   
+
+
+
+
+
