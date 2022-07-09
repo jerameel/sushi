@@ -13,27 +13,32 @@ import BalanceBreakdown from 'components/module/BalanceBreakdown';
 import { Transaction } from 'store/transactions';
 import Button from 'components/base/Button';
 import { formatCurrency } from 'utils/formatCurrency';
+import TranslatedText from 'components/smart/TranslatedText';
+import { Translation } from 'types/Translation';
+import TranslatedButton from 'components/smart/TranslatedButton';
 
 const SubHeader = (props: {
-  label: string;
+  label: keyof Translation;
   action?: () => void;
-  actionText?: string;
+  actionText?: keyof Translation;
 }) => {
   const { styles, theme } = useStyles();
   return (
     <View style={styles.contentHeader}>
-      <Text variant="subtitle" theme={theme}>
-        {props.label}
-      </Text>
+      <TranslatedText
+        variant="subtitle"
+        theme={theme}
+        translationKey={props.label}
+      />
 
       {!!props.actionText && (
         <TouchableOpacity onPress={props.action}>
-          <Text
-            style={styles.contentHeaderAction}
+          <TranslatedText
             variant="label"
-            theme={theme}>
-            {props.actionText}
-          </Text>
+            style={styles.contentHeaderAction}
+            theme={theme}
+            translationKey={props.actionText}
+          />
         </TouchableOpacity>
       )}
     </View>
@@ -117,7 +122,7 @@ const HomeView = (props: HomeProps) => {
       />
       <View style={styles.content}>
         <View>
-          <SubHeader label="My Wallets" />
+          <SubHeader label="MY_ACCOUNTS" />
           <View style={styles.walletsScrollContainer}>
             <ScrollView
               contentContainerStyle={styles.contentScroll}
@@ -175,8 +180,8 @@ const HomeView = (props: HomeProps) => {
 
         <View style={styles.transactionsContainer}>
           <SubHeader
-            label="Recent Transactions"
-            actionText="See All"
+            label="RECENT_TRANSACTIONS"
+            actionText="SHOW_ALL"
             action={() => {
               navigation.navigate('TRANSACTIONS');
             }}
@@ -210,10 +215,10 @@ const HomeView = (props: HomeProps) => {
         </View>
 
         <View style={styles.actionsContainer}>
-          <Button
+          <TranslatedButton
             outline
             onPress={() => navigation.navigate('CREATE_TRANSACTION')}
-            label="New Transaction"
+            translationKey="NEW_TRANSACTION"
             theme={theme}
           />
         </View>
