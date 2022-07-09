@@ -1,0 +1,2 @@
+- Initial translation support
+- Updated splash screen
