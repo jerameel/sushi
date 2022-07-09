@@ -4,6 +4,7 @@ import useStyles from './style';
 import { BalanceBreakdownProps } from './props';
 import Text from 'components/base/Text';
 import { formatCurrency } from 'utils/formatCurrency';
+import TranslatedText from 'components/smart/TranslatedText';
 
 const BalanceBreakdown = (props: BalanceBreakdownProps) => {
   const { containerStyle = {}, theme, income, expenses, language } = props;
@@ -12,17 +13,23 @@ const BalanceBreakdown = (props: BalanceBreakdownProps) => {
   return (
     <View style={[styles.container, containerStyle]}>
       <View style={styles.card}>
-        <Text variant="label" style={styles.cardLabelText} theme={theme}>
-          Income
-        </Text>
+        <TranslatedText
+          variant="label"
+          style={styles.cardLabelText}
+          theme={theme}
+          translationKey="DEBIT"
+        />
         <Text variant="subtitle" theme={theme}>
           {formatCurrency(income, { language })}
         </Text>
       </View>
       <View style={styles.card}>
-        <Text variant="label" style={styles.cardLabelText} theme={theme}>
-          Expenses
-        </Text>
+        <TranslatedText
+          variant="label"
+          style={styles.cardLabelText}
+          theme={theme}
+          translationKey="CREDIT"
+        />
         <Text variant="subtitle" theme={theme}>
           {formatCurrency(expenses, { language })}
         </Text>
