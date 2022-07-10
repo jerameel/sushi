@@ -5,15 +5,15 @@ const it_IT: Translation = {
   CREDIT: 'Credit',
   DEBIT: 'Debit',
   RECENT_TRANSACTIONS: 'Tranzazioni recenti',
-  MY_ACCOUNTS: 'My Accounts',
+  MY_ACCOUNTS: 'I Miei Account',
 
   // ADD ACCOUNT
-  ADD_ACCOUNT: 'Add Account',
-  ACCOUNT_NAME: 'Account Name',
+  ADD_ACCOUNT: 'Aggiungi Account',
+  ACCOUNT_NAME: 'Nome Account',
   INITIAL_AMOUNT: 'Quantità Iniziale',
 
   // ACCOUNT DETAILS
-  ACCOUNT_DETAILS: 'Account Details',
+  ACCOUNT_DETAILS: 'Dettagli Account',
   INITIAL_BALANCE: 'Saldo Iniziale',
 
   // NEW TRANSACTION
