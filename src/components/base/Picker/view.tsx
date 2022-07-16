@@ -12,8 +12,9 @@ const Picker = (props: PickerProps) => {
     onSelect,
     selectedValue,
     options,
-    label,
+    label = '',
     placeholder,
+    renderLabel,
   } = props;
 
   const { styles, colors } = useStyles(theme);
@@ -26,9 +27,13 @@ const Picker = (props: PickerProps) => {
   return (
     <>
       <View style={[styles.container, containerStyle]}>
-        <Text variant="label" style={styles.label}>
-          {label}
-        </Text>
+        {renderLabel ? (
+          renderLabel()
+        ) : (
+          <Text variant="label" style={styles.label}>
+            {label}
+          </Text>
+        )}
 
         <TouchableOpacity
           style={styles.inputContainer}

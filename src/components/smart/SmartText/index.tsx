@@ -6,17 +6,15 @@ import { RootState } from 'store';
 import { Translation } from 'types/Translation';
 import { TRANSLATIONS } from 'constants/translations';
 
-type TranslatedTextProps = {
+type SmartTextProps = {
   translationKey: keyof Translation;
 };
 
-const TranslatedText = (
-  props: Omit<TextProps, 'children'> & TranslatedTextProps,
-) => {
+const SmartText = (props: Omit<TextProps, 'children'> & SmartTextProps) => {
   const { translationKey, ...textProps } = props;
   const language = useSelector((state: RootState) => state.language.selected);
 
   return <Text {...textProps}>{TRANSLATIONS[language][translationKey]}</Text>;
 };
 
-export default TranslatedText;
+export default SmartText;

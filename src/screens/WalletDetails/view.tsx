@@ -11,6 +11,8 @@ import { Transaction } from 'store/transactions';
 import TransactionCard from 'components/module/TransactionCard';
 import AlertModal from 'components/module/AlertModal';
 import { formatCurrency } from 'utils/formatCurrency';
+import SmartText from 'components/smart/SmartText';
+import SmartAlertModal from 'components/smart/SmartAlertModal';
 
 const WalletDetailsView = (props: WalletDetailsProps) => {
   const { navigation, wallet, transactions, wallets, deleteWallet, language } =
@@ -92,12 +94,12 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
           }}>
           <Back fill={colors.PRIMARY_TEXT} width={24} height={24} />
         </TouchableOpacity>
-        <Text
+        <SmartText
           containerStyle={styles.headerTitleContainer}
           variant="title"
-          theme={theme}>
-          Wallet Details
-        </Text>
+          theme={theme}
+          translationKey="ACCOUNT_DETAILS"
+        />
         <TouchableOpacity
           style={styles.headerRightAction}
           onPress={() => {
@@ -124,25 +126,27 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
             </Text>
           </View>
           <View style={styles.detailsCardRow}>
-            <Text variant="label" theme={theme}>
-              Initial Balance
-            </Text>
+            <SmartText
+              variant="label"
+              theme={theme}
+              translationKey="INITIAL_BALANCE"
+            />
             <Text variant="body" theme={theme}>
               {formatCurrency(wallet.initialAmount, { language })}
             </Text>
           </View>
           <View style={styles.detailsCardRow}>
-            <Text variant="label" theme={theme}>
-              Income
-            </Text>
+            <SmartText variant="label" theme={theme} translationKey={'DEBIT'} />
             <Text variant="body" theme={theme}>
               {formatCurrency(balanceBreakdown.income, { language })}
             </Text>
           </View>
           <View style={styles.detailsCardRow}>
-            <Text variant="label" theme={theme}>
-              Expenses
-            </Text>
+            <SmartText
+              variant="label"
+              theme={theme}
+              translationKey={'CREDIT'}
+            />
             <Text variant="body" theme={theme}>
               {formatCurrency(balanceBreakdown.expenses, { language })}
             </Text>
@@ -177,10 +181,14 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
           </ScrollView>
         </View>
       </View>
-      <AlertModal
+      <SmartAlertModal
         theme={theme}
-        title="Delete Wallet?"
-        description={`This will permanently delete the ${wallet.label} wallet including ${walletTransactions.length} linked transactions.`}
+        titleTranslationKey="DELETE_ACCOUNT"
+        descriptionTranslationKey="DELETE_ACCOUNT_INFO"
+        descriptionReplacementRecord={{
+          accountName: wallet.label,
+          transactionCount: walletTransactions.length.toString(),
+        }}
         visible={showDelete}
         actions={[
           {

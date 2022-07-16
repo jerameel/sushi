@@ -8,6 +8,8 @@ import { SettingsProps } from './props';
 import { Back } from 'components/base/SVG';
 import Picker from 'components/base/Picker';
 import { TRANSLATIONS } from 'constants/translations';
+import SmartText from 'components/smart/SmartText';
+import SmartPicker from 'components/smart/SmartPicker';
 
 const LANGUAGE_OPTIONS = Object.keys(TRANSLATIONS).map((value) => {
   const typedValue = value as keyof typeof TRANSLATIONS;
@@ -58,36 +60,36 @@ const SettingsView = (props: SettingsProps) => {
           }}>
           <Back fill={colors.PRIMARY_TEXT} width={24} height={24} />
         </TouchableOpacity>
-        <Text
+        <SmartText
           containerStyle={styles.headerTitleContainer}
           variant="title"
-          theme={theme}>
-          Settings
-        </Text>
+          theme={theme}
+          translationKey="SETTINGS"
+        />
       </View>
       <View style={styles.content}>
         <ScrollView style={styles.contentScroll}>
-          <Picker
+          <SmartPicker
             // containerStyle={styles.inputContainer}
-            label="Currency"
+            translationKey="CURRENCY"
             selectedValue={currencyLanguage}
             onSelect={(value) => setCurrencyLanguage(value)}
             options={currencyLanguageOptions}
             theme={theme}
           />
 
-          <Picker
+          <SmartPicker
             containerStyle={styles.inputContainer}
-            label="Language (Beta)"
+            translationKey="LANGUAGE"
             selectedValue={selectedLanguage}
             onSelect={(value) => setSelectedLanguage(value)}
             options={LANGUAGE_OPTIONS}
             theme={theme}
           />
 
-          <Picker
+          <SmartPicker
             containerStyle={styles.inputContainer}
-            label="Theme"
+            translationKey="THEME"
             selectedValue={baseTheme}
             onSelect={(value) => {
               // @ts-ignore
@@ -95,11 +97,15 @@ const SettingsView = (props: SettingsProps) => {
             }}
             options={[
               {
-                label: 'Light',
+                label:
+                  TRANSLATIONS[selectedLanguage as keyof typeof TRANSLATIONS]
+                    .THEME_LIGHT,
                 value: 'Light',
               },
               {
-                label: 'Dark',
+                label:
+                  TRANSLATIONS[selectedLanguage as keyof typeof TRANSLATIONS]
+                    .THEME_DARK,
                 value: 'Dark',
               },
             ]}
