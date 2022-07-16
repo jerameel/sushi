@@ -11,10 +11,18 @@ const en_US: Translation = {
   ADD_ACCOUNT: 'Add Account',
   ACCOUNT_NAME: 'Account Name',
   INITIAL_AMOUNT: 'Initial Amount',
+  CREATE_ACCOUNT: 'Create Account',
+
+  // EDIT ACCOUNT
+  EDIT_ACCOUNT: 'Edit Account',
+  UPDATE_ACCOUNT: 'Update Account',
 
   // ACCOUNT DETAILS
   ACCOUNT_DETAILS: 'Account Details',
   INITIAL_BALANCE: 'Initial Balance',
+  DELETE_ACCOUNT: 'Delete Account?',
+  DELETE_ACCOUNT_INFO:
+    'This will permanently delete the {{accountName}} wallet including {{transactionCount}} linked transactions.',
 
   // NEW TRANSACTION
   NEW_TRANSACTION: 'New Transaction',
@@ -26,10 +34,20 @@ const en_US: Translation = {
   SHORT_DESCRIPTION: 'Short Description',
   AMOUNT: 'Amount',
 
+  // EDIT TRANSACTION
+  EDIT_TRANSACTION: 'Edit Transaction',
+  UPDATE_TRANSACTION: 'Update Transaction',
+
   // TRANSACTION DETAILS
+  TRANSACTION_DETAILS: 'Transaction Details',
   ACCOUNT: 'Account',
   DATE_CREATED: 'Date Created',
   DATE_UPDATED: 'Date Updated',
+  DELETE_TRANSACTION: 'Delete Transaction?',
+  DELETE_TRANSACTION_INFO:
+    'This will permanently delete the transaction record.',
+  KEEP: 'Keep',
+  DELETE: 'Delete',
 
   // Transactions
   TRANSACTIONS: 'Transactions',

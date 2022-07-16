@@ -15,14 +15,19 @@ const TextInput = (props: TextInputProps) => {
     onChangeText,
     keyboardType,
     onBlur,
+    renderLabel,
   } = props;
   const { styles, colors } = useStyles(theme);
   const [isSelected, setIsSelected] = useState(false);
   return (
     <View style={[styles.container, containerStyle]}>
-      <Text variant="label" style={styles.label}>
-        {label}
-      </Text>
+      {renderLabel ? (
+        renderLabel()
+      ) : (
+        <Text variant="label" style={styles.label}>
+          {label}
+        </Text>
+      )}
 
       <View
         style={[

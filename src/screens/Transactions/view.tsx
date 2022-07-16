@@ -12,6 +12,9 @@ import DatePicker from 'components/module/DatePicker';
 import isWithinInterval from 'date-fns/isWithinInterval';
 import { endOfDay, startOfDay } from 'date-fns';
 import TextInput from 'components/base/TextInput';
+import SmartText from 'components/smart/SmartText';
+import SmartTextInput from 'components/smart/SmartTextInput';
+import SmartDatePicker from 'components/smart/SmartDatePicker';
 
 const isSearchTermMatch = (filter: TransactionFilter, t: Transaction) => {
   const filterSearchTerm = filter.searchTerm.toLowerCase();
@@ -104,30 +107,30 @@ const TransactionsView = (props: TransactionsProps) => {
           }}>
           <Back fill={colors.PRIMARY_TEXT} width={24} height={24} />
         </TouchableOpacity>
-        <Text
+        <SmartText
           containerStyle={styles.headerTitleContainer}
           variant="title"
-          theme={theme}>
-          Transactions
-        </Text>
+          theme={theme}
+          translationKey="TRANSACTIONS"
+        />
       </View>
 
       <View style={styles.content}>
         <View style={styles.transactionsContainer}>
-          <TextInput
-            label="Search"
+          <SmartTextInput
+            translationKey="SEARCH"
             value={searchTerm}
             onChangeText={(text) => setSearchTerm(text)}
             theme={theme}
           />
-          <DatePicker
+          <SmartDatePicker
             containerStyle={styles.textFieldContainer}
-            label="Date Range"
+            labelTranslationKey="DATE_RANGE"
             startDate={startDate}
             setStartDate={setStartDate}
             endDate={endDate}
             setEndDate={setEndDate}
-            placeholder="Show All"
+            defaultLabelTranslationKey="SHOW_ALL"
             theme={theme}
           />
           <FlatList

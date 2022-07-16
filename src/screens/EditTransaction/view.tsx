@@ -5,14 +5,15 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import useStyles from './styles';
 import { EditTransactionProps } from './props';
 import { Back } from 'components/base/SVG';
-import TextInput from 'components/base/TextInput';
-import Button from 'components/base/Button';
-import Picker from 'components/base/Picker';
 import {
   formatCategory,
   getCategorySuggestions,
   toWalletOptions,
 } from './transforms';
+import SmartText from 'components/smart/SmartText';
+import SmartTextInput from 'components/smart/SmartTextInput';
+import SmartPicker from 'components/smart/SmartPicker';
+import SmartButton from 'components/smart/SmartButton';
 
 const TRANSACTION_TYPES: {
   label: string;
@@ -72,18 +73,18 @@ const EditTransactionView = (props: EditTransactionProps) => {
           }}>
           <Back fill={colors.PRIMARY_TEXT} width={24} height={24} />
         </TouchableOpacity>
-        <Text
-          containerStyle={styles.headerTitleContainer}
+        <SmartText
           variant="title"
-          theme={theme}>
-          Edit Transaction
-        </Text>
+          style={styles.headerTitleContainer}
+          theme={theme}
+          translationKey="EDIT_TRANSACTION"
+        />
       </View>
       <View style={styles.content}>
         <ScrollView style={styles.contentScroll}>
-          <TextInput
+          <SmartTextInput
             containerStyle={styles.inputContainer}
-            label="Category"
+            translationKey="CATEGORY"
             value={category}
             onChangeText={(text) => setCategory(text)}
             theme={theme}
@@ -97,19 +98,28 @@ const EditTransactionView = (props: EditTransactionProps) => {
                 onPress={() => {
                   setCategory(categorySuggestion);
                 }}>
-                <Text
-                  style={styles.categorySuggestionText}
-                  variant="label"
-                  theme={theme}>
-                  {categorySuggestion}
-                </Text>
+                {categorySuggestion.toUpperCase() === 'TRANSFER' ? (
+                  <SmartText
+                    variant="label"
+                    style={styles.categorySuggestionText}
+                    theme={theme}
+                    translationKey="TRANSFER"
+                  />
+                ) : (
+                  <Text
+                    style={styles.categorySuggestionText}
+                    variant="label"
+                    theme={theme}>
+                    {categorySuggestion}
+                  </Text>
+                )}
               </TouchableOpacity>
             ))}
           </View>
 
-          <Picker
+          <SmartPicker
             containerStyle={styles.inputContainer}
-            label="Source Wallet"
+            translationKey="SOURCE_ACCOUNT"
             selectedValue={sourceWalletId || undefined}
             onSelect={(value) => setSourceWalletId(value)}
             options={walletOptions}
@@ -117,9 +127,9 @@ const EditTransactionView = (props: EditTransactionProps) => {
           />
 
           {category.toUpperCase() === 'TRANSFER' && (
-            <Picker
+            <SmartPicker
               containerStyle={styles.inputContainer}
-              label="Destination Wallet"
+              translationKey="DESTINATION_ACCOUNT"
               selectedValue={destinationWalletId || undefined}
               onSelect={(value) => setDestinationWalletId(value)}
               options={walletOptions}
@@ -127,17 +137,17 @@ const EditTransactionView = (props: EditTransactionProps) => {
             />
           )}
 
-          <TextInput
+          <SmartTextInput
             containerStyle={styles.inputContainer}
-            label="Short Description"
+            translationKey="SHORT_DESCRIPTION"
             value={description}
             onChangeText={(text) => setDescription(text)}
             theme={theme}
           />
 
-          <TextInput
+          <SmartTextInput
             containerStyle={styles.inputContainer}
-            label="Amount"
+            translationKey="AMOUNT"
             value={amount}
             onChangeText={(text) => setAmount(text)}
             placeholder="0"
@@ -176,7 +186,7 @@ const EditTransactionView = (props: EditTransactionProps) => {
           )}
         </ScrollView>
         <View style={styles.actionsContainer}>
-          <Button
+          <SmartButton
             onPress={() =>
               editTransaction({
                 ...transaction,
@@ -190,7 +200,7 @@ const EditTransactionView = (props: EditTransactionProps) => {
                 destinationWalletId,
               })
             }
-            label="Update Transaction"
+            translationKey="UPDATE_TRANSACTION"
             theme={theme}
           />
         </View>

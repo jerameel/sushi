@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import Text from 'components/base/Text';
 import { ScrollView, View, StatusBar, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useStyles from './styles';
 import { CreateWalletProps } from './props';
 import { Back } from 'components/base/SVG';
-import TextInput from 'components/base/TextInput';
-import Button from 'components/base/Button';
+import SmartText from 'components/smart/SmartText';
+import SmartTextInput from 'components/smart/SmartTextInput';
+import SmartButton from 'components/smart/SmartButton';
 
 const CreateWalletView = (props: CreateWalletProps) => {
   const { navigation, createWallet } = props;
@@ -29,26 +29,26 @@ const CreateWalletView = (props: CreateWalletProps) => {
           }}>
           <Back fill={colors.PRIMARY_TEXT} width={24} height={24} />
         </TouchableOpacity>
-        <Text
-          containerStyle={styles.headerTitleContainer}
+        <SmartText
           variant="title"
-          theme={theme}>
-          New Wallet
-        </Text>
+          style={styles.headerTitleContainer}
+          theme={theme}
+          translationKey="ADD_ACCOUNT"
+        />
       </View>
       <View style={styles.content}>
         <ScrollView style={styles.contentScroll}>
-          <TextInput
+          <SmartTextInput
             containerStyle={styles.textFieldContainer}
-            label="Label"
+            translationKey="ACCOUNT_NAME"
             value={label}
             onChangeText={(text) => setLabel(text)}
             theme={theme}
           />
 
-          <TextInput
+          <SmartTextInput
             containerStyle={styles.textFieldContainer}
-            label="Initial Amount"
+            translationKey="INITIAL_AMOUNT"
             value={initialAmount}
             onChangeText={(text) => setInitialAmount(text)}
             placeholder="0"
@@ -62,14 +62,14 @@ const CreateWalletView = (props: CreateWalletProps) => {
           />
         </ScrollView>
         <View style={styles.actionsContainer}>
-          <Button
+          <SmartButton
             onPress={() =>
               createWallet({
                 label: label || 'New Wallet',
                 initialAmount: parseFloat(initialAmount) || 0,
               })
             }
-            label="Create Wallet"
+            translationKey="CREATE_ACCOUNT"
             theme={theme}
           />
         </View>

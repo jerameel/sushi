@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import Text from 'components/base/Text';
 import { ScrollView, View, StatusBar, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useStyles from './styles';
 import { EditWalletProps } from './props';
 import { Back } from 'components/base/SVG';
-import TextInput from 'components/base/TextInput';
-import Button from 'components/base/Button';
+import SmartText from 'components/smart/SmartText';
+import SmartTextInput from 'components/smart/SmartTextInput';
+import SmartButton from 'components/smart/SmartButton';
 
 const EditWalletView = (props: EditWalletProps) => {
   const { navigation, wallet, editWallet } = props;
@@ -31,26 +31,26 @@ const EditWalletView = (props: EditWalletProps) => {
           }}>
           <Back fill={colors.PRIMARY_TEXT} width={24} height={24} />
         </TouchableOpacity>
-        <Text
+        <SmartText
           containerStyle={styles.headerTitleContainer}
           variant="title"
-          theme={theme}>
-          Edit Wallet
-        </Text>
+          theme={theme}
+          translationKey="EDIT_ACCOUNT"
+        />
       </View>
       <View style={styles.content}>
         <ScrollView style={styles.contentScroll}>
-          <TextInput
+          <SmartTextInput
             containerStyle={styles.textFieldContainer}
-            label="Label"
+            translationKey="ACCOUNT_NAME"
             value={label}
             onChangeText={(text) => setLabel(text)}
             theme={theme}
           />
 
-          <TextInput
+          <SmartTextInput
             containerStyle={styles.textFieldContainer}
-            label="Initial Amount"
+            translationKey="INITIAL_AMOUNT"
             value={initialAmount}
             onChangeText={(text) => setInitialAmount(text)}
             placeholder="0"
@@ -64,7 +64,7 @@ const EditWalletView = (props: EditWalletProps) => {
           />
         </ScrollView>
         <View style={styles.actionsContainer}>
-          <Button
+          <SmartButton
             onPress={() =>
               editWallet({
                 ...wallet,
@@ -72,7 +72,7 @@ const EditWalletView = (props: EditWalletProps) => {
                 initialAmount: parseFloat(initialAmount) || 0,
               })
             }
-            label="Update Wallet"
+            translationKey="UPDATE_ACCOUNT"
             theme={theme}
           />
         </View>

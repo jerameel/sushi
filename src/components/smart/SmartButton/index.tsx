@@ -1,17 +1,15 @@
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import useStyles from '../../base/Button/style';
 import { ButtonProps } from '../../base/Button/props';
 import { Translation } from 'types/Translation';
-import TranslatedText from '../TranslatedText';
+import SmartText from '../SmartText';
 
-type TranslatedButtonProps = {
+type SmartButtonProps = {
   translationKey: keyof Translation;
 };
 
-const TranslatedButton = (
-  props: Omit<ButtonProps, 'label'> & TranslatedButtonProps,
-) => {
+const SmartButton = (props: Omit<ButtonProps, 'label'> & SmartButtonProps) => {
   const {
     containerStyle = {},
     theme,
@@ -36,7 +34,7 @@ const TranslatedButton = (
           : {},
       ]}
       onPress={onPress}>
-      <TranslatedText
+      <SmartText
         variant="label"
         style={outline ? styles.outlineText : styles.text}
         theme={theme}
@@ -46,4 +44,4 @@ const TranslatedButton = (
   );
 };
 
-export default TranslatedButton;
+export default SmartButton;
