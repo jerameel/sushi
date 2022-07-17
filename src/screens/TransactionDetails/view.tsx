@@ -8,6 +8,8 @@ import { Back, Delete, Edit } from 'components/base/SVG';
 import AlertModal from 'components/module/AlertModal';
 import { formatCurrency } from 'utils/formatCurrency';
 import { formatDate } from 'utils/formatDate';
+import SmartText from 'components/smart/SmartText';
+import SmartAlertModal from 'components/smart/SmartAlertModal';
 
 const TransactionDetailsView = (props: TransactionDetailsProps) => {
   const {
@@ -35,12 +37,12 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
           }}>
           <Back fill={colors.PRIMARY_TEXT} width={24} height={24} />
         </TouchableOpacity>
-        <Text
+        <SmartText
           containerStyle={styles.headerTitleContainer}
           variant="title"
-          theme={theme}>
-          Transaction Details
-        </Text>
+          theme={theme}
+          translationKey="TRANSACTION_DETAILS"
+        />
         <TouchableOpacity
           style={styles.headerRightAction}
           onPress={() => {
@@ -71,9 +73,7 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
         )}
         <View style={styles.detailBorder} />
         <View style={styles.detailCard}>
-          <Text variant="label" theme={theme}>
-            Category
-          </Text>
+          <SmartText variant="label" theme={theme} translationKey="CATEGORY" />
           <Text
             variant="subtitle"
             containerStyle={styles.detailCardSubtitle}
@@ -82,9 +82,11 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
           </Text>
         </View>
         <View style={styles.detailCard}>
-          <Text variant="label" theme={theme}>
-            {destinationWallet ? 'Source Wallet' : 'Wallet'}
-          </Text>
+          <SmartText
+            variant="label"
+            theme={theme}
+            translationKey={destinationWallet ? 'SOURCE_ACCOUNT' : 'ACCOUNT'}
+          />
           <Text
             variant="subtitle"
             containerStyle={styles.detailCardSubtitle}
@@ -94,9 +96,11 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
         </View>
         {destinationWallet && (
           <View style={styles.detailCard}>
-            <Text variant="label" theme={theme}>
-              Destination Wallet
-            </Text>
+            <SmartText
+              variant="label"
+              theme={theme}
+              translationKey="DESTINATION_ACCOUNT"
+            />
             <Text
               variant="subtitle"
               containerStyle={styles.detailCardSubtitle}
@@ -106,9 +110,11 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
           </View>
         )}
         <View style={styles.detailCard}>
-          <Text variant="label" theme={theme}>
-            Date Created
-          </Text>
+          <SmartText
+            variant="label"
+            theme={theme}
+            translationKey="DATE_CREATED"
+          />
           <Text
             variant="subtitle"
             containerStyle={styles.detailCardSubtitle}
@@ -118,9 +124,11 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
         </View>
         {!!transaction.updatedAt && (
           <View style={styles.detailCard}>
-            <Text variant="label" theme={theme}>
-              Date Updated
-            </Text>
+            <SmartText
+              variant="label"
+              theme={theme}
+              translationKey="DATE_UPDATED"
+            />
             <Text
               variant="subtitle"
               containerStyle={styles.detailCardSubtitle}
@@ -130,11 +138,12 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
           </View>
         )}
       </View>
-      <AlertModal
+      <SmartAlertModal
         theme={theme}
-        title="Delete Transaction?"
-        description={'This will permanently delete the transaction record.'}
+        titleTranslationKey="DELETE_TRANSACTION"
+        descriptionTranslationKey="DELETE_TRANSACTION_INFO"
         visible={showDelete}
+        actionTranslationKeys={['KEEP', 'DELETE']}
         actions={[
           {
             label: 'Keep',

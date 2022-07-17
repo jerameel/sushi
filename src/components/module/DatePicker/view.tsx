@@ -14,7 +14,7 @@ const DatePicker = (props: DatePickerProps) => {
     containerStyle = {},
     theme,
     label,
-    placeholder,
+    defaultLabel = '',
     startDate,
     endDate,
     setStartDate,
@@ -59,7 +59,7 @@ const DatePicker = (props: DatePickerProps) => {
             setShowModal(true);
           }}>
           <Text variant="body" style={styles.value}>
-            {displayDate || placeholder || ''}
+            {displayDate || defaultLabel || ''}
           </Text>
           <Down width={16} height={16} fill={colors.BORDER} />
         </TouchableOpacity>
@@ -149,7 +149,7 @@ const DatePicker = (props: DatePickerProps) => {
 
                   setStartDate(null);
                 }}
-                label="Show All"
+                label={defaultLabel}
                 outline
                 theme={theme}
               />

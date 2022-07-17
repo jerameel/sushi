@@ -9,10 +9,17 @@ export type Translation = {
   ADD_ACCOUNT: string;
   ACCOUNT_NAME: string;
   INITIAL_AMOUNT: string;
+  CREATE_ACCOUNT: string;
+
+  // EDIT ACCOUNT
+  EDIT_ACCOUNT: string;
+  UPDATE_ACCOUNT: string;
 
   // ACCOUNT DETAILS
   ACCOUNT_DETAILS: string;
   INITIAL_BALANCE: string;
+  DELETE_ACCOUNT: string;
+  DELETE_ACCOUNT_INFO: string;
 
   // NEW TRANSACTION
   NEW_TRANSACTION: string;
@@ -24,10 +31,19 @@ export type Translation = {
   SHORT_DESCRIPTION: string;
   AMOUNT: string;
 
+  // EDIT TRANSACTION
+  EDIT_TRANSACTION: string;
+  UPDATE_TRANSACTION: string;
+
   // TRANSACTION DETAILS
+  TRANSACTION_DETAILS: string;
   ACCOUNT: string;
   DATE_CREATED: string;
   DATE_UPDATED: string;
+  DELETE_TRANSACTION: string;
+  DELETE_TRANSACTION_INFO: string;
+  KEEP: string;
+  DELETE: string;
 
   // Transactions
   TRANSACTIONS: string;

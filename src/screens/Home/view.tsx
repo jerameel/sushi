@@ -11,11 +11,10 @@ import { Settings } from 'components/base/SVG';
 import TransactionCard from 'components/module/TransactionCard';
 import BalanceBreakdown from 'components/module/BalanceBreakdown';
 import { Transaction } from 'store/transactions';
-import Button from 'components/base/Button';
 import { formatCurrency } from 'utils/formatCurrency';
-import TranslatedText from 'components/smart/TranslatedText';
+import SmartText from 'components/smart/SmartText';
 import { Translation } from 'types/Translation';
-import TranslatedButton from 'components/smart/TranslatedButton';
+import SmartButton from 'components/smart/SmartButton';
 
 const SubHeader = (props: {
   label: keyof Translation;
@@ -25,7 +24,7 @@ const SubHeader = (props: {
   const { styles, theme } = useStyles();
   return (
     <View style={styles.contentHeader}>
-      <TranslatedText
+      <SmartText
         variant="subtitle"
         theme={theme}
         translationKey={props.label}
@@ -33,7 +32,7 @@ const SubHeader = (props: {
 
       {!!props.actionText && (
         <TouchableOpacity onPress={props.action}>
-          <TranslatedText
+          <SmartText
             variant="label"
             style={styles.contentHeaderAction}
             theme={theme}
@@ -215,7 +214,7 @@ const HomeView = (props: HomeProps) => {
         </View>
 
         <View style={styles.actionsContainer}>
-          <TranslatedButton
+          <SmartButton
             outline
             onPress={() => navigation.navigate('CREATE_TRANSACTION')}
             translationKey="NEW_TRANSACTION"

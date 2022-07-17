@@ -13,6 +13,10 @@ import {
   getCategorySuggestions,
   toWalletOptions,
 } from './transforms';
+import SmartText from 'components/smart/SmartText';
+import SmartTextInput from 'components/smart/SmartTextInput';
+import SmartPicker from 'components/smart/SmartPicker';
+import SmartButton from 'components/smart/SmartButton';
 
 const TRANSACTION_TYPES: {
   label: string;
@@ -67,18 +71,18 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
           }}>
           <Back fill={colors.PRIMARY_TEXT} width={24} height={24} />
         </TouchableOpacity>
-        <Text
-          containerStyle={styles.headerTitleContainer}
+        <SmartText
           variant="title"
-          theme={theme}>
-          New Transaction
-        </Text>
+          style={styles.headerTitleContainer}
+          theme={theme}
+          translationKey="NEW_TRANSACTION"
+        />
       </View>
       <View style={styles.content}>
         <ScrollView style={styles.contentScroll}>
-          <TextInput
+          <SmartTextInput
             containerStyle={styles.inputContainer}
-            label="Category"
+            translationKey="CATEGORY"
             value={category}
             onChangeText={(text) => setCategory(text)}
             theme={theme}
@@ -92,19 +96,28 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
                 onPress={() => {
                   setCategory(categorySuggestion);
                 }}>
-                <Text
-                  style={styles.categorySuggestionText}
-                  variant="label"
-                  theme={theme}>
-                  {categorySuggestion}
-                </Text>
+                {categorySuggestion.toUpperCase() === 'TRANSFER' ? (
+                  <SmartText
+                    variant="label"
+                    style={styles.categorySuggestionText}
+                    theme={theme}
+                    translationKey="TRANSFER"
+                  />
+                ) : (
+                  <Text
+                    style={styles.categorySuggestionText}
+                    variant="label"
+                    theme={theme}>
+                    {categorySuggestion}
+                  </Text>
+                )}
               </TouchableOpacity>
             ))}
           </View>
 
-          <Picker
+          <SmartPicker
             containerStyle={styles.inputContainer}
-            label="Source Wallet"
+            translationKey="SOURCE_ACCOUNT"
             selectedValue={sourceWalletId || undefined}
             onSelect={(value) => setSourceWalletId(value)}
             options={walletOptions}
@@ -112,9 +125,9 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
           />
 
           {category.toUpperCase() === 'TRANSFER' && (
-            <Picker
+            <SmartPicker
               containerStyle={styles.inputContainer}
-              label="Destination Wallet"
+              translationKey="DESTINATION_ACCOUNT"
               selectedValue={destinationWalletId || undefined}
               onSelect={(value) => setDestinationWalletId(value)}
               options={walletOptions}
@@ -122,17 +135,17 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
             />
           )}
 
-          <TextInput
+          <SmartTextInput
             containerStyle={styles.inputContainer}
-            label="Short Description"
+            translationKey="SHORT_DESCRIPTION"
             value={description}
             onChangeText={(text) => setDescription(text)}
             theme={theme}
           />
 
-          <TextInput
+          <SmartTextInput
             containerStyle={styles.inputContainer}
-            label="Amount"
+            translationKey="AMOUNT"
             value={amount}
             onChangeText={(text) => setAmount(text)}
             placeholder="0"
@@ -171,7 +184,7 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
           )}
         </ScrollView>
         <View style={styles.actionsContainer}>
-          <Button
+          <SmartButton
             onPress={() =>
               createTransaction({
                 category: formatCategory(category || 'Others'),
@@ -184,7 +197,7 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
                 destinationWalletId,
               })
             }
-            label="Create Transaction"
+            translationKey="CREATE_TRANSACTION"
             theme={theme}
           />
         </View>
