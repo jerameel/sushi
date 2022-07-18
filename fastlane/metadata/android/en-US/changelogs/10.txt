@@ -1,0 +1,2 @@
+- Fixed translation support
+- Italian translation

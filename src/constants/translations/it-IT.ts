@@ -1,6 +1,6 @@
 import { Translation } from 'types/Translation';
 
-const en_US: Translation = {
+const it_IT: Translation = {
   // DASHBOARD
   CREDIT: 'Guadagno',
   DEBIT: 'Spesa',
@@ -44,8 +44,7 @@ const en_US: Translation = {
   DATE_CREATED: 'Date Di Creazione',
   DATE_UPDATED: 'Date Di Aggiornamento',
   DELETE_TRANSACTION: 'Eliminare La Transazione?',
-  DELETE_TRANSACTION_INFO:
-    'Questo eliminerà definitivamente la transazione.',
+  DELETE_TRANSACTION_INFO: 'Questo eliminerà definitivamente la transazione.',
   KEEP: 'Mantieni',
   DELETE: 'Elimina',
 
