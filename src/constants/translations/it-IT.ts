@@ -2,37 +2,37 @@ import { Translation } from 'types/Translation';
 
 const it_IT: Translation = {
   // DASHBOARD
-  CREDIT: 'Guadagno',
-  DEBIT: 'Spesa',
+  CREDIT: 'Guadagni',
+  DEBIT: 'Spese',
   RECENT_TRANSACTIONS: 'Transazioni Recenti',
-  MY_ACCOUNTS: 'I Miei Account',
+  MY_ACCOUNTS: 'I Miei Conti',
 
   // ADD ACCOUNT
-  ADD_ACCOUNT: 'Aggiungi Account',
-  ACCOUNT_NAME: 'Nome Account',
-  INITIAL_AMOUNT: 'Quantità Iniziale',
-  CREATE_ACCOUNT: 'Crea Account',
+  ADD_ACCOUNT: 'Aggiungi Conto',
+  ACCOUNT_NAME: 'Nome Conto',
+  INITIAL_AMOUNT: 'Importo Iniziale',
+  CREATE_ACCOUNT: 'Crea Conto',
 
   // EDIT ACCOUNT
-  EDIT_ACCOUNT: 'Modifica Account',
-  UPDATE_ACCOUNT: 'Aggiorna Account',
+  EDIT_ACCOUNT: 'Modifica Conto',
+  UPDATE_ACCOUNT: 'Aggiorna Conto',
 
   // ACCOUNT DETAILS
   ACCOUNT_DETAILS: 'Dettagli Account',
   INITIAL_BALANCE: 'Bilancio Iniziale',
   DELETE_ACCOUNT: 'Elimina Account?',
   DELETE_ACCOUNT_INFO:
-    'Questo eliminerà definitivamente il portafoglio {{accountName}} comprese {{transactionCount}} transazioni collegate.',
+    'Questo eliminerà definitivamente il conto {{accountName}} comprese {{transactionCount}} transazioni collegate.',
 
   // NEW TRANSACTION
   NEW_TRANSACTION: 'Nuova Transazione',
   CREATE_TRANSACTION: 'Crea Transazione',
   CATEGORY: 'Categoria',
-  SOURCE_ACCOUNT: 'Account Di Origine',
-  DESTINATION_ACCOUNT: 'Account Di Destinazione',
+  SOURCE_ACCOUNT: 'Conto Di Origine',
+  DESTINATION_ACCOUNT: 'Conto Di Destinazione',
   TRANSFER: 'Trasferimento',
   SHORT_DESCRIPTION: 'Breve Descrizione',
-  AMOUNT: 'Quantità',
+  AMOUNT: 'Importo',
 
   // EDIT TRANSACTION
   EDIT_TRANSACTION: 'Modifica Transazione',
@@ -40,9 +40,9 @@ const it_IT: Translation = {
 
   // TRANSACTION DETAILS
   TRANSACTION_DETAILS: 'Dettagli Transazione',
-  ACCOUNT: 'Account',
-  DATE_CREATED: 'Date Di Creazione',
-  DATE_UPDATED: 'Date Di Aggiornamento',
+  ACCOUNT: 'Conto',
+  DATE_CREATED: 'Data Di Creazione',
+  DATE_UPDATED: 'Data Di Aggiornamento',
   DELETE_TRANSACTION: 'Eliminare La Transazione?',
   DELETE_TRANSACTION_INFO: 'Questo eliminerà definitivamente la transazione.',
   KEEP: 'Mantieni',
