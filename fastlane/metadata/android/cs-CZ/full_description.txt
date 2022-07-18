@@ -1,0 +1,5 @@
+Open source mobilní aplikace, která vám pomůže lépe spravovat několik peněženek a zaznamenávat transakce.
+
+Od výdajů jako jsou potraviny, online nákupy, odběry, po vaše úspory a příjmy a dokonce i převody mezi peněženkami... všechno to vyjmenujete v Sushi.
+
+Spravujte své osobní finance se Sushi.
