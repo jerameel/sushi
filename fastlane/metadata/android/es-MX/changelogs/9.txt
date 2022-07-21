@@ -1,0 +1,2 @@
+- Soporte de traducción inicial.
+- Pantalla de bienvenida actualizada.
