@@ -1,0 +1,5 @@
+Una aplicación móvil de código abierto para ayudarte a manejar multiples carteras y registrar transacciónes facilmente. 
+
+Desde gastos como Mandado, Compras En Linea, Suscrpiciones, Para ahorros y sueldo, hasta transferencia de cuentas... la puedes listar en Sushi.
+
+Maneja tus finanzas personales con Sushi.
