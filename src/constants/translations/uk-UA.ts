@@ -2,8 +2,8 @@ import { Translation } from 'types/Translation';
 
 const uk_UA: Translation = {
   // DASHBOARD
-  CREDIT: 'Credit',
-  DEBIT: 'Кредит',
+  CREDIT: 'Кредит',
+  DEBIT: 'Дебет',
   RECENT_TRANSACTIONS: 'Останні Транзакції',
   MY_ACCOUNTS: 'Мої Рахунки',
 
