@@ -147,6 +147,7 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
             containerStyle={styles.inputContainer}
             translationKey="AMOUNT"
             value={amount}
+            maxLength={14}
             onChangeText={(text) => setAmount(text)}
             placeholder="0"
             keyboardType="decimal-pad"

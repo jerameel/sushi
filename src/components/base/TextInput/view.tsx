@@ -16,6 +16,7 @@ const TextInput = (props: TextInputProps) => {
     keyboardType,
     onBlur,
     renderLabel,
+    maxLength,
   } = props;
   const { styles, colors } = useStyles(theme);
   const [isSelected, setIsSelected] = useState(false);
@@ -37,6 +38,7 @@ const TextInput = (props: TextInputProps) => {
         <RNTextInput
           style={[styles.input, style]}
           value={value}
+          maxLength={maxLength}
           onChangeText={onChangeText}
           onFocus={() => {
             setIsSelected(true);

@@ -50,6 +50,7 @@ const CreateWalletView = (props: CreateWalletProps) => {
             containerStyle={styles.textFieldContainer}
             translationKey="INITIAL_AMOUNT"
             value={initialAmount}
+            maxLength={14}
             onChangeText={(text) => setInitialAmount(text)}
             placeholder="0"
             keyboardType="decimal-pad"

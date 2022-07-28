@@ -13,4 +13,5 @@ export interface TextInputProps {
   onChangeText?: (value: string) => void;
   onBlur?: () => void;
   keyboardType?: KeyboardTypeOptions;
+  maxLength?: number;
 }
