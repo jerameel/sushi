@@ -13,5 +13,5 @@ export const TRANSLATIONS = {
   'fil-PH': fil_PH,
   'it-IT': it_IT,
   'ru-RU': ru_RU,
-  'uk-UA': uk_UA
+  'uk-UA': uk_UA,
 };

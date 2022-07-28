@@ -44,8 +44,7 @@ const ru_RU: Translation = {
   DATE_CREATED: 'Дата Создания',
   DATE_UPDATED: 'Дата Обновления',
   DELETE_TRANSACTION: 'Удалить Транзакцию?',
-  DELETE_TRANSACTION_INFO:
-    'Это безвозвратно удалит запись о транзакции.',
+  DELETE_TRANSACTION_INFO: 'Это безвозвратно удалит запись о транзакции.',
   KEEP: 'Оставить',
   DELETE: 'Удалить',
 

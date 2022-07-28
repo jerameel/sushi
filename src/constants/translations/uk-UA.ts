@@ -44,8 +44,7 @@ const uk_UA: Translation = {
   DATE_CREATED: 'Дата Створення',
   DATE_UPDATED: 'Дата Оновлення',
   DELETE_TRANSACTION: 'Видалити Транзакцію?',
-  DELETE_TRANSACTION_INFO:
-    'Це назавжди видалить запис транзацкії.',
+  DELETE_TRANSACTION_INFO: 'Це назавжди видалить запис транзацкії.',
   KEEP: 'Лишити',
   DELETE: 'Видалити',
 
