@@ -2,6 +2,7 @@ import cs_CZ from './cs-CZ';
 import en_US from './en-US';
 import fil_PH from './fil-PH';
 import it_IT from './it-IT';
+import ru_RU from './ru-RU';
 import uk_UA from './uk-UA';
 
 export const TRANSLATIONS = {
@@ -9,5 +10,6 @@ export const TRANSLATIONS = {
   'en-US': en_US,
   'fil-PH': fil_PH,
   'it-IT': it_IT,
+  'ru-RU': ru_RU,
   'uk-UA': uk_UA
 };
