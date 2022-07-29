@@ -44,8 +44,7 @@ const pl_PL: Translation = {
   DATE_CREATED: 'Data utworzenia',
   DATE_UPDATED: 'Data aktualizacji',
   DELETE_TRANSACTION: 'Usunąć transakcję?',
-  DELETE_TRANSACTION_INFO:
-    'Wpis o transakcji zostanie bezpowrotnie usunięty.',
+  DELETE_TRANSACTION_INFO: 'Wpis o transakcji zostanie bezpowrotnie usunięty.',
   KEEP: 'Anuluj',
   DELETE: 'Usuń',
 
@@ -54,6 +53,7 @@ const pl_PL: Translation = {
   SEARCH: 'Wyszukaj',
   DATE_RANGE: 'Okres',
   SHOW_ALL: 'Pokaż wszystkie',
+  EXPORT: 'Export',
 
   // SETTINGS
   SETTINGS: 'Ustawienia',
