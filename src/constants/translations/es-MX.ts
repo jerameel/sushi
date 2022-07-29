@@ -53,6 +53,7 @@ const es_MX: Translation = {
   SEARCH: 'Buscar',
   DATE_RANGE: 'Periodo de Tiempo',
   SHOW_ALL: 'Enseñar Todo',
+  EXPORT: 'Export',
 
   // SETTINGS
   SETTINGS: 'Ajustes',
