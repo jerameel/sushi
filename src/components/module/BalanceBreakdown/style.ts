@@ -17,9 +17,24 @@ const useStyles = (theme: Theme = DEFAULT_THEME) => {
       backgroundColor: colors.AREA_HIGHLIGHT,
       borderRadius: 10,
       padding: 16,
+      justifyContent: 'space-between',
+    },
+    cardLabelContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
     },
     cardLabelText: {
       color: colors.DISABLE,
+      marginLeft: 8,
+    },
+    cardLabelIcon: {
+      width: 24,
+      height: 24,
+      borderWidth: 1,
+      borderRadius: 8,
+      borderColor: colors.BORDER,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
   });
 

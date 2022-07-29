@@ -15,6 +15,8 @@ import TextInput from 'components/base/TextInput';
 import SmartText from 'components/smart/SmartText';
 import SmartTextInput from 'components/smart/SmartTextInput';
 import SmartDatePicker from 'components/smart/SmartDatePicker';
+import SmartButton from 'components/smart/SmartButton';
+import { createCSV, recordToCSVString } from 'services/CSV';
 
 const isSearchTermMatch = (filter: TransactionFilter, t: Transaction) => {
   const filterSearchTerm = filter.searchTerm.toLowerCase();
@@ -46,6 +48,7 @@ const TransactionsView = (props: TransactionsProps) => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isExporting, setIsExporting] = useState(false);
 
   const filter: TransactionFilter = {
     startDate,
@@ -118,6 +121,7 @@ const TransactionsView = (props: TransactionsProps) => {
       <View style={styles.content}>
         <View style={styles.transactionsContainer}>
           <SmartTextInput
+            containerStyle={styles.textFieldContainer}
             translationKey="SEARCH"
             value={searchTerm}
             onChangeText={(text) => setSearchTerm(text)}
@@ -138,6 +142,25 @@ const TransactionsView = (props: TransactionsProps) => {
             data={filteredTransactionsArray}
             renderItem={renderTransaction}
             keyExtractor={(item) => item.id}
+          />
+        </View>
+        <View style={styles.actionsContainer}>
+          <SmartButton
+            outline
+            onPress={() => {
+              if (!isExporting) {
+                setIsExporting(true);
+                createCSV(
+                  'transactions',
+                  recordToCSVString(filteredTransactionsArray),
+                )
+                  .then(() => setIsExporting(false))
+                  .catch(() => setIsExporting(false));
+              }
+            }}
+            translationKey="EXPORT"
+            theme={theme}
+            loading={isExporting}
           />
         </View>
       </View>

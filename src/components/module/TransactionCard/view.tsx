@@ -24,18 +24,18 @@ const TransactionCard = (props: TransactionCardProps) => {
 
   const Icon = (() => {
     if (destinationWallet) {
-      return <UpDown width={24} height={24} fill={colors.NEUTRAL} />;
+      return <UpDown width={16} height={16} fill={colors.NEUTRAL} />;
     }
 
     if (amount > 0) {
-      return <DownLeft width={24} height={24} fill={colors.POSITIVE} />;
+      return <DownLeft width={16} height={16} fill={colors.POSITIVE} />;
     }
 
     if (amount < 0) {
-      return <UpRight width={24} height={24} fill={colors.NEGATIVE} />;
+      return <UpRight width={16} height={16} fill={colors.NEGATIVE} />;
     }
 
-    return <UpDown width={24} height={24} fill={colors.NEUTRAL} />;
+    return <UpDown width={16} height={16} fill={colors.NEUTRAL} />;
   })();
   return (
     <TouchableOpacity

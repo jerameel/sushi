@@ -46,6 +46,9 @@ const useStyles = (theme: Theme = DEFAULT_THEME) => {
       textTransform: 'uppercase',
       letterSpacing: 1,
     },
+    loadingContainer: {
+      marginLeft: 8,
+    },
   });
 
   return { styles, colors, theme };

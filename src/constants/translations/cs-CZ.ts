@@ -54,6 +54,7 @@ const cs_CZ: Translation = {
   SEARCH: 'Hledat',
   DATE_RANGE: 'Rozsah dat',
   SHOW_ALL: 'Zobrazit vše',
+  EXPORT: 'Export',
 
   // SETTINGS
   SETTINGS: 'Nastavení',

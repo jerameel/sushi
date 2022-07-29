@@ -50,6 +50,7 @@ export type Translation = {
   SEARCH: string;
   DATE_RANGE: string;
   SHOW_ALL: string;
+  EXPORT: string;
 
   // SETTINGS
   SETTINGS: string;

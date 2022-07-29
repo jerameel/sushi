@@ -53,6 +53,7 @@ const uk_UA: Translation = {
   SEARCH: 'Пошук',
   DATE_RANGE: 'Проміжок Часу',
   SHOW_ALL: 'Показати Всі',
+  EXPORT: 'Export',
 
   // SETTINGS
   SETTINGS: 'Налаштування',

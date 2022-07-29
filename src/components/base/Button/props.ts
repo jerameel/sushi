@@ -8,4 +8,5 @@ export interface ButtonProps {
   onPress?: () => void;
   outline?: boolean;
   disabled?: boolean;
+  loading?: boolean;
 }

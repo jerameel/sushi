@@ -53,6 +53,7 @@ const it_IT: Translation = {
   SEARCH: 'Ricerca',
   DATE_RANGE: 'Intervallo Di Date',
   SHOW_ALL: 'Mostra Tutto',
+  EXPORT: 'Export',
 
   // SETTINGS
   SETTINGS: 'Impostazioni',

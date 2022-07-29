@@ -54,6 +54,7 @@ const fil_PH: Translation = {
   SEARCH: 'Maghanap',
   DATE_RANGE: 'Saklaw ng Petsa',
   SHOW_ALL: 'Ipakita lahat',
+  EXPORT: 'Export',
 
   // SETTINGS
   SETTINGS: 'Mga setting',

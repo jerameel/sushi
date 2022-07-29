@@ -1,46 +1,22 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
-import useStyles from '../../base/Button/style';
 import { ButtonProps } from '../../base/Button/props';
 import { Translation } from 'types/Translation';
-import SmartText from '../SmartText';
+import { TRANSLATIONS } from 'constants/translations';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store';
+import Button from 'components/base/Button';
 
 type SmartButtonProps = {
   translationKey: keyof Translation;
 };
 
 const SmartButton = (props: Omit<ButtonProps, 'label'> & SmartButtonProps) => {
-  const {
-    containerStyle = {},
-    theme,
-    onPress,
-    outline,
-    disabled,
-    translationKey,
-  } = props;
+  const { translationKey, ...buttonProps } = props;
 
-  const { styles } = useStyles(theme);
+  const language = useSelector((state: RootState) => state.language.selected);
+
   return (
-    <TouchableOpacity
-      disabled={disabled}
-      activeOpacity={0.7}
-      style={[
-        outline ? styles.outlineContainer : styles.container,
-        containerStyle,
-        disabled
-          ? outline
-            ? styles.outlineContainerDisabled
-            : styles.containerDisabled
-          : {},
-      ]}
-      onPress={onPress}>
-      <SmartText
-        variant="label"
-        style={outline ? styles.outlineText : styles.text}
-        theme={theme}
-        translationKey={translationKey}
-      />
-    </TouchableOpacity>
+    <Button {...buttonProps} label={TRANSLATIONS[language][translationKey]} />
   );
 };
 

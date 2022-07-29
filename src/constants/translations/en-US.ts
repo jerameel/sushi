@@ -54,6 +54,7 @@ const en_US: Translation = {
   SEARCH: 'Search',
   DATE_RANGE: 'Date Range',
   SHOW_ALL: 'Show All',
+  EXPORT: 'Export',
 
   // SETTINGS
   SETTINGS: 'Settings',

@@ -23,11 +23,11 @@ const useStyles = () => {
     },
     content: {
       flex: 1,
-      paddingHorizontal: 16,
     },
     contentScroll: {
       paddingTop: 8,
       paddingBottom: 8,
+      paddingHorizontal: 16,
     },
     contentHeader: {
       flexDirection: 'row',
@@ -47,7 +47,12 @@ const useStyles = () => {
       marginTop: 8,
     },
     textFieldContainer: {
-      marginTop: 16,
+      marginBottom: 16,
+      paddingHorizontal: 16,
+    },
+    actionsContainer: {
+      padding: 16,
+      backgroundColor: colors.AREA_HIGHLIGHT,
     },
   });
   return { styles, colors, theme };

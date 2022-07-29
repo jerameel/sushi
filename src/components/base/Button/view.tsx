@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, Text, TouchableOpacity, View } from 'react-native';
 import useStyles from './style';
 import { ButtonProps } from './props';
 
@@ -11,9 +11,10 @@ const Button = (props: ButtonProps) => {
     label,
     outline,
     disabled,
+    loading,
   } = props;
 
-  const { styles } = useStyles(theme);
+  const { styles, colors } = useStyles(theme);
   return (
     <TouchableOpacity
       disabled={disabled}
@@ -29,6 +30,11 @@ const Button = (props: ButtonProps) => {
       ]}
       onPress={onPress}>
       <Text style={[outline ? styles.outlineText : styles.text]}>{label}</Text>
+      {loading && (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="small" color={colors.PRIMARY} />
+        </View>
+      )}
     </TouchableOpacity>
   );
 };
