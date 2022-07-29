@@ -1,0 +1,2 @@
+- Añadido filtro por fecha y buscar transacciónes.
+- Correcciones menores.

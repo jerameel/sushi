@@ -1,0 +1,2 @@
+- Pantalla con todas las transacciónes añadida
+- Correcciones menores

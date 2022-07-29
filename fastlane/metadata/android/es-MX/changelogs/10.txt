@@ -1,0 +1,2 @@
+- Soporte de traducción arreglado
+- Traducción Italiana añadido
