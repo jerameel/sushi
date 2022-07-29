@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { allPass, partial, sortBy, reverse } from 'ramda';
 import Text from 'components/base/Text';
 import { View, StatusBar, TouchableOpacity, FlatList } from 'react-native';
@@ -17,6 +17,7 @@ import SmartTextInput from 'components/smart/SmartTextInput';
 import SmartDatePicker from 'components/smart/SmartDatePicker';
 import SmartButton from 'components/smart/SmartButton';
 import { createCSV, recordToCSVString } from 'services/CSV';
+import Info from 'components/module/Info';
 
 const isSearchTermMatch = (filter: TransactionFilter, t: Transaction) => {
   const filterSearchTerm = filter.searchTerm.toLowerCase();
@@ -48,7 +49,17 @@ const TransactionsView = (props: TransactionsProps) => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [isExporting, setIsExporting] = useState(false);
+  const [exportStatus, setExportStatus] = useState<
+    'IDLE' | 'LOADING' | 'SUCCESS' | 'FAILED'
+  >('IDLE');
+
+  useEffect(() => {
+    if (exportStatus === 'SUCCESS' || exportStatus === 'FAILED') {
+      setTimeout(() => {
+        setExportStatus('IDLE');
+      }, 2000);
+    }
+  }, [exportStatus]);
 
   const filter: TransactionFilter = {
     startDate,
@@ -137,6 +148,7 @@ const TransactionsView = (props: TransactionsProps) => {
             defaultLabelTranslationKey="SHOW_ALL"
             theme={theme}
           />
+
           <FlatList
             contentContainerStyle={styles.contentScroll}
             data={filteredTransactionsArray}
@@ -144,25 +156,31 @@ const TransactionsView = (props: TransactionsProps) => {
             keyExtractor={(item) => item.id}
           />
         </View>
-        <View style={styles.actionsContainer}>
-          <SmartButton
-            outline
-            onPress={() => {
-              if (!isExporting) {
-                setIsExporting(true);
-                createCSV(
-                  'transactions',
-                  recordToCSVString(filteredTransactionsArray),
-                )
-                  .then(() => setIsExporting(false))
-                  .catch(() => setIsExporting(false));
-              }
-            }}
-            translationKey="EXPORT"
-            theme={theme}
-            loading={isExporting}
-          />
-        </View>
+        {exportStatus === 'SUCCESS' ? (
+          <Info label="Transactions has been successfully exported to sushi_transactions.csv" />
+        ) : (
+          <View style={styles.actionsContainer}>
+            <SmartButton
+              outline
+              onPress={() => {
+                if (exportStatus !== 'LOADING') {
+                  setExportStatus('LOADING');
+                  createCSV(
+                    'transactions',
+                    recordToCSVString(filteredTransactionsArray),
+                  )
+                    .then(() => {
+                      setExportStatus('SUCCESS');
+                    })
+                    .catch(() => setExportStatus('FAILED'));
+                }
+              }}
+              translationKey="EXPORT"
+              theme={theme}
+              loading={exportStatus === 'LOADING'}
+            />
+          </View>
+        )}
       </View>
     </SafeAreaView>
   );
