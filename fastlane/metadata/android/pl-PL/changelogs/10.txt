@@ -1,0 +1,2 @@
+- Naprawiono wsparcie dla tłumaczeń
+- Dodano włoską wersję językową
