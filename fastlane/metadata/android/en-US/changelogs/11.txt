@@ -1,0 +1,3 @@
+- Add Czech, Ukrainian, Russian, Spanish, Polish translation
+- Add CSV export for transaction record
+- Other minor improvements
