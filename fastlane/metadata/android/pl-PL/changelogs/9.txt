@@ -1,0 +1,2 @@
+- Wstępne wsparcie dla tłumaczeń
+- Zaktualizowano ekran powitalny 

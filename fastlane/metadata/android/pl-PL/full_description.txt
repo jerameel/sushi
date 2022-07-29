@@ -1,0 +1,5 @@
+Aplikacja otwarto-źródłowa pomagająca w zarządzaniu budżetami i rejestrowaniu transakcji.
+
+Wydatki na Artykuły Spożywcze, Zakupy Online, Subskrypcje, twoje oszczędności i przychody, a nawet przelewy... tymi wszystkimi elementami możesz zarządzać dzięki Sushi.
+
+Zarządzaj osobistymi finansami za pomocą Sushi.

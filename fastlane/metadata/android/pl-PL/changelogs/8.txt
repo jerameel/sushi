@@ -1,0 +1,2 @@
+- Dodano możliwość wyszukiwania i filtr według daty
+- Drobne poprawki
