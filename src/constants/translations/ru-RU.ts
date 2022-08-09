@@ -53,7 +53,7 @@ const ru_RU: Translation = {
   SEARCH: 'Поиск',
   DATE_RANGE: 'Диапазон Дат',
   SHOW_ALL: 'Показать Всё',
-  EXPORT: 'Export',
+  EXPORT: 'Экспорт',
 
   // SETTINGS
   SETTINGS: 'Настройки',
