@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { allPass, partial, sortBy, reverse } from 'ramda';
+import { allPass, partial, sortBy, reverse, groupBy } from 'ramda';
 import Text from 'components/base/Text';
-import { View, StatusBar, TouchableOpacity, FlatList } from 'react-native';
+import { View, StatusBar, TouchableOpacity, SectionList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useStyles from './styles';
 import { TransactionFilter, TransactionsProps } from './props';
@@ -18,6 +18,7 @@ import SmartDatePicker from 'components/smart/SmartDatePicker';
 import SmartButton from 'components/smart/SmartButton';
 import { createCSV, recordToCSVString } from 'services/CSV';
 import Info from 'components/module/Info';
+import { formatDate } from 'utils/formatDate';
 
 const isSearchTermMatch = (filter: TransactionFilter, t: Transaction) => {
   const filterSearchTerm = filter.searchTerm.toLowerCase();
@@ -81,6 +82,14 @@ const TransactionsView = (props: TransactionsProps) => {
       partial(isDateRangeMatch, [filter]),
     ]),
   );
+
+  const groupByDate = groupBy((transaction: Transaction) =>
+    formatDate(transaction.createdAt, 'MMM d yyyy'),
+  );
+
+  const groupedTransactionsArray = Object.entries(
+    groupByDate(filteredTransactionsArray),
+  ).map(([title, data]) => ({ title, data }));
 
   const renderTransaction = ({ item: transaction }: { item: Transaction }) => {
     const sourceWallet = wallets[transaction.sourceWalletId];
@@ -149,11 +158,16 @@ const TransactionsView = (props: TransactionsProps) => {
             theme={theme}
           />
 
-          <FlatList
+          <SectionList
             contentContainerStyle={styles.contentScroll}
-            data={filteredTransactionsArray}
-            renderItem={renderTransaction}
+            sections={groupedTransactionsArray}
             keyExtractor={(item) => item.id}
+            renderSectionHeader={({ section: { title } }) => (
+              <Text variant="subtitle" theme={theme} style={styles.dateText}>
+                {title}
+              </Text>
+            )}
+            renderItem={({ item }) => renderTransaction({ item: item })}
           />
         </View>
         {exportStatus === 'SUCCESS' ? (
