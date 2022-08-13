@@ -18,6 +18,7 @@ const TransactionCard = (props: TransactionCardProps) => {
     createdAt,
     onPress,
     language,
+    showDate = false,
   } = props;
 
   const { styles, colors } = useStyles(theme);
@@ -64,9 +65,11 @@ const TransactionCard = (props: TransactionCardProps) => {
         <Text variant="body" theme={theme}>{`${sourceWallet}${
           destinationWallet ? ` to ${destinationWallet}` : ''
         }`}</Text>
-        <Text variant="label" style={styles.dateText} theme={theme}>
-          {formatDate(createdAt)}
-        </Text>
+        {showDate && (
+          <Text variant="label" style={styles.dateText} theme={theme}>
+            {formatDate(createdAt)}
+          </Text>
+        )}
       </View>
     </TouchableOpacity>
   );

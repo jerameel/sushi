@@ -207,6 +207,7 @@ const HomeView = (props: HomeProps) => {
                   }
                   theme={theme}
                   language={language}
+                  showDate={true}
                 />
               );
             })}
