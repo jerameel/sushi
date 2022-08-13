@@ -150,6 +150,19 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
             variant="subtitle"
             containerStyle={styles.detailCardSubtitle}
             theme={theme}>
+            {formatDate(transaction.paidAt)}
+          </Text>
+        </View>
+        <View style={styles.detailCard}>
+          <SmartText
+            variant="label"
+            theme={theme}
+            translationKey="DATE_CREATED"
+          />
+          <Text
+            variant="subtitle"
+            containerStyle={styles.detailCardSubtitle}
+            theme={theme}>
             {formatDate(transaction.createdAt)}
           </Text>
         </View>
