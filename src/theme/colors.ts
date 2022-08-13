@@ -1,8 +1,7 @@
 const LIGHT = {
   PRIMARY: '#e15f41',
-  POSITIVE: '#3dc1d3',
-  NEGATIVE: '#c44569',
-  NEUTRAL: '#303952',
+  POSITIVE: '#218c74',
+  NEGATIVE: '#b33939',
   TITLE: '#1f1f1f',
   PRIMARY_TEXT: '#434343',
   SECONDARY_TEXT: '#595959',
@@ -17,9 +16,8 @@ const LIGHT = {
 
 export const DARK = {
   PRIMARY: '#e15f41',
-  POSITIVE: '#3dc1d3',
-  NEGATIVE: '#c44569',
-  NEUTRAL: '#303952',
+  POSITIVE: '#33d9b2',
+  NEGATIVE: '#ff5252',
   TITLE: '#fafafa',
   PRIMARY_TEXT: '#f5f5f5',
   SECONDARY_TEXT: '#d9d9d9',

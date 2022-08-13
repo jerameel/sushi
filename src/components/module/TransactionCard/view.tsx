@@ -18,32 +18,41 @@ const TransactionCard = (props: TransactionCardProps) => {
     createdAt,
     onPress,
     language,
-    showDate = false,
   } = props;
 
   const { styles, colors } = useStyles(theme);
 
-  const Icon = (() => {
+  const config = (() => {
+    const defaultConfig = {
+      color: colors.PRIMARY_TEXT,
+      prefix: '',
+    };
     if (destinationWallet) {
-      return <UpDown width={16} height={16} fill={colors.NEUTRAL} />;
+      return defaultConfig;
     }
 
     if (amount > 0) {
-      return <DownLeft width={16} height={16} fill={colors.POSITIVE} />;
+      return {
+        color: colors.POSITIVE,
+        prefix: '+ ',
+      };
     }
 
     if (amount < 0) {
-      return <UpRight width={16} height={16} fill={colors.NEGATIVE} />;
+      return {
+        color: colors.NEGATIVE,
+        prefix: '- ',
+      };
     }
 
-    return <UpDown width={16} height={16} fill={colors.NEUTRAL} />;
+    return defaultConfig;
   })();
   return (
     <TouchableOpacity
       style={[styles.container, containerStyle]}
       onPress={onPress}
       activeOpacity={0.6}>
-      <View style={styles.imageContainer}>{Icon}</View>
+      {/* <View style={styles.imageContainer}>{Icon}</View> */}
       <View style={styles.detailsContainer}>
         <View style={styles.row}>
           <Text
@@ -54,22 +63,34 @@ const TransactionCard = (props: TransactionCardProps) => {
           </Text>
           <Text
             containerStyle={styles.rowColumnRight}
-            variant="subtitle"
+            variant="label"
+            style={styles.dateText}
             theme={theme}>
-            {`${amount > 0 ? '+' : ''}${formatCurrency(
-              destinationWallet ? Math.abs(amount) : amount,
-              { language },
-            )}`}
+            {formatDate(createdAt, 'hh:mm a')}
           </Text>
         </View>
-        <Text variant="body" theme={theme}>{`${sourceWallet}${
-          destinationWallet ? ` to ${destinationWallet}` : ''
-        }`}</Text>
-        {showDate && (
+        <View style={styles.row}>
+          <Text
+            containerStyle={styles.rowColumnLeft}
+            variant="body"
+            theme={theme}>{`${sourceWallet}${
+            destinationWallet ? ` to ${destinationWallet}` : ''
+          }`}</Text>
+          <Text
+            containerStyle={styles.rowColumnRight}
+            style={{ color: config.color }}
+            variant="subtitle"
+            theme={theme}>
+            {`${config.prefix}${formatCurrency(Math.abs(amount), {
+              language,
+            })}`}
+          </Text>
+        </View>
+        {/* {showDate && (
           <Text variant="label" style={styles.dateText} theme={theme}>
             {formatDate(createdAt)}
           </Text>
-        )}
+        )} */}
       </View>
     </TouchableOpacity>
   );

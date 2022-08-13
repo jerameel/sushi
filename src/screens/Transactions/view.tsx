@@ -84,7 +84,7 @@ const TransactionsView = (props: TransactionsProps) => {
   );
 
   const groupByDate = groupBy((transaction: Transaction) =>
-    formatDate(transaction.createdAt, 'MMM d yyyy'),
+    formatDate(transaction.createdAt, 'MMMM d yyyy'),
   );
 
   const groupedTransactionsArray = Object.entries(

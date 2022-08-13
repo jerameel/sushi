@@ -11,5 +11,4 @@ export interface TransactionCardProps {
   createdAt: string;
   onPress?: () => void;
   language: string;
-  showDate?: boolean;
 }

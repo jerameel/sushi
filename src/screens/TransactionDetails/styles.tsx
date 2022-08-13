@@ -42,7 +42,7 @@ const useStyles = () => {
       alignItems: 'center',
     },
     amountText: {
-      color: colors.PRIMARY_TEXT,
+      // color: colors.PRIMARY_TEXT,
       fontSize: 24,
     },
     descriptionContainer: {

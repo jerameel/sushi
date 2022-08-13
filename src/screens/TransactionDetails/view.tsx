@@ -23,6 +23,32 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
   const { styles, theme, colors } = useStyles();
   const [showDelete, setShowDelete] = useState(false);
 
+  const config = (() => {
+    const defaultConfig = {
+      color: colors.PRIMARY_TEXT,
+      prefix: '',
+    };
+    if (destinationWallet) {
+      return defaultConfig;
+    }
+
+    if (transaction.amount > 0) {
+      return {
+        color: colors.POSITIVE,
+        prefix: '+ ',
+      };
+    }
+
+    if (transaction.amount < 0) {
+      return {
+        color: colors.NEGATIVE,
+        prefix: '- ',
+      };
+    }
+
+    return defaultConfig;
+  })();
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar
@@ -62,8 +88,13 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
       </View>
       <View style={styles.content}>
         <View style={styles.amountCard}>
-          <Text variant="subtitle" style={styles.amountText} theme={theme}>
-            {`${formatCurrency(Math.abs(transaction.amount), { language })}`}
+          <Text
+            variant="subtitle"
+            style={{ ...styles.amountText, color: config.color }}
+            theme={theme}>
+            {`${config.prefix}${formatCurrency(Math.abs(transaction.amount), {
+              language,
+            })}`}
           </Text>
         </View>
         {transaction.description.length > 0 && (

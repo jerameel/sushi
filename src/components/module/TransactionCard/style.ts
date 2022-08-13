@@ -14,23 +14,12 @@ const useStyles = (theme: Theme = DEFAULT_THEME) => {
       flexDirection: 'row',
       alignItems: 'flex-start',
     },
-    imageContainer: {
-      width: 24,
-      height: 24,
-      borderWidth: 1,
-      borderRadius: 8,
-      borderColor: colors.BORDER,
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginTop: 4,
-    },
     detailsContainer: {
-      marginLeft: 8,
       flex: 1,
     },
     row: {
       flexDirection: 'row',
-      alignItems: 'flex-start',
+      alignItems: 'flex-end',
     },
     rowColumnLeft: {
       flex: 1,
@@ -40,7 +29,7 @@ const useStyles = (theme: Theme = DEFAULT_THEME) => {
       alignItems: 'flex-end',
     },
     dateText: {
-      color: colors.DISABLE,
+      color: colors.PLACE_HOLDER,
     },
   });
 
