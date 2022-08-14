@@ -144,7 +144,7 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
           <SmartText
             variant="label"
             theme={theme}
-            translationKey="DATE_CREATED"
+            translationKey="TRANSACTION_DATE"
           />
           <Text
             variant="subtitle"
@@ -153,7 +153,7 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
             {formatDate(transaction.paidAt)}
           </Text>
         </View>
-        <View style={styles.detailCard}>
+        {/* <View style={styles.detailCard}>
           <SmartText
             variant="label"
             theme={theme}
@@ -180,7 +180,7 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
               {formatDate(transaction.updatedAt)}
             </Text>
           </View>
-        )}
+        )} */}
       </View>
       <SmartAlertModal
         theme={theme}

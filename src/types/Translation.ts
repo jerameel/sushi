@@ -38,6 +38,7 @@ export type Translation = {
   // TRANSACTION DETAILS
   TRANSACTION_DETAILS: string;
   ACCOUNT: string;
+  TRANSACTION_DATE: string;
   DATE_CREATED: string;
   DATE_UPDATED: string;
   DELETE_TRANSACTION: string;

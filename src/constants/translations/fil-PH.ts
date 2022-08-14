@@ -1,6 +1,8 @@
 import { Translation } from 'types/Translation';
+import en_US from './en-US';
 
 const fil_PH: Translation = {
+  ...en_US,
   // DASHBOARD
   CREDIT: 'Kredito',
   DEBIT: 'Debito',
