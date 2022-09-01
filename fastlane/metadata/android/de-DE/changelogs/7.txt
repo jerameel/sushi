@@ -1,0 +1,2 @@
+- Übersicht für alle Transaktionen hinzugefügt
+- Kleinere Korrekturen
