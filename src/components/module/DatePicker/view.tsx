@@ -19,6 +19,7 @@ const DatePicker = (props: DatePickerProps) => {
     endDate,
     setStartDate,
     setEndDate,
+    hideActionButton = false,
   } = props;
 
   const { styles, colors } = useStyles(theme);
@@ -29,7 +30,12 @@ const DatePicker = (props: DatePickerProps) => {
 
   const displayStartDate = startDate ? format(startDate, 'MMM d yyyy ') : '';
   const displayEndDate = endDate ? ` - ${format(endDate, 'MMM d yyyy ')}` : '';
-  const displayDate = startDate ? displayStartDate + displayEndDate : '';
+  const displayDate = (() => {
+    if (startDate && !endDate) {
+      return format(startDate, 'MMMM d yyyy');
+    }
+    return startDate && endDate ? displayStartDate + displayEndDate : '';
+  })();
 
   const markedDates = (
     startDate && endDate
@@ -140,19 +146,21 @@ const DatePicker = (props: DatePickerProps) => {
                   }
                 }}
               />
-              <Button
-                containerStyle={styles.actionContainer}
-                onPress={() => {
-                  if (setEndDate) {
-                    setEndDate(null);
-                  }
+              {!hideActionButton && (
+                <Button
+                  containerStyle={styles.actionContainer}
+                  onPress={() => {
+                    if (setEndDate) {
+                      setEndDate(null);
+                    }
 
-                  setStartDate(null);
-                }}
-                label={defaultLabel}
-                outline
-                theme={theme}
-              />
+                    setStartDate(null);
+                  }}
+                  label={defaultLabel}
+                  outline
+                  theme={theme}
+                />
+              )}
             </ScrollView>
           </View>
         </View>
