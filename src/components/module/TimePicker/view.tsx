@@ -18,6 +18,11 @@ import Button from 'components/base/Button';
 const HOURS = [...new Array(24)].map((v, i) => `${i}`.padStart(2, '0'));
 const MINUTES = [...new Array(60)].map((v, i) => `${i}`.padStart(2, '0'));
 
+const calculateScrollOffset = (index: number) => {
+  const fixedElementHeight = 42;
+  return index * fixedElementHeight;
+};
+
 const TimePicker = (props: TimePickerProps) => {
   const {
     containerStyle = {},
@@ -38,22 +43,26 @@ const TimePicker = (props: TimePickerProps) => {
     if (selectedTime && showModal) {
       if (hourRef && hourRef.current) {
         setTimeout(() => {
-          hourRef.current.scrollToIndex({
-            index: selectedTime?.getHours(),
-            animated: true,
-            viewPosition: 0.5,
-          });
-        }, 500);
+          if (hourRef && hourRef.current) {
+            hourRef.current.scrollTo({
+              x: 0,
+              y: calculateScrollOffset(selectedTime?.getHours()),
+              animated: true,
+            });
+          }
+        }, 250);
       }
 
       if (minuteRef && minuteRef.current) {
         setTimeout(() => {
-          minuteRef.current.scrollToIndex({
-            index: selectedTime?.getMinutes(),
-            animated: true,
-            viewPosition: 0.5,
-          });
-        }, 700);
+          if (minuteRef && minuteRef.current) {
+            minuteRef.current.scrollTo({
+              x: 0,
+              y: calculateScrollOffset(selectedTime?.getMinutes()),
+              animated: true,
+            });
+          }
+        }, 500);
       }
     }
   }, [selectedTime, showModal]);
@@ -107,60 +116,62 @@ const TimePicker = (props: TimePickerProps) => {
               </TouchableOpacity>
             </View>
             <View style={styles.timePickerContainer}>
-              <FlatList
+              <ScrollView
                 ref={hourRef}
                 style={styles.timePickerList}
-                data={HOURS}
-                keyExtractor={(item) => `${item}`}
-                showsVerticalScrollIndicator={false}
-                renderItem={({ item, index }) => {
-                  return (
-                    <TouchableOpacity
-                      onPress={() => {
-                        const refValue = new Date(
-                          (selectedTime || new Date()).getTime(),
-                        );
-                        refValue.setHours(index);
-                        setSelectedTime(refValue);
-                      }}>
+                showsVerticalScrollIndicator={false}>
+                <View style={styles.spacer} />
+                {HOURS.map((item, index) => (
+                  <TouchableOpacity
+                    onPress={() => {
+                      const refValue = new Date(
+                        (selectedTime || new Date()).getTime(),
+                      );
+                      refValue.setHours(index);
+                      setSelectedTime(refValue);
+                    }}>
+                    <View style={styles.touchableHour}>
                       <Text
                         style={
                           index === hourIndex
                             ? styles.timePickerLabelActive
                             : styles.timePickerLabel
                         }>{`${item}`}</Text>
-                    </TouchableOpacity>
-                  );
-                }}
-                onScrollToIndexFailed={() => null}
-              />
-              <FlatList
+                    </View>
+                  </TouchableOpacity>
+                ))}
+                <View style={styles.spacer} />
+              </ScrollView>
+              <View style={styles.timePickerSeparator}>
+                <Text style={styles.timePickerLabel}>:</Text>
+              </View>
+
+              <ScrollView
                 ref={minuteRef}
                 style={styles.timePickerList}
-                data={MINUTES}
-                keyExtractor={(item) => `${item}`}
-                showsVerticalScrollIndicator={false}
-                renderItem={({ item, index }) => {
-                  return (
-                    <TouchableOpacity
-                      onPress={() => {
-                        const refValue = new Date(
-                          (selectedTime || new Date()).getTime(),
-                        );
-                        refValue.setMinutes(index);
-                        setSelectedTime(refValue);
-                      }}>
+                showsVerticalScrollIndicator={false}>
+                <View style={styles.spacer} />
+                {MINUTES.map((item, index) => (
+                  <TouchableOpacity
+                    onPress={() => {
+                      const refValue = new Date(
+                        (selectedTime || new Date()).getTime(),
+                      );
+                      refValue.setMinutes(index);
+                      setSelectedTime(refValue);
+                    }}>
+                    <View style={styles.touchableMinute}>
                       <Text
                         style={
                           index === minuteIndex
                             ? styles.timePickerLabelActive
                             : styles.timePickerLabel
                         }>{`${item}`}</Text>
-                    </TouchableOpacity>
-                  );
-                }}
-                onScrollToIndexFailed={() => null}
-              />
+                    </View>
+                  </TouchableOpacity>
+                ))}
+                <View style={styles.spacer} />
+              </ScrollView>
             </View>
           </View>
         </View>

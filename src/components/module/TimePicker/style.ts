@@ -65,15 +65,34 @@ const useStyles = (theme: Theme = DEFAULT_THEME) => {
     },
     timePickerList: {
       maxHeight: 120,
-      maxWidth: 64,
+    },
+    touchableHour: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
+    },
+    touchableMinute: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
     },
     timePickerLabel: {
       fontSize: 32,
       color: colors.PRIMARY_TEXT,
+      height: 42,
     },
     timePickerLabelActive: {
       fontSize: 32,
       color: colors.PRIMARY,
+      height: 42,
+    },
+    timePickerSeparator: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingHorizontal: 4,
+    },
+    spacer: {
+      height: 42,
     },
   });
 
