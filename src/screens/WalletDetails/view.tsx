@@ -72,7 +72,7 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
     wallet.initialAmount + balanceBreakdown.income - balanceBreakdown.expenses;
 
   const sortTransactionByDate = sortBy(
-    (transaction: Transaction) => transaction.createdAt,
+    (transaction: Transaction) => transaction.paidAt,
   );
   const sortedTransactionsArray = reverse(
     sortTransactionByDate(walletTransactions),
@@ -167,7 +167,7 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
                   amount={transaction.amount}
                   sourceWallet={sourceWallet.label}
                   destinationWallet={destinationWallet?.label}
-                  createdAt={transaction.createdAt}
+                  paidAt={transaction.paidAt}
                   onPress={() =>
                     navigation.navigate('TRANSACTION_DETAILS', {
                       transactionId: transaction.id,

@@ -8,7 +8,7 @@ export interface TransactionCardProps {
   amount: number;
   sourceWallet: string;
   destinationWallet?: string;
-  createdAt: string;
+  paidAt: string;
   onPress?: () => void;
   language: string;
 }

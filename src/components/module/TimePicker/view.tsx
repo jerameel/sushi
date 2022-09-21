@@ -115,7 +115,7 @@ const TimePicker = (props: TimePickerProps) => {
                 <Close fill={colors.PRIMARY_TEXT} width={24} height={24} />
               </TouchableOpacity>
             </View>
-            <View style={styles.timePickerContainer}>
+            <View key="spacer-0" style={styles.timePickerContainer}>
               <ScrollView
                 ref={hourRef}
                 style={styles.timePickerList}
@@ -123,6 +123,7 @@ const TimePicker = (props: TimePickerProps) => {
                 <View style={styles.spacer} />
                 {HOURS.map((item, index) => (
                   <TouchableOpacity
+                    key={`hour-${item}`}
                     onPress={() => {
                       const refValue = new Date(
                         (selectedTime || new Date()).getTime(),
@@ -140,7 +141,7 @@ const TimePicker = (props: TimePickerProps) => {
                     </View>
                   </TouchableOpacity>
                 ))}
-                <View style={styles.spacer} />
+                <View key="spacer-1" style={styles.spacer} />
               </ScrollView>
               <View style={styles.timePickerSeparator}>
                 <Text style={styles.timePickerLabel}>:</Text>
@@ -150,9 +151,10 @@ const TimePicker = (props: TimePickerProps) => {
                 ref={minuteRef}
                 style={styles.timePickerList}
                 showsVerticalScrollIndicator={false}>
-                <View style={styles.spacer} />
+                <View key="spacer-2" style={styles.spacer} />
                 {MINUTES.map((item, index) => (
                   <TouchableOpacity
+                    key={`minute-${item}`}
                     onPress={() => {
                       const refValue = new Date(
                         (selectedTime || new Date()).getTime(),
@@ -170,7 +172,7 @@ const TimePicker = (props: TimePickerProps) => {
                     </View>
                   </TouchableOpacity>
                 ))}
-                <View style={styles.spacer} />
+                <View key="spacer-3" style={styles.spacer} />
               </ScrollView>
             </View>
           </View>

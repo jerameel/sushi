@@ -57,7 +57,7 @@ const HomeView = (props: HomeProps) => {
   const { styles, theme, colors } = useStyles();
 
   const sortTransactionByDate = sortBy(
-    (transaction: Transaction) => transaction.createdAt,
+    (transaction: Transaction) => transaction.paidAt,
   );
   const sortedTransactionsArray = reverse(
     sortTransactionByDate(
@@ -66,7 +66,7 @@ const HomeView = (props: HomeProps) => {
   );
 
   const groupByDate = groupBy((transaction: Transaction) =>
-    formatDate(transaction.createdAt, 'MMMM d yyyy'),
+    formatDate(transaction.paidAt, 'MMMM d yyyy'),
   );
 
   const groupedTransactionsArray = Object.entries(
@@ -122,7 +122,7 @@ const HomeView = (props: HomeProps) => {
         amount={transaction.amount}
         sourceWallet={sourceWallet.label}
         destinationWallet={destinationWallet?.label}
-        createdAt={transaction.createdAt}
+        paidAt={transaction.paidAt}
         onPress={() =>
           navigation.navigate('TRANSACTION_DETAILS', {
             transactionId: transaction.id,

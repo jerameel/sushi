@@ -20,6 +20,7 @@ import SmartButton from 'components/smart/SmartButton';
 import DatePicker from 'components/module/DatePicker';
 import SmartDatePicker from 'components/smart/SmartDatePicker';
 import TimePicker from 'components/module/TimePicker';
+import SmartTimePicker from 'components/smart/SmartTimePicker';
 
 const TRANSACTION_TYPES: {
   label: string;
@@ -197,12 +198,11 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
             hideActionButton
             theme={theme}
           />
-          <TimePicker
+          <SmartTimePicker
             containerStyle={styles.inputContainer}
-            label="Transaction Time"
+            labelTranslationKey="TRANSACTION_TIME"
             selectedTime={paidAt}
             setSelectedTime={setPaidAt}
-            theme={theme}
           />
         </ScrollView>
         <View style={styles.actionsContainer}>

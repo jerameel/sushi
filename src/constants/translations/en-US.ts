@@ -42,6 +42,7 @@ const en_US: Translation = {
   TRANSACTION_DETAILS: 'Transaction Details',
   ACCOUNT: 'Account',
   TRANSACTION_DATE: 'Transaction Date',
+  TRANSACTION_TIME: 'Transaction Time',
   DATE_CREATED: 'Date Created',
   DATE_UPDATED: 'Date Updated',
   DELETE_TRANSACTION: 'Delete Transaction?',
