@@ -28,13 +28,13 @@ const useStyles = () => {
     inputContainer: {
       marginTop: 16,
     },
-    categorySuggestionsContainer: {
+    suggestionsContainer: {
       flexDirection: 'row',
       alignItems: 'center',
       flexWrap: 'wrap',
       marginTop: 4,
     },
-    categorySuggestionBadge: {
+    suggestionsBadge: {
       paddingVertical: 4,
       paddingHorizontal: 8,
       backgroundColor: colors.AREA_HIGHLIGHT,
@@ -44,7 +44,7 @@ const useStyles = () => {
       marginRight: 4,
       marginTop: 4,
     },
-    categorySuggestionText: {
+    suggestionText: {
       color: colors.PRIMARY,
     },
     transactionTypeContainer: {
@@ -74,6 +74,9 @@ const useStyles = () => {
     },
     actionsContainer: {
       padding: 16,
+    },
+    spacer: {
+      height: 32,
     },
   });
   return { styles, colors, theme };

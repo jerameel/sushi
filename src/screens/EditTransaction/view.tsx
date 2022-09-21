@@ -89,6 +89,21 @@ const EditTransactionView = (props: EditTransactionProps) => {
       </View>
       <View style={styles.content}>
         <ScrollView style={styles.contentScroll}>
+          <SmartDatePicker
+            containerStyle={styles.inputContainer}
+            labelTranslationKey="TRANSACTION_DATE"
+            startDate={paidAt}
+            setStartDate={setPaidAt}
+            defaultLabelTranslationKey="TRANSACTION_DATE"
+            hideActionButton
+            theme={theme}
+          />
+          <SmartTimePicker
+            containerStyle={styles.inputContainer}
+            labelTranslationKey="TRANSACTION_TIME"
+            selectedTime={paidAt}
+            setSelectedTime={setPaidAt}
+          />
           <SmartTextInput
             containerStyle={styles.inputContainer}
             translationKey="CATEGORY"
@@ -192,22 +207,6 @@ const EditTransactionView = (props: EditTransactionProps) => {
               ))}
             </View>
           )}
-
-          <SmartDatePicker
-            containerStyle={styles.inputContainer}
-            labelTranslationKey="TRANSACTION_DATE"
-            startDate={paidAt}
-            setStartDate={setPaidAt}
-            defaultLabelTranslationKey="TRANSACTION_DATE"
-            hideActionButton
-            theme={theme}
-          />
-          <SmartTimePicker
-            containerStyle={styles.inputContainer}
-            labelTranslationKey="TRANSACTION_TIME"
-            selectedTime={paidAt}
-            setSelectedTime={setPaidAt}
-          />
         </ScrollView>
         <View style={styles.actionsContainer}>
           <SmartButton

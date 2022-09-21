@@ -55,3 +55,44 @@ export const getCategorySuggestions = (transactions: Transactions) => {
 
   return [...new Set([...defaultCategories, ...sortedCategories])].slice(0, 8);
 };
+
+export const getWalletSuggestions = (transactions: Transactions) => {
+  const transactionsArray = Object.keys(transactions).map((key) => {
+    const transaction = transactions[key];
+    return transaction;
+  });
+  const groupByWalletId = groupBy(
+    (transaction: Transaction) => transaction.sourceWalletId,
+  );
+
+  const groupedByWalletIdTransactions = groupByWalletId(transactionsArray);
+
+  const countedWalletIdArray = Object.keys(groupedByWalletIdTransactions).map(
+    (walletId) => {
+      const transactionCount = groupedByWalletIdTransactions[walletId].length;
+      return {
+        walletId,
+        count: transactionCount,
+      };
+    },
+  );
+
+  const sortByCount = sortBy(
+    (countedWalletId: { walletId: string; count: number }) =>
+      -countedWalletId.count,
+  );
+
+  const sortedWalletIds = sortByCount(countedWalletIdArray).map(
+    (countedWalletId) => countedWalletId.walletId,
+  );
+
+  const sortByTransactionDate = sortBy(
+    (transaction: Transaction) => -new Date(transaction.paidAt).getTime(),
+  );
+
+  const defaultWalletIds = (
+    sortByTransactionDate(transactionsArray).slice(0, 1) as Transaction[]
+  ).map((transaction) => transaction.sourceWalletId);
+
+  return [...new Set([...defaultWalletIds, ...sortedWalletIds])].slice(0, 3);
+};

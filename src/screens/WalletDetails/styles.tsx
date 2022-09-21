@@ -51,6 +51,11 @@ const useStyles = () => {
     transactionCard: {
       marginTop: 8,
     },
+    dateText: {
+      color: colors.PLACE_HOLDER,
+      marginTop: 12,
+      fontSize: 14,
+    },
   });
   return { styles, colors, theme };
 };

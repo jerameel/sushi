@@ -2,7 +2,13 @@ import React, { useState } from 'react';
 import sortBy from 'ramda/es/sortBy';
 import reverse from 'ramda/es/reverse';
 import Text from 'components/base/Text';
-import { ScrollView, View, StatusBar, TouchableOpacity } from 'react-native';
+import {
+  ScrollView,
+  View,
+  StatusBar,
+  TouchableOpacity,
+  SectionList,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useStyles from './styles';
 import { WalletDetailsProps } from './props';
@@ -13,6 +19,8 @@ import AlertModal from 'components/module/AlertModal';
 import { formatCurrency } from 'utils/formatCurrency';
 import SmartText from 'components/smart/SmartText';
 import SmartAlertModal from 'components/smart/SmartAlertModal';
+import { groupBy } from 'ramda';
+import { formatDate } from 'utils/formatDate';
 
 const WalletDetailsView = (props: WalletDetailsProps) => {
   const { navigation, wallet, transactions, wallets, deleteWallet, language } =
@@ -74,9 +82,43 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
   const sortTransactionByDate = sortBy(
     (transaction: Transaction) => transaction.paidAt,
   );
+
   const sortedTransactionsArray = reverse(
     sortTransactionByDate(walletTransactions),
   );
+
+  const groupByDate = groupBy((transaction: Transaction) =>
+    formatDate(transaction.paidAt, 'MMMM d yyyy'),
+  );
+
+  const groupedTransactionsArray = Object.entries(
+    groupByDate(sortedTransactionsArray),
+  ).map(([title, data]) => ({ title, data }));
+
+  const renderTransaction = ({ item: transaction }: { item: Transaction }) => {
+    const sourceWallet = wallets[transaction.sourceWalletId];
+    const destinationWallet = transaction.destinationWalletId
+      ? wallets[transaction.destinationWalletId]
+      : null;
+    return (
+      <TransactionCard
+        containerStyle={styles.transactionCard}
+        key={transaction.id}
+        category={transaction.category}
+        amount={transaction.amount}
+        sourceWallet={sourceWallet.label}
+        destinationWallet={destinationWallet?.label}
+        paidAt={transaction.paidAt}
+        onPress={() =>
+          navigation.navigate('TRANSACTION_DETAILS', {
+            transactionId: transaction.id,
+          })
+        }
+        theme={theme}
+        language={language}
+      />
+    );
+  };
 
   const [showDelete, setShowDelete] = useState(false);
 
@@ -153,32 +195,17 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
           </View>
         </View>
         <View style={styles.transactionsContainer}>
-          <ScrollView contentContainerStyle={styles.contentScroll}>
-            {sortedTransactionsArray.map((transaction) => {
-              const sourceWallet = wallets[transaction.sourceWalletId];
-              const destinationWallet = transaction.destinationWalletId
-                ? wallets[transaction.destinationWalletId]
-                : null;
-              return (
-                <TransactionCard
-                  containerStyle={styles.transactionCard}
-                  key={transaction.id}
-                  category={transaction.category}
-                  amount={transaction.amount}
-                  sourceWallet={sourceWallet.label}
-                  destinationWallet={destinationWallet?.label}
-                  paidAt={transaction.paidAt}
-                  onPress={() =>
-                    navigation.navigate('TRANSACTION_DETAILS', {
-                      transactionId: transaction.id,
-                    })
-                  }
-                  theme={theme}
-                  language={language}
-                />
-              );
-            })}
-          </ScrollView>
+          <SectionList
+            contentContainerStyle={styles.contentScroll}
+            sections={groupedTransactionsArray}
+            keyExtractor={(item) => item.id}
+            renderSectionHeader={({ section: { title } }) => (
+              <Text variant="subtitle" theme={theme} style={styles.dateText}>
+                {title}
+              </Text>
+            )}
+            renderItem={({ item }) => renderTransaction({ item: item })}
+          />
         </View>
       </View>
       <SmartAlertModal
