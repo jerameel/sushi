@@ -1,0 +1,1 @@
+- Unterstützung zum editieren von Konten und Transaktionen hinzugefügt

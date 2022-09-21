@@ -6,6 +6,7 @@ import it_IT from './it-IT';
 import pl_PL from './pl-PL';
 import ru_RU from './ru-RU';
 import uk_UA from './uk-UA';
+import de_DE from './de-DE';
 
 export const TRANSLATIONS = {
   'cs-CZ': cs_CZ,
@@ -16,4 +17,5 @@ export const TRANSLATIONS = {
   'pl-PL': pl_PL,
   'ru-RU': ru_RU,
   'uk-UA': uk_UA,
+  'de-DE': de_DE
 };

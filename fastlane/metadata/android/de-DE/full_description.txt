@@ -1,0 +1,5 @@
+Eine Open-Source-Mobilanwendung, mit der Sie problemlos mehrere Konten verwalten und Transaktionen aufzeichnen können.
+
+Ausgaben wie Lebensmittel, Online-Einkäufe, Abonnements, für Ihre Ersparnisse und Einkommen und sogar Kontentransfers... Sie können sie auf Sushi auflisten.
+
+Verwalten Sie Ihre persönlichen Finanzen mit Sushi.
