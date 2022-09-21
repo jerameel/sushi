@@ -17,5 +17,5 @@ export const TRANSLATIONS = {
   'pl-PL': pl_PL,
   'ru-RU': ru_RU,
   'uk-UA': uk_UA,
-  'de-DE': de_DE
+  'de-DE': de_DE,
 };
