@@ -15,7 +15,7 @@ const TransactionCard = (props: TransactionCardProps) => {
     amount,
     sourceWallet,
     destinationWallet,
-    createdAt,
+    paidAt,
     onPress,
     language,
   } = props;
@@ -66,7 +66,7 @@ const TransactionCard = (props: TransactionCardProps) => {
             variant="label"
             style={styles.dateText}
             theme={theme}>
-            {formatDate(createdAt, 'hh:mm a')}
+            {formatDate(paidAt, 'hh:mm a')}
           </Text>
         </View>
         <View style={styles.row}>

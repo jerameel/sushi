@@ -10,6 +10,7 @@ export type Transaction = {
   category: string;
   description: string;
   amount: number;
+  paidAt: string;
   createdAt: string;
   updatedAt: string;
 };

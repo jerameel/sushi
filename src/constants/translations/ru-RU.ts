@@ -1,6 +1,8 @@
 import { Translation } from 'types/Translation';
+import en_US from './en-US';
 
 const ru_RU: Translation = {
+  ...en_US,
   // DASHBOARD
   CREDIT: 'Расход',
   DEBIT: 'Доход',

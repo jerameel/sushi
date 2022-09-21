@@ -1,6 +1,8 @@
 import { Translation } from 'types/Translation';
+import en_US from './en-US';
 
 const fil_PH: Translation = {
+  ...en_US,
   // DASHBOARD
   CREDIT: 'Kredito',
   DEBIT: 'Debito',
@@ -41,6 +43,8 @@ const fil_PH: Translation = {
   // TRANSACTION DETAILS
   TRANSACTION_DETAILS: 'Mga Detalye ng Transaksyon',
   ACCOUNT: 'Account',
+  TRANSACTION_DATE: 'Petsa ng Transaksyon',
+  TRANSACTION_TIME: 'Oras ng Transaksyon',
   DATE_CREATED: 'Petsa ng Paggawa',
   DATE_UPDATED: 'Petsa ng Pagbago',
   DELETE_TRANSACTION: 'Burahin ang Transaksyon?',

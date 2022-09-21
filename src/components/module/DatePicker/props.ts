@@ -10,4 +10,5 @@ export interface DatePickerProps {
   setStartDate: (date: Date | null) => void;
   endDate?: Date | null;
   setEndDate?: (date: Date | null) => void;
+  hideActionButton?: boolean;
 }

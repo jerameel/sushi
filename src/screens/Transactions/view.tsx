@@ -33,7 +33,7 @@ const isDateRangeMatch = (filter: TransactionFilter, t: Transaction) => {
     const endDate = endOfDay(
       filter.endDate ? filter.endDate : filter.startDate,
     );
-    return isWithinInterval(new Date(t.createdAt), {
+    return isWithinInterval(new Date(t.paidAt), {
       start: startDate,
       end: endDate,
     });
@@ -68,7 +68,7 @@ const TransactionsView = (props: TransactionsProps) => {
     searchTerm,
   };
   const sortTransactionByDate = sortBy(
-    (transaction: Transaction) => transaction.createdAt,
+    (transaction: Transaction) => transaction.paidAt,
   );
   const sortedTransactionsArray = reverse(
     sortTransactionByDate(
@@ -84,7 +84,7 @@ const TransactionsView = (props: TransactionsProps) => {
   );
 
   const groupByDate = groupBy((transaction: Transaction) =>
-    formatDate(transaction.createdAt, 'MMMM d yyyy'),
+    formatDate(transaction.paidAt, 'MMMM d yyyy'),
   );
 
   const groupedTransactionsArray = Object.entries(
@@ -104,7 +104,7 @@ const TransactionsView = (props: TransactionsProps) => {
         amount={transaction.amount}
         sourceWallet={sourceWallet.label}
         destinationWallet={destinationWallet?.label}
-        createdAt={transaction.createdAt}
+        paidAt={transaction.paidAt}
         onPress={() =>
           navigation.navigate('TRANSACTION_DETAILS', {
             transactionId: transaction.id,

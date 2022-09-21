@@ -59,8 +59,11 @@ const useStyles = () => {
       marginHorizontal: 16,
       marginTop: 16,
     },
-    detailCardSubtitle: {
+    detailCardValue: {
       marginTop: 2,
+    },
+    detailCardHidden: {
+      color: colors.PLACE_HOLDER,
     },
   });
   return { styles, colors, theme };
