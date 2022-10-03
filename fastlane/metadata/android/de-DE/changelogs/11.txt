@@ -1,0 +1,3 @@
+- Tschechische, Ukrainische, Russische, Spanische und Polnische Übersetzung hinzugefügt
+- CSV-Export für Transaktionseinträge hinzugefügt
+- Andere kleinere Verbesserungen

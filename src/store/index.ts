@@ -9,6 +9,8 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
+  createMigrate,
+  MigrationManifest,
 } from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
 
@@ -17,6 +19,7 @@ import walletsReducer from './wallets';
 import transactionsReducer from './transactions';
 import currencyReducer from './currency';
 import languageReducer from './language';
+import Migrations from './migration';
 
 const rootReducer = combineReducers({
   theme: themeReducer,
@@ -30,9 +33,12 @@ export type RootState = ReturnType<typeof rootReducer>;
 
 const persistConfig = {
   key: 'root',
-  version: 1,
+  version: 2,
   storage: AsyncStorage,
   whitelist: ['theme', 'wallets', 'transactions', 'currency', 'language'],
+  migrate: createMigrate(Migrations as unknown as MigrationManifest, {
+    debug: false,
+  }),
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

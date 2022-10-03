@@ -23,6 +23,32 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
   const { styles, theme, colors } = useStyles();
   const [showDelete, setShowDelete] = useState(false);
 
+  const config = (() => {
+    const defaultConfig = {
+      color: colors.PRIMARY_TEXT,
+      prefix: '',
+    };
+    if (destinationWallet) {
+      return defaultConfig;
+    }
+
+    if (transaction.amount > 0) {
+      return {
+        color: colors.POSITIVE,
+        prefix: '+ ',
+      };
+    }
+
+    if (transaction.amount < 0) {
+      return {
+        color: colors.NEGATIVE,
+        prefix: '- ',
+      };
+    }
+
+    return defaultConfig;
+  })();
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar
@@ -62,8 +88,13 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
       </View>
       <View style={styles.content}>
         <View style={styles.amountCard}>
-          <Text variant="subtitle" style={styles.amountText} theme={theme}>
-            {`${formatCurrency(Math.abs(transaction.amount), { language })}`}
+          <Text
+            variant="subtitle"
+            style={{ ...styles.amountText, color: config.color }}
+            theme={theme}>
+            {`${config.prefix}${formatCurrency(Math.abs(transaction.amount), {
+              language,
+            })}`}
           </Text>
         </View>
         {transaction.description.length > 0 && (
@@ -76,7 +107,7 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
           <SmartText variant="label" theme={theme} translationKey="CATEGORY" />
           <Text
             variant="subtitle"
-            containerStyle={styles.detailCardSubtitle}
+            containerStyle={styles.detailCardValue}
             theme={theme}>
             {transaction.category}
           </Text>
@@ -89,7 +120,7 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
           />
           <Text
             variant="subtitle"
-            containerStyle={styles.detailCardSubtitle}
+            containerStyle={styles.detailCardValue}
             theme={theme}>
             {sourceWallet.label}
           </Text>
@@ -103,7 +134,7 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
             />
             <Text
               variant="subtitle"
-              containerStyle={styles.detailCardSubtitle}
+              containerStyle={styles.detailCardValue}
               theme={theme}>
               {destinationWallet.label}
             </Text>
@@ -113,11 +144,26 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
           <SmartText
             variant="label"
             theme={theme}
+            translationKey="TRANSACTION_DATE"
+          />
+          <Text
+            variant="subtitle"
+            containerStyle={styles.detailCardValue}
+            theme={theme}>
+            {formatDate(transaction.paidAt)}
+          </Text>
+        </View>
+        <View style={styles.detailCard}>
+          <SmartText
+            style={styles.detailCardHidden}
+            variant="label"
+            theme={theme}
             translationKey="DATE_CREATED"
           />
           <Text
             variant="subtitle"
-            containerStyle={styles.detailCardSubtitle}
+            containerStyle={styles.detailCardValue}
+            style={styles.detailCardHidden}
             theme={theme}>
             {formatDate(transaction.createdAt)}
           </Text>
@@ -125,13 +171,15 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
         {!!transaction.updatedAt && (
           <View style={styles.detailCard}>
             <SmartText
+              style={styles.detailCardHidden}
               variant="label"
               theme={theme}
               translationKey="DATE_UPDATED"
             />
             <Text
               variant="subtitle"
-              containerStyle={styles.detailCardSubtitle}
+              containerStyle={styles.detailCardValue}
+              style={styles.detailCardHidden}
               theme={theme}>
               {formatDate(transaction.updatedAt)}
             </Text>

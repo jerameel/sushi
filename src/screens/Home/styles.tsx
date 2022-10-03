@@ -66,6 +66,11 @@ const useStyles = () => {
       padding: 16,
       backgroundColor: colors.AREA_HIGHLIGHT,
     },
+    dateText: {
+      color: colors.PLACE_HOLDER,
+      marginTop: 12,
+      fontSize: 14,
+    },
   });
   return { styles, colors, theme };
 };

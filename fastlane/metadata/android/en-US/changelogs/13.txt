@@ -1,0 +1,2 @@
+- General UX improvements
+- Add support for Transaction Date

@@ -14,6 +14,9 @@ import SmartText from 'components/smart/SmartText';
 import SmartTextInput from 'components/smart/SmartTextInput';
 import SmartPicker from 'components/smart/SmartPicker';
 import SmartButton from 'components/smart/SmartButton';
+import SmartDatePicker from 'components/smart/SmartDatePicker';
+import TimePicker from 'components/module/TimePicker';
+import SmartTimePicker from 'components/smart/SmartTimePicker';
 
 const TRANSACTION_TYPES: {
   label: string;
@@ -49,6 +52,10 @@ const EditTransactionView = (props: EditTransactionProps) => {
     transaction.amount > 0 ? 'IN' : 'OUT',
   );
 
+  const [paidAt, setPaidAt] = useState<Date | null>(
+    new Date(transaction.paidAt),
+  );
+
   const categorySuggestions = getCategorySuggestions(transactions).filter(
     (suggestion) => suggestion.toUpperCase().includes(category.toUpperCase()),
   );
@@ -82,6 +89,21 @@ const EditTransactionView = (props: EditTransactionProps) => {
       </View>
       <View style={styles.content}>
         <ScrollView style={styles.contentScroll}>
+          <SmartDatePicker
+            containerStyle={styles.inputContainer}
+            labelTranslationKey="TRANSACTION_DATE"
+            startDate={paidAt}
+            setStartDate={setPaidAt}
+            defaultLabelTranslationKey="TRANSACTION_DATE"
+            hideActionButton
+            theme={theme}
+          />
+          <SmartTimePicker
+            containerStyle={styles.inputContainer}
+            labelTranslationKey="TRANSACTION_TIME"
+            selectedTime={paidAt}
+            setSelectedTime={setPaidAt}
+          />
           <SmartTextInput
             containerStyle={styles.inputContainer}
             translationKey="CATEGORY"
@@ -199,6 +221,7 @@ const EditTransactionView = (props: EditTransactionProps) => {
                   ) || 0,
                 sourceWalletId: sourceWalletId || '',
                 destinationWalletId,
+                paidAt: (paidAt || new Date()).toISOString(),
               })
             }
             translationKey="UPDATE_TRANSACTION"

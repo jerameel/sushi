@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { allPass, partial, sortBy, reverse } from 'ramda';
+import { allPass, partial, sortBy, reverse, groupBy } from 'ramda';
 import Text from 'components/base/Text';
-import { View, StatusBar, TouchableOpacity, FlatList } from 'react-native';
+import { View, StatusBar, TouchableOpacity, SectionList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useStyles from './styles';
 import { TransactionFilter, TransactionsProps } from './props';
@@ -18,6 +18,7 @@ import SmartDatePicker from 'components/smart/SmartDatePicker';
 import SmartButton from 'components/smart/SmartButton';
 import { createCSV, recordToCSVString } from 'services/CSV';
 import Info from 'components/module/Info';
+import { formatDate } from 'utils/formatDate';
 
 const isSearchTermMatch = (filter: TransactionFilter, t: Transaction) => {
   const filterSearchTerm = filter.searchTerm.toLowerCase();
@@ -32,7 +33,7 @@ const isDateRangeMatch = (filter: TransactionFilter, t: Transaction) => {
     const endDate = endOfDay(
       filter.endDate ? filter.endDate : filter.startDate,
     );
-    return isWithinInterval(new Date(t.createdAt), {
+    return isWithinInterval(new Date(t.paidAt), {
       start: startDate,
       end: endDate,
     });
@@ -67,7 +68,7 @@ const TransactionsView = (props: TransactionsProps) => {
     searchTerm,
   };
   const sortTransactionByDate = sortBy(
-    (transaction: Transaction) => transaction.createdAt,
+    (transaction: Transaction) => transaction.paidAt,
   );
   const sortedTransactionsArray = reverse(
     sortTransactionByDate(
@@ -82,6 +83,14 @@ const TransactionsView = (props: TransactionsProps) => {
     ]),
   );
 
+  const groupByDate = groupBy((transaction: Transaction) =>
+    formatDate(transaction.paidAt, 'MMMM d yyyy'),
+  );
+
+  const groupedTransactionsArray = Object.entries(
+    groupByDate(filteredTransactionsArray),
+  ).map(([title, data]) => ({ title, data }));
+
   const renderTransaction = ({ item: transaction }: { item: Transaction }) => {
     const sourceWallet = wallets[transaction.sourceWalletId];
     const destinationWallet = transaction.destinationWalletId
@@ -95,7 +104,7 @@ const TransactionsView = (props: TransactionsProps) => {
         amount={transaction.amount}
         sourceWallet={sourceWallet.label}
         destinationWallet={destinationWallet?.label}
-        createdAt={transaction.createdAt}
+        paidAt={transaction.paidAt}
         onPress={() =>
           navigation.navigate('TRANSACTION_DETAILS', {
             transactionId: transaction.id,
@@ -149,11 +158,16 @@ const TransactionsView = (props: TransactionsProps) => {
             theme={theme}
           />
 
-          <FlatList
+          <SectionList
             contentContainerStyle={styles.contentScroll}
-            data={filteredTransactionsArray}
-            renderItem={renderTransaction}
+            sections={groupedTransactionsArray}
             keyExtractor={(item) => item.id}
+            renderSectionHeader={({ section: { title } }) => (
+              <Text variant="subtitle" theme={theme} style={styles.dateText}>
+                {title}
+              </Text>
+            )}
+            renderItem={({ item }) => renderTransaction({ item: item })}
           />
         </View>
         {exportStatus === 'SUCCESS' ? (

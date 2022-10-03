@@ -2,7 +2,13 @@ import React from 'react';
 import sortBy from 'ramda/es/sortBy';
 import reverse from 'ramda/es/reverse';
 import Text from 'components/base/Text';
-import { ScrollView, View, StatusBar, TouchableOpacity } from 'react-native';
+import {
+  ScrollView,
+  View,
+  StatusBar,
+  TouchableOpacity,
+  SectionList,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useStyles from './styles';
 import { HomeProps } from './props';
@@ -15,6 +21,8 @@ import { formatCurrency } from 'utils/formatCurrency';
 import SmartText from 'components/smart/SmartText';
 import { Translation } from 'types/Translation';
 import SmartButton from 'components/smart/SmartButton';
+import { groupBy } from 'ramda';
+import { formatDate } from 'utils/formatDate';
 
 const SubHeader = (props: {
   label: keyof Translation;
@@ -49,13 +57,23 @@ const HomeView = (props: HomeProps) => {
   const { styles, theme, colors } = useStyles();
 
   const sortTransactionByDate = sortBy(
-    (transaction: Transaction) => transaction.createdAt,
+    (transaction: Transaction) => transaction.paidAt,
   );
   const sortedTransactionsArray = reverse(
     sortTransactionByDate(
       Object.keys(transactions).map((key) => transactions[key]),
     ),
   );
+
+  const groupByDate = groupBy((transaction: Transaction) =>
+    formatDate(transaction.paidAt, 'MMMM d yyyy'),
+  );
+
+  const groupedTransactionsArray = Object.entries(
+    groupByDate(sortedTransactionsArray),
+  ).map(([title, data]) => ({ title, data }));
+
+  const recentTransactions = groupedTransactionsArray.slice(0, 3);
 
   const balanceBreakdown = sortedTransactionsArray.reduce(
     (accum, transaction) => {
@@ -90,6 +108,31 @@ const HomeView = (props: HomeProps) => {
   }, 0);
   const currentBalance =
     totalInitialBalance + balanceBreakdown.income - balanceBreakdown.expenses;
+
+  const renderTransaction = ({ item: transaction }: { item: Transaction }) => {
+    const sourceWallet = wallets[transaction.sourceWalletId];
+    const destinationWallet = transaction.destinationWalletId
+      ? wallets[transaction.destinationWalletId]
+      : null;
+    return (
+      <TransactionCard
+        containerStyle={styles.transactionCard}
+        key={transaction.id}
+        category={transaction.category}
+        amount={transaction.amount}
+        sourceWallet={sourceWallet.label}
+        destinationWallet={destinationWallet?.label}
+        paidAt={transaction.paidAt}
+        onPress={() =>
+          navigation.navigate('TRANSACTION_DETAILS', {
+            transactionId: transaction.id,
+          })
+        }
+        theme={theme}
+        language={language}
+      />
+    );
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -185,32 +228,17 @@ const HomeView = (props: HomeProps) => {
               navigation.navigate('TRANSACTIONS');
             }}
           />
-          <ScrollView contentContainerStyle={styles.contentScroll}>
-            {sortedTransactionsArray.slice(0, 5).map((transaction) => {
-              const sourceWallet = wallets[transaction.sourceWalletId];
-              const destinationWallet = transaction.destinationWalletId
-                ? wallets[transaction.destinationWalletId]
-                : null;
-              return (
-                <TransactionCard
-                  containerStyle={styles.transactionCard}
-                  key={transaction.id}
-                  category={transaction.category}
-                  amount={transaction.amount}
-                  sourceWallet={sourceWallet.label}
-                  destinationWallet={destinationWallet?.label}
-                  createdAt={transaction.createdAt}
-                  onPress={() =>
-                    navigation.navigate('TRANSACTION_DETAILS', {
-                      transactionId: transaction.id,
-                    })
-                  }
-                  theme={theme}
-                  language={language}
-                />
-              );
-            })}
-          </ScrollView>
+          <SectionList
+            contentContainerStyle={styles.contentScroll}
+            sections={recentTransactions}
+            keyExtractor={(item) => item.id}
+            renderSectionHeader={({ section: { title } }) => (
+              <Text variant="subtitle" theme={theme} style={styles.dateText}>
+                {title}
+              </Text>
+            )}
+            renderItem={({ item }) => renderTransaction({ item: item })}
+          />
         </View>
 
         <View style={styles.actionsContainer}>

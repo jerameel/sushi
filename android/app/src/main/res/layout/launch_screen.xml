@@ -4,13 +4,31 @@
     android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:background="#1f1f1f" >
-
-    <ImageView
-        android:id="@+id/splash_logo"
-        android:layout_width="128dp"
-        android:layout_height="64dp"
+    
+    <TextView
+        android:id="@+id/splash_title"
+        android:layout_width="wrap_content"
+        android:layout_height="54dp"
         android:layout_centerInParent="true"
-        android:scaleType="fitCenter"
-        android:src="@drawable/splash_logo" />
+        android:fontFamily="@font/heebo_medium"
+        android:letterSpacing="0.13"
+        android:text="Sushi"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="48sp" />
+
+    <TextView
+        android:id="@+id/splash_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/splash_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="2dp"
+        android:fontFamily="@font/heebo_light"
+        android:text="Personal Finance"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="20sp" />
+
 
 </RelativeLayout>

@@ -11,12 +11,17 @@ import Picker from 'components/base/Picker';
 import {
   formatCategory,
   getCategorySuggestions,
+  getWalletSuggestions,
   toWalletOptions,
 } from './transforms';
 import SmartText from 'components/smart/SmartText';
 import SmartTextInput from 'components/smart/SmartTextInput';
 import SmartPicker from 'components/smart/SmartPicker';
 import SmartButton from 'components/smart/SmartButton';
+import DatePicker from 'components/module/DatePicker';
+import SmartDatePicker from 'components/smart/SmartDatePicker';
+import TimePicker from 'components/module/TimePicker';
+import SmartTimePicker from 'components/smart/SmartTimePicker';
 
 const TRANSACTION_TYPES: {
   label: string;
@@ -46,10 +51,13 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
   const [transactionType, setTransactionType] = useState<'IN' | 'OUT'>('OUT');
+  const [paidAt, setPaidAt] = useState<Date | null>(new Date());
 
   const categorySuggestions = getCategorySuggestions(transactions).filter(
     (suggestion) => suggestion.toUpperCase().includes(category.toUpperCase()),
   );
+
+  const walletIdSuggestions = getWalletSuggestions(transactions);
 
   useEffect(() => {
     if (category.toUpperCase() === 'TRANSFER') {
@@ -80,6 +88,22 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
       </View>
       <View style={styles.content}>
         <ScrollView style={styles.contentScroll}>
+          <SmartDatePicker
+            containerStyle={styles.inputContainer}
+            labelTranslationKey="TRANSACTION_DATE"
+            startDate={paidAt}
+            setStartDate={setPaidAt}
+            defaultLabelTranslationKey="TRANSACTION_DATE"
+            hideActionButton
+            theme={theme}
+          />
+          <SmartTimePicker
+            containerStyle={styles.inputContainer}
+            labelTranslationKey="TRANSACTION_TIME"
+            selectedTime={paidAt}
+            setSelectedTime={setPaidAt}
+          />
+
           <SmartTextInput
             containerStyle={styles.inputContainer}
             translationKey="CATEGORY"
@@ -88,24 +112,24 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
             theme={theme}
           />
 
-          <View style={styles.categorySuggestionsContainer}>
+          <View style={styles.suggestionsContainer}>
             {categorySuggestions.map((categorySuggestion) => (
               <TouchableOpacity
                 key={categorySuggestion}
-                style={styles.categorySuggestionBadge}
+                style={styles.suggestionsBadge}
                 onPress={() => {
                   setCategory(categorySuggestion);
                 }}>
                 {categorySuggestion.toUpperCase() === 'TRANSFER' ? (
                   <SmartText
                     variant="label"
-                    style={styles.categorySuggestionText}
+                    style={styles.suggestionText}
                     theme={theme}
                     translationKey="TRANSFER"
                   />
                 ) : (
                   <Text
-                    style={styles.categorySuggestionText}
+                    style={styles.suggestionText}
                     variant="label"
                     theme={theme}>
                     {categorySuggestion}
@@ -123,6 +147,24 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
             options={walletOptions}
             theme={theme}
           />
+
+          <View style={styles.suggestionsContainer}>
+            {walletIdSuggestions.map((id, index) => (
+              <TouchableOpacity
+                key={id}
+                style={styles.suggestionsBadge}
+                onPress={() => {
+                  setSourceWalletId(id);
+                }}>
+                <Text
+                  style={styles.suggestionText}
+                  variant="label"
+                  theme={theme}>
+                  {wallets[id].label}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
 
           {category.toUpperCase() === 'TRANSFER' && (
             <SmartPicker
@@ -183,6 +225,8 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
               ))}
             </View>
           )}
+
+          <View style={styles.spacer} />
         </ScrollView>
         <View style={styles.actionsContainer}>
           <SmartButton
@@ -196,6 +240,7 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
                   ) || 0,
                 sourceWalletId: sourceWalletId || '',
                 destinationWalletId,
+                paidAt: (paidAt || new Date()).toISOString(),
               })
             }
             translationKey="CREATE_TRANSACTION"
