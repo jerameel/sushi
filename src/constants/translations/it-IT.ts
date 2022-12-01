@@ -4,48 +4,48 @@ import en_US from './en-US';
 const it_IT: Translation = {
   ...en_US,
   // DASHBOARD
-  CREDIT: 'Guadagni',
-  DEBIT: 'Spese',
-  RECENT_TRANSACTIONS: 'Transazioni Recenti',
-  MY_ACCOUNTS: 'I Miei Conti',
+  CREDIT: 'Spese',
+  DEBIT: 'Guadagni',
+  RECENT_TRANSACTIONS: 'Transazioni recenti',
+  MY_ACCOUNTS: 'I miei conti bancari',
 
   // ADD ACCOUNT
-  ADD_ACCOUNT: 'Aggiungi Conto',
-  ACCOUNT_NAME: 'Nome Conto',
-  INITIAL_AMOUNT: 'Importo Iniziale',
-  CREATE_ACCOUNT: 'Crea Conto',
+  ADD_ACCOUNT: 'Aggiungi conto',
+  ACCOUNT_NAME: 'Nome del conto',
+  INITIAL_AMOUNT: 'Importo iniziale',
+  CREATE_ACCOUNT: 'Crea conto',
 
   // EDIT ACCOUNT
-  EDIT_ACCOUNT: 'Modifica Conto',
-  UPDATE_ACCOUNT: 'Aggiorna Conto',
+  EDIT_ACCOUNT: 'Modifica conto',
+  UPDATE_ACCOUNT: 'Aggiorna conto',
 
   // ACCOUNT DETAILS
-  ACCOUNT_DETAILS: 'Dettagli Account',
-  INITIAL_BALANCE: 'Bilancio Iniziale',
-  DELETE_ACCOUNT: 'Elimina Account?',
+  ACCOUNT_DETAILS: 'Dettagli conto',
+  INITIAL_BALANCE: 'Bilancio iniziale',
+  DELETE_ACCOUNT: 'Eliminare il conto?',
   DELETE_ACCOUNT_INFO:
     'Questo eliminerà definitivamente il conto {{accountName}} comprese {{transactionCount}} transazioni collegate.',
 
   // NEW TRANSACTION
-  NEW_TRANSACTION: 'Nuova Transazione',
-  CREATE_TRANSACTION: 'Crea Transazione',
+  NEW_TRANSACTION: 'Nuova transazione',
+  CREATE_TRANSACTION: 'Crea transazione',
   CATEGORY: 'Categoria',
-  SOURCE_ACCOUNT: 'Conto Di Origine',
-  DESTINATION_ACCOUNT: 'Conto Di Destinazione',
-  TRANSFER: 'Trasferimento',
-  SHORT_DESCRIPTION: 'Breve Descrizione',
+  SOURCE_ACCOUNT: 'Conto di origine',
+  DESTINATION_ACCOUNT: 'Conto di destinazione',
+  TRANSFER: 'Bonifico',
+  SHORT_DESCRIPTION: 'Descrizione breve',
   AMOUNT: 'Importo',
 
   // EDIT TRANSACTION
-  EDIT_TRANSACTION: 'Modifica Transazione',
-  UPDATE_TRANSACTION: 'Aggiorna Transazione',
+  EDIT_TRANSACTION: 'Modifica transazione',
+  UPDATE_TRANSACTION: 'Aggiorna transazione',
 
   // TRANSACTION DETAILS
-  TRANSACTION_DETAILS: 'Dettagli Transazione',
-  ACCOUNT: 'Conto',
-  DATE_CREATED: 'Data Di Creazione',
-  DATE_UPDATED: 'Data Di Aggiornamento',
-  DELETE_TRANSACTION: 'Eliminare La Transazione?',
+  TRANSACTION_DETAILS: 'Dettagli transazione',
+  ACCOUNT: 'Conto bancario',
+  DATE_CREATED: 'Data di creazione',
+  DATE_UPDATED: 'Data di aggiornamento',
+  DELETE_TRANSACTION: 'Eliminare la transazione?',
   DELETE_TRANSACTION_INFO: 'Questo eliminerà definitivamente la transazione.',
   KEEP: 'Mantieni',
   DELETE: 'Elimina',
@@ -53,9 +53,9 @@ const it_IT: Translation = {
   // Transactions
   TRANSACTIONS: 'Transazioni',
   SEARCH: 'Ricerca',
-  DATE_RANGE: 'Intervallo Di Date',
-  SHOW_ALL: 'Mostra Tutto',
-  EXPORT: 'Export',
+  DATE_RANGE: 'Intervallo di tempo',
+  SHOW_ALL: 'Mostra tutte',
+  EXPORT: 'Esporta',
 
   // SETTINGS
   SETTINGS: 'Impostazioni',
