@@ -25,7 +25,7 @@
     "numbro": "^2.3.5",
     "ramda": "^0.27.1",
     "react": "17.0.1",
-    "react-native": "0.64.2",
+    "react-native": "^0.64.4",
     "react-native-calendars": "^1.1284.0",
     "react-native-config": "^1.4.4",
     "react-native-get-random-values": "^1.7.0",
