@@ -5,7 +5,7 @@
   "scripts": {
     "android": "react-native run-android",
     "android:storybook": "ENVFILE=.env.storybook npm run android",
-    "ios": "react-native run-ios",
+    "ios": "react-native run-ios --simulator=\"iPhone 14\"",
     "start": "react-native start",
     "test": "jest ./*.unit.test.*",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
@@ -24,8 +24,8 @@
     "date-fns": "^2.28.0",
     "numbro": "^2.3.5",
     "ramda": "^0.27.1",
-    "react": "17.0.1",
-    "react-native": "^0.64.4",
+    "react": "17.0.2",
+    "react-native": "^0.67.5",
     "react-native-calendars": "^1.1284.0",
     "react-native-config": "^1.4.4",
     "react-native-get-random-values": "^1.7.0",
@@ -54,9 +54,9 @@
     "babel-plugin-module-resolver": "^4.1.0",
     "eslint": "^7.14.0",
     "jest": "^26.6.3",
-    "metro-react-native-babel-preset": "^0.64.0",
+    "metro-react-native-babel-preset": "^0.66.2",
     "plop": "^2.7.4",
-    "react-test-renderer": "17.0.1",
+    "react-test-renderer": "17.0.2",
     "typescript": "^3.8.3"
   },
   "resolutions": {
