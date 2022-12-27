@@ -6,7 +6,7 @@ import { EditWalletProps } from './props';
 import { Back } from 'components/base/SVG';
 import SmartText from 'components/smart/SmartText';
 import SmartTextInput from 'components/smart/SmartTextInput';
-import SmartButton from 'components/smart/SmartButton';
+import Button from 'components/base/Button';
 
 const EditWalletView = (props: EditWalletProps) => {
   const { navigation, wallet, editWallet } = props;
@@ -65,7 +65,7 @@ const EditWalletView = (props: EditWalletProps) => {
           />
         </ScrollView>
         <View style={styles.actionsContainer}>
-          <SmartButton
+          <Button
             onPress={() =>
               editWallet({
                 ...wallet,

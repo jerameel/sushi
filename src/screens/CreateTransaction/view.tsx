@@ -6,7 +6,6 @@ import useStyles from './styles';
 import { CreateTransactionProps } from './props';
 import { Back } from 'components/base/SVG';
 import TextInput from 'components/base/TextInput';
-import Button from 'components/base/Button';
 import Picker from 'components/base/Picker';
 import {
   formatCategory,
@@ -17,7 +16,7 @@ import {
 import SmartText from 'components/smart/SmartText';
 import SmartTextInput from 'components/smart/SmartTextInput';
 import SmartPicker from 'components/smart/SmartPicker';
-import SmartButton from 'components/smart/SmartButton';
+import Button from 'components/base/Button';
 import DatePicker from 'components/module/DatePicker';
 import SmartDatePicker from 'components/smart/SmartDatePicker';
 import TimePicker from 'components/module/TimePicker';
@@ -229,7 +228,7 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
           <View style={styles.spacer} />
         </ScrollView>
         <View style={styles.actionsContainer}>
-          <SmartButton
+          <Button
             onPress={() =>
               createTransaction({
                 category: formatCategory(category || 'Others'),

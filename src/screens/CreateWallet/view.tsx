@@ -6,7 +6,7 @@ import { CreateWalletProps } from './props';
 import { Back } from 'components/base/SVG';
 import SmartText from 'components/smart/SmartText';
 import SmartTextInput from 'components/smart/SmartTextInput';
-import SmartButton from 'components/smart/SmartButton';
+import Button from 'components/base/Button';
 
 const CreateWalletView = (props: CreateWalletProps) => {
   const { navigation, createWallet } = props;
@@ -63,7 +63,7 @@ const CreateWalletView = (props: CreateWalletProps) => {
           />
         </ScrollView>
         <View style={styles.actionsContainer}>
-          <SmartButton
+          <Button
             onPress={() =>
               createWallet({
                 label: label || 'New Wallet',

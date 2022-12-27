@@ -1,9 +1,9 @@
 import React from 'react';
 import { ActivityIndicator, Text, TouchableOpacity, View } from 'react-native';
 import useStyles from './style';
-import { ButtonProps } from './props';
+import { ButtonPrivateProps } from './props';
 
-const Button = (props: ButtonProps) => {
+const Button = (props: ButtonPrivateProps) => {
   const {
     containerStyle = {},
     theme,

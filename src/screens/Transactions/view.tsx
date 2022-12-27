@@ -15,7 +15,7 @@ import TextInput from 'components/base/TextInput';
 import SmartText from 'components/smart/SmartText';
 import SmartTextInput from 'components/smart/SmartTextInput';
 import SmartDatePicker from 'components/smart/SmartDatePicker';
-import SmartButton from 'components/smart/SmartButton';
+import Button from 'components/base/Button';
 import { createCSV, recordToCSVString } from 'services/CSV';
 import Info from 'components/module/Info';
 import { formatDate } from 'utils/formatDate';
@@ -174,7 +174,7 @@ const TransactionsView = (props: TransactionsProps) => {
           <Info label="Transactions has been successfully exported to sushi_transactions.csv" />
         ) : (
           <View style={styles.actionsContainer}>
-            <SmartButton
+            <Button
               outline
               onPress={() => {
                 if (exportStatus !== 'LOADING') {

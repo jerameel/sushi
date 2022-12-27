@@ -20,7 +20,7 @@ import { Transaction } from 'store/transactions';
 import { formatCurrency } from 'utils/formatCurrency';
 import SmartText from 'components/smart/SmartText';
 import { Translation } from 'types/Translation';
-import SmartButton from 'components/smart/SmartButton';
+import Button from 'components/base/Button';
 import { groupBy } from 'ramda';
 import { formatDate } from 'utils/formatDate';
 
@@ -242,7 +242,7 @@ const HomeView = (props: HomeProps) => {
         </View>
 
         <View style={styles.actionsContainer}>
-          <SmartButton
+          <Button
             outline
             onPress={() => navigation.navigate('CREATE_TRANSACTION')}
             translationKey="NEW_TRANSACTION"

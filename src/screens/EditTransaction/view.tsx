@@ -13,7 +13,7 @@ import {
 import SmartText from 'components/smart/SmartText';
 import SmartTextInput from 'components/smart/SmartTextInput';
 import SmartPicker from 'components/smart/SmartPicker';
-import SmartButton from 'components/smart/SmartButton';
+import Button from 'components/base/Button';
 import SmartDatePicker from 'components/smart/SmartDatePicker';
 import TimePicker from 'components/module/TimePicker';
 import SmartTimePicker from 'components/smart/SmartTimePicker';
@@ -209,7 +209,7 @@ const EditTransactionView = (props: EditTransactionProps) => {
           )}
         </ScrollView>
         <View style={styles.actionsContainer}>
-          <SmartButton
+          <Button
             onPress={() =>
               editTransaction({
                 ...transaction,
