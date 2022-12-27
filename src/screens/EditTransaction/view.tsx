@@ -10,7 +10,7 @@ import {
   getCategorySuggestions,
   toWalletOptions,
 } from './transforms';
-import Text from 'components/base/Text';
+import TextView from 'components/base/Text/view';
 import TextInput from 'components/base/TextInput';
 import Picker from 'components/base/Picker';
 import Button from 'components/base/Button';
@@ -127,12 +127,12 @@ const EditTransactionView = (props: EditTransactionProps) => {
                     translationKey="TRANSFER"
                   />
                 ) : (
-                  <Text
+                  <TextView
                     style={styles.categorySuggestionText}
                     variant="label"
                     theme={theme}>
                     {categorySuggestion}
-                  </Text>
+                  </TextView>
                 )}
               </TouchableOpacity>
             ))}
@@ -196,12 +196,12 @@ const EditTransactionView = (props: EditTransactionProps) => {
                   onPress={() => {
                     setTransactionType(value);
                   }}>
-                  <Text
+                  <TextView
                     style={styles.transactionTypeText}
                     variant="label"
                     theme={theme}>
                     {label}
-                  </Text>
+                  </TextView>
                 </TouchableOpacity>
               ))}
             </View>

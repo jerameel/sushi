@@ -17,7 +17,7 @@ import { Transaction } from 'store/transactions';
 import TransactionCard from 'components/module/TransactionCard';
 import AlertModal from 'components/module/AlertModal';
 import { formatCurrency } from 'utils/formatCurrency';
-import Text from 'components/base/Text';
+import TextView from 'components/base/Text/view';
 import { groupBy } from 'ramda';
 import { formatDate } from 'utils/formatDate';
 
@@ -162,9 +162,9 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
         <View style={styles.detailsCard}>
           <View style={styles.detailsCardRow}>
             <Text theme={theme}>{wallet.label}</Text>
-            <Text variant="subtitle" theme={theme}>
+            <TextView variant="subtitle" theme={theme}>
               {formatCurrency(currentBalance, { language })}
-            </Text>
+            </TextView>
           </View>
           <View style={styles.detailsCardRow}>
             <Text
@@ -172,25 +172,21 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
               theme={theme}
               translationKey="INITIAL_BALANCE"
             />
-            <Text variant="body" theme={theme}>
+            <TextView variant="body" theme={theme}>
               {formatCurrency(wallet.initialAmount, { language })}
-            </Text>
+            </TextView>
           </View>
           <View style={styles.detailsCardRow}>
             <Text variant="label" theme={theme} translationKey={'DEBIT'} />
-            <Text variant="body" theme={theme}>
+            <TextView variant="body" theme={theme}>
               {formatCurrency(balanceBreakdown.income, { language })}
-            </Text>
+            </TextView>
           </View>
           <View style={styles.detailsCardRow}>
-            <Text
-              variant="label"
-              theme={theme}
-              translationKey={'CREDIT'}
-            />
-            <Text variant="body" theme={theme}>
+            <Text variant="label" theme={theme} translationKey={'CREDIT'} />
+            <TextView variant="body" theme={theme}>
               {formatCurrency(balanceBreakdown.expenses, { language })}
-            </Text>
+            </TextView>
           </View>
         </View>
         <View style={styles.transactionsContainer}>
@@ -199,9 +195,12 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
             sections={groupedTransactionsArray}
             keyExtractor={(item) => item.id}
             renderSectionHeader={({ section: { title } }) => (
-              <Text variant="subtitle" theme={theme} style={styles.dateText}>
+              <TextView
+                variant="subtitle"
+                theme={theme}
+                style={styles.dateText}>
                 {title}
-              </Text>
+              </TextView>
             )}
             renderItem={({ item }) => renderTransaction({ item: item })}
           />

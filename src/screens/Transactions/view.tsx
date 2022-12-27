@@ -12,8 +12,7 @@ import DatePicker from 'components/module/DatePicker';
 import isWithinInterval from 'date-fns/isWithinInterval';
 import { endOfDay, startOfDay } from 'date-fns';
 import TextInput from 'components/base/TextInput';
-import Text from 'components/base/Text';
-import TextInput from 'components/base/TextInput';
+import TextView from 'components/base/Text/view';
 import Button from 'components/base/Button';
 import { createCSV, recordToCSVString } from 'services/CSV';
 import Info from 'components/module/Info';
@@ -162,9 +161,12 @@ const TransactionsView = (props: TransactionsProps) => {
             sections={groupedTransactionsArray}
             keyExtractor={(item) => item.id}
             renderSectionHeader={({ section: { title } }) => (
-              <Text variant="subtitle" theme={theme} style={styles.dateText}>
+              <TextView
+                variant="subtitle"
+                theme={theme}
+                style={styles.dateText}>
                 {title}
-              </Text>
+              </TextView>
             )}
             renderItem={({ item }) => renderTransaction({ item: item })}
           />

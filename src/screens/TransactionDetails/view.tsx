@@ -8,7 +8,7 @@ import { Back, Delete, Edit } from 'components/base/SVG';
 import AlertModal from 'components/module/AlertModal';
 import { formatCurrency } from 'utils/formatCurrency';
 import { formatDate } from 'utils/formatDate';
-import Text from 'components/base/Text';
+import TextView from 'components/base/Text/view';
 
 const TransactionDetailsView = (props: TransactionDetailsProps) => {
   const {
@@ -87,29 +87,29 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
       </View>
       <View style={styles.content}>
         <View style={styles.amountCard}>
-          <Text
+          <TextView
             variant="subtitle"
             style={{ ...styles.amountText, color: config.color }}
             theme={theme}>
             {`${config.prefix}${formatCurrency(Math.abs(transaction.amount), {
               language,
             })}`}
-          </Text>
+          </TextView>
         </View>
         {transaction.description.length > 0 && (
-          <Text containerStyle={styles.descriptionContainer} theme={theme}>
+          <TextView containerStyle={styles.descriptionContainer} theme={theme}>
             {transaction.description}
-          </Text>
+          </TextView>
         )}
         <View style={styles.detailBorder} />
         <View style={styles.detailCard}>
           <Text variant="label" theme={theme} translationKey="CATEGORY" />
-          <Text
+          <TextView
             variant="subtitle"
             containerStyle={styles.detailCardValue}
             theme={theme}>
             {transaction.category}
-          </Text>
+          </TextView>
         </View>
         <View style={styles.detailCard}>
           <Text
@@ -117,12 +117,12 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
             theme={theme}
             translationKey={destinationWallet ? 'SOURCE_ACCOUNT' : 'ACCOUNT'}
           />
-          <Text
+          <TextView
             variant="subtitle"
             containerStyle={styles.detailCardValue}
             theme={theme}>
             {sourceWallet.label}
-          </Text>
+          </TextView>
         </View>
         {destinationWallet && (
           <View style={styles.detailCard}>
@@ -131,12 +131,12 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
               theme={theme}
               translationKey="DESTINATION_ACCOUNT"
             />
-            <Text
+            <TextView
               variant="subtitle"
               containerStyle={styles.detailCardValue}
               theme={theme}>
               {destinationWallet.label}
-            </Text>
+            </TextView>
           </View>
         )}
         <View style={styles.detailCard}>
@@ -159,13 +159,13 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
             theme={theme}
             translationKey="DATE_CREATED"
           />
-          <Text
+          <TextView
             variant="subtitle"
             containerStyle={styles.detailCardValue}
             style={styles.detailCardHidden}
             theme={theme}>
             {formatDate(transaction.createdAt)}
-          </Text>
+          </TextView>
         </View>
         {!!transaction.updatedAt && (
           <View style={styles.detailCard}>
@@ -175,13 +175,13 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
               theme={theme}
               translationKey="DATE_UPDATED"
             />
-            <Text
+            <TextView
               variant="subtitle"
               containerStyle={styles.detailCardValue}
               style={styles.detailCardHidden}
               theme={theme}>
               {formatDate(transaction.updatedAt)}
-            </Text>
+            </TextView>
           </View>
         )}
       </View>

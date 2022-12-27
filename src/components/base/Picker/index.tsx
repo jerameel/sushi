@@ -1,9 +1,9 @@
 import React from 'react';
-import useStyles from '../../base/Picker/style';
-import { PickerPrivateProps, PickerProps } from '../../base/Picker/props';
+import useStyles from './style';
+import { PickerPrivateProps, PickerProps } from './props';
 
-import PickerView from '../../base/Picker/view';
-import SmartText from '../../smart/SmartText';
+import PickerView from './view';
+import Text from '../Text';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
 import { TRANSLATIONS } from 'constants/translations';
@@ -21,7 +21,7 @@ const Picker = (
       {...pickerProps}
       label={TRANSLATIONS[language][translationKey]}
       renderLabel={() => (
-        <SmartText
+        <Text
           variant="label"
           style={styles.label}
           translationKey={translationKey}

@@ -18,7 +18,7 @@ import TransactionCard from 'components/module/TransactionCard';
 import BalanceBreakdown from 'components/module/BalanceBreakdown';
 import { Transaction } from 'store/transactions';
 import { formatCurrency } from 'utils/formatCurrency';
-import Text from 'components/base/Text';
+import TextView from 'components/base/Text/view';
 import { Translation } from 'types/Translation';
 import Button from 'components/base/Button';
 import { groupBy } from 'ramda';
@@ -32,11 +32,7 @@ const SubHeader = (props: {
   const { styles, theme } = useStyles();
   return (
     <View style={styles.contentHeader}>
-      <Text
-        variant="subtitle"
-        theme={theme}
-        translationKey={props.label}
-      />
+      <Text variant="subtitle" theme={theme} translationKey={props.label} />
 
       {!!props.actionText && (
         <TouchableOpacity onPress={props.action}>
@@ -143,9 +139,9 @@ const HomeView = (props: HomeProps) => {
       <View style={styles.header}>
         <View style={styles.headerActionContainer} />
         <View style={styles.balanceContainer}>
-          <Text variant="title" theme={theme}>
+          <TextView variant="title" theme={theme}>
             {formatCurrency(currentBalance, { language })}
-          </Text>
+          </TextView>
         </View>
         <TouchableOpacity
           style={styles.headerActionContainer}
@@ -233,9 +229,12 @@ const HomeView = (props: HomeProps) => {
             sections={recentTransactions}
             keyExtractor={(item) => item.id}
             renderSectionHeader={({ section: { title } }) => (
-              <Text variant="subtitle" theme={theme} style={styles.dateText}>
+              <TextView
+                variant="subtitle"
+                theme={theme}
+                style={styles.dateText}>
                 {title}
-              </Text>
+              </TextView>
             )}
             renderItem={({ item }) => renderTransaction({ item: item })}
           />

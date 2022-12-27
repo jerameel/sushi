@@ -3,8 +3,8 @@ import { View } from 'react-native';
 import useStyles from './style';
 import { BalanceBreakdownProps } from './props';
 import Text from 'components/base/Text';
+import TextView from 'components/base/Text/view';
 import { formatCurrency } from 'utils/formatCurrency';
-import SmartText from 'components/smart/SmartText';
 import { DownLeft, UpDown, UpRight } from 'components/base/SVG';
 
 const BalanceBreakdown = (props: BalanceBreakdownProps) => {
@@ -14,14 +14,14 @@ const BalanceBreakdown = (props: BalanceBreakdownProps) => {
   return (
     <View style={[styles.container, containerStyle]}>
       <View style={styles.card}>
-        <Text variant="subtitle" theme={theme}>
+        <TextView variant="subtitle" theme={theme}>
           {formatCurrency(income, { language })}
-        </Text>
+        </TextView>
         <View style={styles.cardLabelContainer}>
           <View style={styles.cardLabelIcon}>
             <DownLeft fill={colors.POSITIVE} width={16} height={16} />
           </View>
-          <SmartText
+          <Text
             variant="label"
             style={styles.cardLabelText}
             theme={theme}
@@ -30,14 +30,14 @@ const BalanceBreakdown = (props: BalanceBreakdownProps) => {
         </View>
       </View>
       <View style={styles.card}>
-        <Text variant="subtitle" theme={theme}>
+        <TextView variant="subtitle" theme={theme}>
           {formatCurrency(expenses, { language })}
-        </Text>
+        </TextView>
         <View style={styles.cardLabelContainer}>
           <View style={styles.cardLabelIcon}>
             <UpRight fill={colors.NEGATIVE} width={16} height={16} />
           </View>
-          <SmartText
+          <Text
             variant="label"
             style={styles.cardLabelText}
             theme={theme}

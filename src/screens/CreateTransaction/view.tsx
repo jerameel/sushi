@@ -11,7 +11,7 @@ import {
   getWalletSuggestions,
   toWalletOptions,
 } from './transforms';
-import Text from 'components/base/Text';
+import TextView from 'components/base/Text/view';
 import TextInput from 'components/base/TextInput';
 import Picker from 'components/base/Picker';
 import Button from 'components/base/Button';
@@ -151,12 +151,12 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
                 onPress={() => {
                   setSourceWalletId(id);
                 }}>
-                <Text
+                <TextView
                   style={styles.suggestionText}
                   variant="label"
                   theme={theme}>
                   {wallets[id].label}
-                </Text>
+                </TextView>
               </TouchableOpacity>
             ))}
           </View>
@@ -210,12 +210,12 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
                   onPress={() => {
                     setTransactionType(value);
                   }}>
-                  <Text
+                  <TextView
                     style={styles.transactionTypeText}
                     variant="label"
                     theme={theme}>
                     {label}
-                  </Text>
+                  </TextView>
                 </TouchableOpacity>
               ))}
             </View>
