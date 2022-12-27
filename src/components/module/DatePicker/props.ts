@@ -1,7 +1,8 @@
 import { ViewStyle } from 'react-native';
 import { Theme } from 'store/theme';
+import { TranslationKey } from 'types/Translation';
 
-export interface DatePickerProps {
+export interface DatePickerPrivateProps {
   containerStyle?: ViewStyle;
   theme?: Theme;
   label: string;
@@ -12,3 +13,8 @@ export interface DatePickerProps {
   setEndDate?: (date: Date | null) => void;
   hideActionButton?: boolean;
 }
+
+export type DatePickerProps = {
+  labelTranslationKey: TranslationKey;
+  defaultLabelTranslationKey: TranslationKey;
+};

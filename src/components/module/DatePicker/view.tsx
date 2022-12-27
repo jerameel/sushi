@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { Modal, View, TouchableOpacity, ScrollView } from 'react-native';
 import Text from 'components/base/Text';
 import useStyles from './style';
-import { DatePickerProps } from './props';
+import { DatePickerPrivateProps } from './props';
 import { Down, Close } from 'components/base/SVG';
 import { Calendar } from 'react-native-calendars';
 import eachDayOfInterval from 'date-fns/eachDayOfInterval';
 import format from 'date-fns/format';
-import Button from 'components/base/Button';
+import Button from 'components/base/Button/view';
 
-const DatePicker = (props: DatePickerProps) => {
+const DatePicker = (props: DatePickerPrivateProps) => {
   const {
     containerStyle = {},
     theme,

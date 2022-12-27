@@ -18,7 +18,6 @@ import SmartTextInput from 'components/smart/SmartTextInput';
 import SmartPicker from 'components/smart/SmartPicker';
 import Button from 'components/base/Button';
 import DatePicker from 'components/module/DatePicker';
-import SmartDatePicker from 'components/smart/SmartDatePicker';
 import TimePicker from 'components/module/TimePicker';
 import SmartTimePicker from 'components/smart/SmartTimePicker';
 
@@ -87,7 +86,7 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
       </View>
       <View style={styles.content}>
         <ScrollView style={styles.contentScroll}>
-          <SmartDatePicker
+          <DatePicker
             containerStyle={styles.inputContainer}
             labelTranslationKey="TRANSACTION_DATE"
             startDate={paidAt}

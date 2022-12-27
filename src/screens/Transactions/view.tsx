@@ -14,7 +14,6 @@ import { endOfDay, startOfDay } from 'date-fns';
 import TextInput from 'components/base/TextInput';
 import SmartText from 'components/smart/SmartText';
 import SmartTextInput from 'components/smart/SmartTextInput';
-import SmartDatePicker from 'components/smart/SmartDatePicker';
 import Button from 'components/base/Button';
 import { createCSV, recordToCSVString } from 'services/CSV';
 import Info from 'components/module/Info';
@@ -147,7 +146,7 @@ const TransactionsView = (props: TransactionsProps) => {
             onChangeText={(text) => setSearchTerm(text)}
             theme={theme}
           />
-          <SmartDatePicker
+          <DatePicker
             containerStyle={styles.textFieldContainer}
             labelTranslationKey="DATE_RANGE"
             startDate={startDate}
