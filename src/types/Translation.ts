@@ -63,3 +63,5 @@ export type Translation = {
   THEME_LIGHT: string;
   THEME_DARK: string;
 };
+
+export type TranslationKey = keyof Translation;

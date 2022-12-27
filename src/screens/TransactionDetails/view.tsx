@@ -9,7 +9,6 @@ import AlertModal from 'components/module/AlertModal';
 import { formatCurrency } from 'utils/formatCurrency';
 import { formatDate } from 'utils/formatDate';
 import SmartText from 'components/smart/SmartText';
-import SmartAlertModal from 'components/smart/SmartAlertModal';
 
 const TransactionDetailsView = (props: TransactionDetailsProps) => {
   const {
@@ -186,7 +185,7 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
           </View>
         )}
       </View>
-      <SmartAlertModal
+      <AlertModal
         theme={theme}
         titleTranslationKey="DELETE_TRANSACTION"
         descriptionTranslationKey="DELETE_TRANSACTION_INFO"

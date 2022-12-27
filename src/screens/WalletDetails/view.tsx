@@ -18,7 +18,6 @@ import TransactionCard from 'components/module/TransactionCard';
 import AlertModal from 'components/module/AlertModal';
 import { formatCurrency } from 'utils/formatCurrency';
 import SmartText from 'components/smart/SmartText';
-import SmartAlertModal from 'components/smart/SmartAlertModal';
 import { groupBy } from 'ramda';
 import { formatDate } from 'utils/formatDate';
 
@@ -208,8 +207,7 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
           />
         </View>
       </View>
-      <SmartAlertModal
-        theme={theme}
+      <AlertModal
         titleTranslationKey="DELETE_ACCOUNT"
         descriptionTranslationKey="DELETE_ACCOUNT_INFO"
         descriptionReplacementRecord={{
