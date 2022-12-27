@@ -8,12 +8,9 @@ import {
 } from 'react-native';
 import Text from 'components/base/Text';
 import useStyles from './style';
-import { TimePickerProps } from './props';
+import { TimePickerPrivateProps } from './props';
 import { Down, Close } from 'components/base/SVG';
-import { Calendar } from 'react-native-calendars';
-import eachDayOfInterval from 'date-fns/eachDayOfInterval';
 import format from 'date-fns/format';
-import Button from 'components/base/Button';
 
 const HOURS = [...new Array(24)].map((v, i) => `${i}`.padStart(2, '0'));
 const MINUTES = [...new Array(60)].map((v, i) => `${i}`.padStart(2, '0'));
@@ -23,7 +20,7 @@ const calculateScrollOffset = (index: number) => {
   return index * fixedElementHeight;
 };
 
-const TimePicker = (props: TimePickerProps) => {
+const TimePicker = (props: TimePickerPrivateProps) => {
   const {
     containerStyle = {},
     theme,

@@ -15,7 +15,7 @@ import SmartTextInput from 'components/smart/SmartTextInput';
 import Picker from 'components/base/Picker';
 import Button from 'components/base/Button';
 import DatePicker from 'components/module/DatePicker';
-import SmartTimePicker from 'components/smart/SmartTimePicker';
+import TimePicker from 'components/module/TimePicker';
 
 const TRANSACTION_TYPES: {
   label: string;
@@ -97,7 +97,7 @@ const EditTransactionView = (props: EditTransactionProps) => {
             hideActionButton
             theme={theme}
           />
-          <SmartTimePicker
+          <TimePicker
             containerStyle={styles.inputContainer}
             labelTranslationKey="TRANSACTION_TIME"
             selectedTime={paidAt}
