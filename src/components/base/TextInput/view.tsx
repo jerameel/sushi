@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, TextInput as RNTextInput } from 'react-native';
-import Text from 'components/base/Text';
+import Text from 'components/base/Text/view';
 import useStyles from './style';
 import { TextInputProps } from './props';
 

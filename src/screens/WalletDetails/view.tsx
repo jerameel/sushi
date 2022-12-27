@@ -17,7 +17,7 @@ import { Transaction } from 'store/transactions';
 import TransactionCard from 'components/module/TransactionCard';
 import AlertModal from 'components/module/AlertModal';
 import { formatCurrency } from 'utils/formatCurrency';
-import SmartText from 'components/smart/SmartText';
+import Text from 'components/base/Text';
 import { groupBy } from 'ramda';
 import { formatDate } from 'utils/formatDate';
 
@@ -135,7 +135,7 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
           }}>
           <Back fill={colors.PRIMARY_TEXT} width={24} height={24} />
         </TouchableOpacity>
-        <SmartText
+        <Text
           containerStyle={styles.headerTitleContainer}
           variant="title"
           theme={theme}
@@ -167,7 +167,7 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
             </Text>
           </View>
           <View style={styles.detailsCardRow}>
-            <SmartText
+            <Text
               variant="label"
               theme={theme}
               translationKey="INITIAL_BALANCE"
@@ -177,13 +177,13 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
             </Text>
           </View>
           <View style={styles.detailsCardRow}>
-            <SmartText variant="label" theme={theme} translationKey={'DEBIT'} />
+            <Text variant="label" theme={theme} translationKey={'DEBIT'} />
             <Text variant="body" theme={theme}>
               {formatCurrency(balanceBreakdown.income, { language })}
             </Text>
           </View>
           <View style={styles.detailsCardRow}>
-            <SmartText
+            <Text
               variant="label"
               theme={theme}
               translationKey={'CREDIT'}

@@ -12,8 +12,8 @@ import DatePicker from 'components/module/DatePicker';
 import isWithinInterval from 'date-fns/isWithinInterval';
 import { endOfDay, startOfDay } from 'date-fns';
 import TextInput from 'components/base/TextInput';
-import SmartText from 'components/smart/SmartText';
-import SmartTextInput from 'components/smart/SmartTextInput';
+import Text from 'components/base/Text';
+import TextInput from 'components/base/TextInput';
 import Button from 'components/base/Button';
 import { createCSV, recordToCSVString } from 'services/CSV';
 import Info from 'components/module/Info';
@@ -129,7 +129,7 @@ const TransactionsView = (props: TransactionsProps) => {
           }}>
           <Back fill={colors.PRIMARY_TEXT} width={24} height={24} />
         </TouchableOpacity>
-        <SmartText
+        <Text
           containerStyle={styles.headerTitleContainer}
           variant="title"
           theme={theme}
@@ -139,7 +139,7 @@ const TransactionsView = (props: TransactionsProps) => {
 
       <View style={styles.content}>
         <View style={styles.transactionsContainer}>
-          <SmartTextInput
+          <TextInput
             containerStyle={styles.textFieldContainer}
             translationKey="SEARCH"
             value={searchTerm}

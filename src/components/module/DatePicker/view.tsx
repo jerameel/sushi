@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, View, TouchableOpacity, ScrollView } from 'react-native';
-import Text from 'components/base/Text';
+import Text from 'components/base/Text/view';
 import useStyles from './style';
 import { DatePickerPrivateProps } from './props';
 import { Down, Close } from 'components/base/SVG';

@@ -11,8 +11,8 @@ import {
   getWalletSuggestions,
   toWalletOptions,
 } from './transforms';
-import SmartText from 'components/smart/SmartText';
-import SmartTextInput from 'components/smart/SmartTextInput';
+import Text from 'components/base/Text';
+import TextInput from 'components/base/TextInput';
 import Picker from 'components/base/Picker';
 import Button from 'components/base/Button';
 import DatePicker from 'components/module/DatePicker';
@@ -74,7 +74,7 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
           }}>
           <Back fill={colors.PRIMARY_TEXT} width={24} height={24} />
         </TouchableOpacity>
-        <SmartText
+        <Text
           variant="title"
           style={styles.headerTitleContainer}
           theme={theme}
@@ -99,7 +99,7 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
             setSelectedTime={setPaidAt}
           />
 
-          <SmartTextInput
+          <TextInput
             containerStyle={styles.inputContainer}
             translationKey="CATEGORY"
             value={category}
@@ -116,7 +116,7 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
                   setCategory(categorySuggestion);
                 }}>
                 {categorySuggestion.toUpperCase() === 'TRANSFER' ? (
-                  <SmartText
+                  <Text
                     variant="label"
                     style={styles.suggestionText}
                     theme={theme}
@@ -172,7 +172,7 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
             />
           )}
 
-          <SmartTextInput
+          <TextInput
             containerStyle={styles.inputContainer}
             translationKey="SHORT_DESCRIPTION"
             value={description}
@@ -180,7 +180,7 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
             theme={theme}
           />
 
-          <SmartTextInput
+          <TextInput
             containerStyle={styles.inputContainer}
             translationKey="AMOUNT"
             value={amount}

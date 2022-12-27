@@ -4,8 +4,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import useStyles from './styles';
 import { CreateWalletProps } from './props';
 import { Back } from 'components/base/SVG';
-import SmartText from 'components/smart/SmartText';
-import SmartTextInput from 'components/smart/SmartTextInput';
+import Text from 'components/base/Text';
+import TextInput from 'components/base/TextInput';
 import Button from 'components/base/Button';
 
 const CreateWalletView = (props: CreateWalletProps) => {
@@ -29,7 +29,7 @@ const CreateWalletView = (props: CreateWalletProps) => {
           }}>
           <Back fill={colors.PRIMARY_TEXT} width={24} height={24} />
         </TouchableOpacity>
-        <SmartText
+        <Text
           variant="title"
           style={styles.headerTitleContainer}
           theme={theme}
@@ -38,7 +38,7 @@ const CreateWalletView = (props: CreateWalletProps) => {
       </View>
       <View style={styles.content}>
         <ScrollView style={styles.contentScroll}>
-          <SmartTextInput
+          <TextInput
             containerStyle={styles.textFieldContainer}
             translationKey="ACCOUNT_NAME"
             value={label}
@@ -46,7 +46,7 @@ const CreateWalletView = (props: CreateWalletProps) => {
             theme={theme}
           />
 
-          <SmartTextInput
+          <TextInput
             containerStyle={styles.textFieldContainer}
             translationKey="INITIAL_AMOUNT"
             value={initialAmount}

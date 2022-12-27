@@ -18,7 +18,7 @@ import TransactionCard from 'components/module/TransactionCard';
 import BalanceBreakdown from 'components/module/BalanceBreakdown';
 import { Transaction } from 'store/transactions';
 import { formatCurrency } from 'utils/formatCurrency';
-import SmartText from 'components/smart/SmartText';
+import Text from 'components/base/Text';
 import { Translation } from 'types/Translation';
 import Button from 'components/base/Button';
 import { groupBy } from 'ramda';
@@ -32,7 +32,7 @@ const SubHeader = (props: {
   const { styles, theme } = useStyles();
   return (
     <View style={styles.contentHeader}>
-      <SmartText
+      <Text
         variant="subtitle"
         theme={theme}
         translationKey={props.label}
@@ -40,7 +40,7 @@ const SubHeader = (props: {
 
       {!!props.actionText && (
         <TouchableOpacity onPress={props.action}>
-          <SmartText
+          <Text
             variant="label"
             style={styles.contentHeaderAction}
             theme={theme}
