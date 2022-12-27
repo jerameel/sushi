@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Modal, View, TouchableOpacity, ScrollView } from 'react-native';
 import Text from 'components/base/Text';
 import useStyles from './style';
-import { PickerProps } from './props';
+import { PickerPrivateProps } from './props';
 import { Down, Close } from 'components/base/SVG';
 
-const Picker = (props: PickerProps) => {
+const Picker = (props: PickerPrivateProps) => {
   const {
     containerStyle = {},
     theme,

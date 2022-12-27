@@ -1,8 +1,9 @@
 import React from 'react';
 import { ViewStyle } from 'react-native';
 import { Theme } from 'store/theme';
+import { TranslationKey } from 'types/Translation';
 
-export interface PickerProps {
+export interface PickerPrivateProps {
   containerStyle?: ViewStyle;
   theme?: Theme;
   options: {
@@ -15,3 +16,7 @@ export interface PickerProps {
   renderLabel?: () => React.ReactFragment;
   placeholder?: string;
 }
+
+export type PickerProps = {
+  translationKey: TranslationKey;
+};

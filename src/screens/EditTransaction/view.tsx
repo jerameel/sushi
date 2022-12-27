@@ -12,10 +12,9 @@ import {
 } from './transforms';
 import SmartText from 'components/smart/SmartText';
 import SmartTextInput from 'components/smart/SmartTextInput';
-import SmartPicker from 'components/smart/SmartPicker';
+import Picker from 'components/base/Picker';
 import Button from 'components/base/Button';
 import DatePicker from 'components/module/DatePicker';
-import TimePicker from 'components/module/TimePicker';
 import SmartTimePicker from 'components/smart/SmartTimePicker';
 
 const TRANSACTION_TYPES: {
@@ -139,7 +138,7 @@ const EditTransactionView = (props: EditTransactionProps) => {
             ))}
           </View>
 
-          <SmartPicker
+          <Picker
             containerStyle={styles.inputContainer}
             translationKey="SOURCE_ACCOUNT"
             selectedValue={sourceWalletId || undefined}
@@ -149,7 +148,7 @@ const EditTransactionView = (props: EditTransactionProps) => {
           />
 
           {category.toUpperCase() === 'TRANSFER' && (
-            <SmartPicker
+            <Picker
               containerStyle={styles.inputContainer}
               translationKey="DESTINATION_ACCOUNT"
               selectedValue={destinationWalletId || undefined}

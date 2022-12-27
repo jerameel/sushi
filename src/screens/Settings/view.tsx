@@ -1,6 +1,5 @@
 import React from 'react';
 import numbro from 'numbro';
-import Text from 'components/base/Text';
 import { ScrollView, View, StatusBar, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useStyles from './styles';
@@ -9,7 +8,6 @@ import { Back } from 'components/base/SVG';
 import Picker from 'components/base/Picker';
 import { TRANSLATIONS } from 'constants/translations';
 import SmartText from 'components/smart/SmartText';
-import SmartPicker from 'components/smart/SmartPicker';
 
 const LANGUAGE_OPTIONS = Object.keys(TRANSLATIONS).map((value) => {
   const typedValue = value as keyof typeof TRANSLATIONS;
@@ -69,7 +67,7 @@ const SettingsView = (props: SettingsProps) => {
       </View>
       <View style={styles.content}>
         <ScrollView style={styles.contentScroll}>
-          <SmartPicker
+          <Picker
             // containerStyle={styles.inputContainer}
             translationKey="CURRENCY"
             selectedValue={currencyLanguage}
@@ -78,7 +76,7 @@ const SettingsView = (props: SettingsProps) => {
             theme={theme}
           />
 
-          <SmartPicker
+          <Picker
             containerStyle={styles.inputContainer}
             translationKey="LANGUAGE"
             selectedValue={selectedLanguage}
@@ -87,7 +85,7 @@ const SettingsView = (props: SettingsProps) => {
             theme={theme}
           />
 
-          <SmartPicker
+          <Picker
             containerStyle={styles.inputContainer}
             translationKey="THEME"
             selectedValue={baseTheme}

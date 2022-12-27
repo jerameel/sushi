@@ -5,8 +5,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import useStyles from './styles';
 import { CreateTransactionProps } from './props';
 import { Back } from 'components/base/SVG';
-import TextInput from 'components/base/TextInput';
-import Picker from 'components/base/Picker';
 import {
   formatCategory,
   getCategorySuggestions,
@@ -15,10 +13,9 @@ import {
 } from './transforms';
 import SmartText from 'components/smart/SmartText';
 import SmartTextInput from 'components/smart/SmartTextInput';
-import SmartPicker from 'components/smart/SmartPicker';
+import Picker from 'components/base/Picker';
 import Button from 'components/base/Button';
 import DatePicker from 'components/module/DatePicker';
-import TimePicker from 'components/module/TimePicker';
 import SmartTimePicker from 'components/smart/SmartTimePicker';
 
 const TRANSACTION_TYPES: {
@@ -137,7 +134,7 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
             ))}
           </View>
 
-          <SmartPicker
+          <Picker
             containerStyle={styles.inputContainer}
             translationKey="SOURCE_ACCOUNT"
             selectedValue={sourceWalletId || undefined}
@@ -165,7 +162,7 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
           </View>
 
           {category.toUpperCase() === 'TRANSFER' && (
-            <SmartPicker
+            <Picker
               containerStyle={styles.inputContainer}
               translationKey="DESTINATION_ACCOUNT"
               selectedValue={destinationWalletId || undefined}
