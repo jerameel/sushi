@@ -145,12 +145,12 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
             theme={theme}
             translationKey="TRANSACTION_DATE"
           />
-          <Text
+          <TextView
             variant="subtitle"
             containerStyle={styles.detailCardValue}
             theme={theme}>
             {formatDate(transaction.paidAt)}
-          </Text>
+          </TextView>
         </View>
         <View style={styles.detailCard}>
           <Text

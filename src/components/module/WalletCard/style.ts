@@ -11,7 +11,7 @@ const useStyles = (theme: Theme = DEFAULT_THEME, _props: WalletCardProps) => {
     container: {
       padding: 16,
       borderRadius: 10,
-      width: 150,
+      width: 200,
       backgroundColor: colors.AREA_HIGHLIGHT,
       justifyContent: 'space-between',
     },

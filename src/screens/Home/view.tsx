@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import sortBy from 'ramda/es/sortBy';
 import reverse from 'ramda/es/reverse';
 import Text from 'components/base/Text';
@@ -13,16 +13,17 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import useStyles from './styles';
 import { HomeProps } from './props';
 import WalletCard from 'components/module/WalletCard';
-import { Settings } from 'components/base/SVG';
+import { DownLeft, Settings, UpRight } from 'components/base/SVG';
 import TransactionCard from 'components/module/TransactionCard';
-import BalanceBreakdown from 'components/module/BalanceBreakdown';
-import { Transaction } from 'store/transactions';
+import { Transaction, Transactions } from 'store/transactions';
 import { formatCurrency } from 'utils/formatCurrency';
 import TextView from 'components/base/Text/view';
 import { Translation } from 'types/Translation';
 import Button from 'components/base/Button';
-import { groupBy } from 'ramda';
+import { groupBy, pickBy } from 'ramda';
 import { formatDate } from 'utils/formatDate';
+import Chip from 'components/base/Chip';
+import useTranslationKey from 'utils/hooks/useTranslationKey';
 
 const SubHeader = (props: {
   label: keyof Translation;
@@ -52,12 +53,35 @@ const HomeView = (props: HomeProps) => {
   const { navigation, wallets, transactions, language } = props;
   const { styles, theme, colors } = useStyles();
 
+  const TEXT_ALL = useTranslationKey('ALL');
+  const TEXT_DEBIT = useTranslationKey('DEBIT');
+  const TEXT_CREDIT = useTranslationKey('CREDIT');
+
+  const [filter, setFilter] = useState({
+    mode: 'ALL',
+  });
+
+  const filteredTransactionRecord: Transactions = pickBy((v: Transaction) => {
+    // ignore transfers on calculation
+    if (filter.mode === 'IN') {
+      return v.amount > 0 && !v.destinationWalletId;
+    }
+
+    if (filter.mode === 'OUT') {
+      return v.amount < 0 && !v.destinationWalletId;
+    }
+
+    return true;
+  }, transactions);
+
   const sortTransactionByDate = sortBy(
     (transaction: Transaction) => transaction.paidAt,
   );
   const sortedTransactionsArray = reverse(
     sortTransactionByDate(
-      Object.keys(transactions).map((key) => transactions[key]),
+      Object.keys(filteredTransactionRecord).map(
+        (key) => filteredTransactionRecord[key],
+      ),
     ),
   );
 
@@ -151,13 +175,32 @@ const HomeView = (props: HomeProps) => {
           <Settings width={24} height={24} fill={colors.PRIMARY_TEXT} />
         </TouchableOpacity>
       </View>
-      <BalanceBreakdown
+      <View style={styles.chipFilterContainer}>
+        <Chip
+          label={TEXT_ALL}
+          selected={filter.mode === 'ALL'}
+          onPress={() => setFilter({ mode: 'ALL' })}
+        />
+        <Chip
+          label={TEXT_DEBIT}
+          selected={filter.mode === 'IN'}
+          onPress={() => setFilter({ mode: 'IN' })}
+          icon={<DownLeft fill={colors.POSITIVE} width={16} height={16} />}
+        />
+        <Chip
+          label={TEXT_CREDIT}
+          selected={filter.mode === 'OUT'}
+          onPress={() => setFilter({ mode: 'OUT' })}
+          icon={<UpRight fill={colors.NEGATIVE} width={16} height={16} />}
+        />
+      </View>
+      {/* <BalanceBreakdown
         containerStyle={styles.breakdownContainer}
         income={balanceBreakdown.income}
         expenses={balanceBreakdown.expenses}
         theme={theme}
         language={language}
-      />
+      /> */}
       <View style={styles.content}>
         <View>
           <SubHeader label="MY_ACCOUNTS" />
@@ -166,19 +209,11 @@ const HomeView = (props: HomeProps) => {
               contentContainerStyle={styles.contentScroll}
               horizontal
               showsHorizontalScrollIndicator={false}>
-              <WalletCard
-                containerStyle={styles.walletCard}
-                key={'create_wallet'}
-                label={''}
-                balance={0}
-                onPress={() => navigation.navigate('CREATE_WALLET')}
-                template
-                theme={theme}
-                language={language}
-              />
               {walletsArray.map((wallet) => {
-                const walletTransactions = Object.keys(transactions)
-                  .map((key) => transactions[key])
+                const walletTransactions = Object.keys(
+                  filteredTransactionRecord,
+                )
+                  .map((key) => filteredTransactionRecord[key])
                   .filter(
                     (transaction) =>
                       transaction.sourceWalletId === wallet.id ||
@@ -212,6 +247,17 @@ const HomeView = (props: HomeProps) => {
                   />
                 );
               })}
+
+              <WalletCard
+                containerStyle={styles.walletCard}
+                key={'create_wallet'}
+                label={''}
+                balance={0}
+                onPress={() => navigation.navigate('CREATE_WALLET')}
+                template
+                theme={theme}
+                language={language}
+              />
             </ScrollView>
           </View>
         </View>

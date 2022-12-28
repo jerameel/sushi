@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/react-native';
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import Button from '../../../src/components/base/Button';
+import Button from '../../../src/components/base/Button/view';
 import { COLORS } from '../../../src/theme';
 
 const styles = StyleSheet.create({

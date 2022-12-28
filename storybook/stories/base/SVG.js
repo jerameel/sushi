@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { storiesOf } from '@storybook/react-native';
-import Text from '../../../src/components/base/Text';
+import Text from '../../../src/components/base/Text/view';
 import {
   /* PLOP_INJECT_IMPORT */
   Edit,

@@ -123,12 +123,12 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
                     translationKey="TRANSFER"
                   />
                 ) : (
-                  <Text
+                  <TextView
                     style={styles.suggestionText}
                     variant="label"
                     theme={theme}>
                     {categorySuggestion}
-                  </Text>
+                  </TextView>
                 )}
               </TouchableOpacity>
             ))}

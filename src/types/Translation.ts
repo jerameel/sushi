@@ -1,5 +1,6 @@
 export type Translation = {
   // DASHBOARD
+  ALL: string;
   CREDIT: string;
   DEBIT: string;
   RECENT_TRANSACTIONS: string;

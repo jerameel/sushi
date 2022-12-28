@@ -2,6 +2,7 @@ import { Translation } from 'types/Translation';
 
 const en_US: Translation = {
   // DASHBOARD
+  ALL: 'All',
   CREDIT: 'Credit',
   DEBIT: 'Debit',
   RECENT_TRANSACTIONS: 'Recent Transactions',

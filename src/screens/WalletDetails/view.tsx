@@ -161,7 +161,7 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
       <View style={styles.content}>
         <View style={styles.detailsCard}>
           <View style={styles.detailsCardRow}>
-            <Text theme={theme}>{wallet.label}</Text>
+            <TextView theme={theme}>{wallet.label}</TextView>
             <TextView variant="subtitle" theme={theme}>
               {formatCurrency(currentBalance, { language })}
             </TextView>
