@@ -43,10 +43,13 @@ const uk_UA: Translation = {
   // TRANSACTION DETAILS
   TRANSACTION_DETAILS: 'Деталі Транзакції',
   ACCOUNT: 'Рахунок',
+  TRANSACTION_DATE: 'Дата транзацкії',
+  TRANSACTION_TIME: 'Час транзацкії',
   DATE_CREATED: 'Дата Створення',
   DATE_UPDATED: 'Дата Оновлення',
   DELETE_TRANSACTION: 'Видалити Транзакцію?',
-  DELETE_TRANSACTION_INFO: 'Це назавжди видалить запис транзацкії.',
+  DELETE_TRANSACTION_INFO:
+    'Це назавжди видалить запис транзацкії.',
   KEEP: 'Лишити',
   DELETE: 'Видалити',
 
