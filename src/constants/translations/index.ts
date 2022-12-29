@@ -1,3 +1,4 @@
+import ar_AR from './ar-AR';
 import cs_CZ from './cs-CZ';
 import en_US from './en-US';
 import es_MX from './es-MX';
@@ -10,6 +11,7 @@ import uk_UA from './uk-UA';
 import de_DE from './de-DE';
 
 export const TRANSLATIONS = {
+  'ar-AR': ar_AR,
   'cs-CZ': cs_CZ,
   'en-US': en_US,
   'es-MX': es_MX,
