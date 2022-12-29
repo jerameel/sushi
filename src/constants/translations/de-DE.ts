@@ -29,7 +29,7 @@ const de_DE: Translation = {
   // NEW TRANSACTION
   NEW_TRANSACTION: 'Neue Transaktion',
   CREATE_TRANSACTION: 'Transaktion erstellen',
-  CATEGORY: 'Kategory',
+  CATEGORY: 'Kategorie',
   SOURCE_ACCOUNT: 'Ursprungskonto',
   DESTINATION_ACCOUNT: 'Zielkonto',
   TRANSFER: 'Überweisung',
@@ -43,6 +43,8 @@ const de_DE: Translation = {
   // TRANSACTION DETAILS
   TRANSACTION_DETAILS: 'Transaktiondetails',
   ACCOUNT: 'Konto',
+  TRANSACTION_DATE: 'Transaktionsdatum',
+  TRANSACTION_TIME: 'Transaktionszeit',
   DATE_CREATED: 'Erstellungsdatum',
   DATE_UPDATED: 'Aktualisierungsdatum',
   DELETE_TRANSACTION: 'Transaktion löschen?',
