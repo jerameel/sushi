@@ -27,6 +27,7 @@
     "react": "17.0.2",
     "react-native": "^0.67.5",
     "react-native-calendars": "^1.1284.0",
+    "react-native-chart-kit": "^6.12.0",
     "react-native-config": "^1.4.4",
     "react-native-get-random-values": "^1.7.0",
     "react-native-safe-area-context": "^3.3.2",

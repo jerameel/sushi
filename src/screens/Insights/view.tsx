@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { allPass, partial, sortBy, reverse, groupBy } from 'ramda';
+import { groupBy } from 'ramda';
 import Text from 'components/base/Text';
 import {
   View,
@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   SectionList,
   ScrollView,
+  Dimensions,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useStyles from './styles';
@@ -15,12 +16,41 @@ import { Back } from 'components/base/SVG';
 import { Transaction } from 'store/transactions';
 import TextView from 'components/base/Text/view';
 import { formatCurrency } from 'utils/formatCurrency';
+import { formatDate } from 'utils/formatDate';
+import { LineChart } from 'react-native-chart-kit';
+
+const screenWidth = Dimensions.get('window').width;
 
 const InsightsView = (props: InsightsProps) => {
   const { navigation, wallets, transactions, language } = props;
   const { styles, theme, colors } = useStyles();
 
   const transactionsArray = Object.values(transactions);
+
+  const groupByTransactionDay = groupBy((transaction: Transaction) =>
+    formatDate(transaction.paidAt, 'dd MMM yyyy'),
+  );
+
+  const groupedByDayTransactions = groupByTransactionDay(transactionsArray);
+
+  const dailyTransactionAmountArray = Object.keys(groupedByDayTransactions).map(
+    (day) => {
+      const transactionTotal = groupedByDayTransactions[day].reduce(
+        (accum, current) => {
+          // Skip transfers on calculation
+          if (current.destinationWalletId) {
+            return accum;
+          }
+          return accum + current.amount;
+        },
+        0,
+      );
+      return {
+        day,
+        total: transactionTotal,
+      };
+    },
+  );
 
   const groupByCategoryName = groupBy(
     (transaction: Transaction) => transaction.category,
@@ -49,6 +79,7 @@ const InsightsView = (props: InsightsProps) => {
   const categories = summedCategoryArray.filter(
     (c) => c.category !== 'Transfer',
   );
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar
@@ -72,6 +103,46 @@ const InsightsView = (props: InsightsProps) => {
       </View>
       <View style={styles.content}>
         <ScrollView style={styles.contentScroll}>
+          {dailyTransactionAmountArray.length > 0 && (
+            <View
+              style={{
+                backgroundColor: colors.AREA_HIGHLIGHT,
+                padding: 16,
+                borderRadius: 10,
+                marginTop: 8,
+                flexDirection: 'column',
+              }}>
+              <TextView
+                containerStyle={{ marginBottom: 8 }}
+                variant="subtitle"
+                theme={theme}>
+                Daily Transactions
+              </TextView>
+
+              <LineChart
+                data={{
+                  labels: dailyTransactionAmountArray.map((d) => d.day),
+                  datasets: [
+                    {
+                      data: dailyTransactionAmountArray.map((d) => d.total),
+                      color: () => colors.PRIMARY, // optional
+                      strokeWidth: 2, // optional
+                    },
+                  ],
+                }}
+                width={screenWidth - 64}
+                height={220}
+                withVerticalLines={false}
+                withHorizontalLines={false}
+                withOuterLines={true}
+                chartConfig={{
+                  backgroundGradientFrom: colors.AREA_HIGHLIGHT,
+                  backgroundGradientTo: colors.AREA_HIGHLIGHT,
+                  color: (opacity = 1) => colors.SECONDARY_TEXT,
+                }}
+              />
+            </View>
+          )}
           {totalTransfer !== null && (
             <View
               style={{
@@ -90,14 +161,14 @@ const InsightsView = (props: InsightsProps) => {
               </TextView>
             </View>
           )}
-          <View
-            style={{
-              backgroundColor: colors.AREA_HIGHLIGHT,
-              padding: 16,
-              borderRadius: 10,
-              marginTop: 8,
-            }}>
-            {categories.length > 0 && (
+          {categories.length > 0 && (
+            <View
+              style={{
+                backgroundColor: colors.AREA_HIGHLIGHT,
+                padding: 16,
+                borderRadius: 10,
+                marginTop: 8,
+              }}>
               <>
                 <TextView variant="subtitle" theme={theme}>
                   Categories
@@ -118,8 +189,8 @@ const InsightsView = (props: InsightsProps) => {
                   </View>
                 ))}
               </>
-            )}
-          </View>
+            </View>
+          )}
         </ScrollView>
       </View>
     </SafeAreaView>
