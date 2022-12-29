@@ -13,7 +13,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import useStyles from './styles';
 import { HomeProps } from './props';
 import WalletCard from 'components/module/WalletCard';
-import { DownLeft, Settings, UpRight } from 'components/base/SVG';
+import { Insights, DownLeft, Settings, UpRight } from 'components/base/SVG';
 import TransactionCard from 'components/module/TransactionCard';
 import { Transaction, Transactions } from 'store/transactions';
 import { formatCurrency } from 'utils/formatCurrency';
@@ -161,7 +161,25 @@ const HomeView = (props: HomeProps) => {
         barStyle={theme.base === 'Dark' ? 'light-content' : 'dark-content'}
       />
       <View style={styles.header}>
-        <View style={styles.headerActionContainer} />
+        <View style={styles.headerActionContainer}>
+          <TouchableOpacity
+            hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+            style={[
+              styles.headerActionContainer,
+              {
+                width: 40,
+                height: 40,
+                borderColor: colors.DIVIDER,
+                borderWidth: 1,
+                borderRadius: 20,
+              },
+            ]}
+            onPress={() => {
+              navigation.navigate('INSIGHTS');
+            }}>
+            <Insights width={20} height={20} fill={colors.PRIMARY_TEXT} />
+          </TouchableOpacity>
+        </View>
         <View style={styles.balanceContainer}>
           <TextView variant="title" theme={theme}>
             {formatCurrency(currentBalance, { language })}

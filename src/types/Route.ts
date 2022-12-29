@@ -16,4 +16,5 @@ export type MainStackParamList = {
     transactionId: string;
   };
   SETTINGS?: {};
+  INSIGHTS?: {};
 };
