@@ -91,22 +91,6 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
       </View>
       <View style={styles.content}>
         <ScrollView style={styles.contentScroll}>
-          <DatePicker
-            containerStyle={styles.inputContainer}
-            labelTranslationKey="TRANSACTION_DATE"
-            startDate={paidAt}
-            setStartDate={setPaidAt}
-            defaultLabelTranslationKey="TRANSACTION_DATE"
-            hideActionButton
-            theme={theme}
-          />
-          <TimePicker
-            containerStyle={styles.inputContainer}
-            labelTranslationKey="TRANSACTION_TIME"
-            selectedTime={paidAt}
-            setSelectedTime={setPaidAt}
-          />
-
           <TextInput
             containerStyle={styles.inputContainer}
             translationKey="CATEGORY"
@@ -182,14 +166,6 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
 
           <TextInput
             containerStyle={styles.inputContainer}
-            translationKey="SHORT_DESCRIPTION"
-            value={description}
-            onChangeText={(text) => setDescription(text)}
-            theme={theme}
-          />
-
-          <TextInput
-            containerStyle={styles.inputContainer}
             translationKey="AMOUNT"
             value={amount}
             maxLength={14}
@@ -228,6 +204,30 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
               ))}
             </View>
           )}
+
+          <TextInput
+            containerStyle={styles.inputContainer}
+            translationKey="SHORT_DESCRIPTION"
+            value={description}
+            onChangeText={(text) => setDescription(text)}
+            theme={theme}
+          />
+
+          <DatePicker
+            containerStyle={styles.inputContainer}
+            labelTranslationKey="TRANSACTION_DATE"
+            startDate={paidAt}
+            setStartDate={setPaidAt}
+            defaultLabelTranslationKey="TRANSACTION_DATE"
+            hideActionButton
+            theme={theme}
+          />
+          <TimePicker
+            containerStyle={styles.inputContainer}
+            labelTranslationKey="TRANSACTION_TIME"
+            selectedTime={paidAt}
+            setSelectedTime={setPaidAt}
+          />
 
           <View style={styles.spacer} />
         </ScrollView>
