@@ -35,19 +35,31 @@ const InsightsView = (props: InsightsProps) => {
 
   const dailyTransactionAmountArray = Object.keys(groupedByDayTransactions).map(
     (day) => {
-      const transactionTotal = groupedByDayTransactions[day].reduce(
+      const incoming = groupedByDayTransactions[day].reduce(
         (accum, current) => {
-          // Skip transfers on calculation
-          if (current.destinationWalletId) {
+          // Skip transfers on calculation and negative amount
+          if (current.destinationWalletId || current.amount < 0) {
             return accum;
           }
           return accum + current.amount;
         },
         0,
       );
+      const outgoing = groupedByDayTransactions[day].reduce(
+        (accum, current) => {
+          // Skip transfers on calculation and positive amount
+          if (current.destinationWalletId || current.amount > 0) {
+            return accum;
+          }
+          return accum + current.amount;
+        },
+        0,
+      );
+
       return {
         day,
-        total: transactionTotal,
+        incoming,
+        outgoing,
       };
     },
   );
@@ -112,22 +124,70 @@ const InsightsView = (props: InsightsProps) => {
                 marginTop: 8,
                 flexDirection: 'column',
               }}>
-              <TextView
+              <Text
                 containerStyle={{ marginBottom: 8 }}
                 variant="subtitle"
-                theme={theme}>
-                Daily Transactions
-              </TextView>
+                translationKey="DEBIT"
+              />
 
               <LineChart
                 data={{
                   labels: dailyTransactionAmountArray.map((d) => d.day),
                   datasets: [
                     {
-                      data: dailyTransactionAmountArray.map((d) => d.total),
-                      color: () => colors.PRIMARY, // optional
+                      data: dailyTransactionAmountArray.map((d) => d.incoming),
+                      color: () => colors.POSITIVE, // optional
                       strokeWidth: 2, // optional
                     },
+                    // {
+                    //   data: dailyTransactionAmountArray.map((d) => d.outgoing),
+                    //   color: () => colors.NEGATIVE, // optional
+                    //   strokeWidth: 2, // optional
+                    // },
+                  ],
+                }}
+                width={screenWidth - 64}
+                height={220}
+                withVerticalLines={false}
+                withHorizontalLines={false}
+                withOuterLines={true}
+                chartConfig={{
+                  backgroundGradientFrom: colors.AREA_HIGHLIGHT,
+                  backgroundGradientTo: colors.AREA_HIGHLIGHT,
+                  color: (opacity = 1) => colors.SECONDARY_TEXT,
+                }}
+              />
+            </View>
+          )}
+          {dailyTransactionAmountArray.length > 0 && (
+            <View
+              style={{
+                backgroundColor: colors.AREA_HIGHLIGHT,
+                padding: 16,
+                borderRadius: 10,
+                marginTop: 8,
+                flexDirection: 'column',
+              }}>
+              <Text
+                containerStyle={{ marginBottom: 8 }}
+                variant="subtitle"
+                translationKey="CREDIT"
+              />
+
+              <LineChart
+                data={{
+                  labels: dailyTransactionAmountArray.map((d) => d.day),
+                  datasets: [
+                    {
+                      data: dailyTransactionAmountArray.map((d) => d.outgoing),
+                      color: () => colors.NEGATIVE, // optional
+                      strokeWidth: 2, // optional
+                    },
+                    // {
+                    //   data: dailyTransactionAmountArray.map((d) => d.outgoing),
+                    //   color: () => colors.NEGATIVE, // optional
+                    //   strokeWidth: 2, // optional
+                    // },
                   ],
                 }}
                 width={screenWidth - 64}
