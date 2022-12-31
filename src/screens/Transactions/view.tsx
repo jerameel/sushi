@@ -71,6 +71,7 @@ const TransactionsView = (props: TransactionsProps) => {
 
   const [accountId, setAccountId] = useState<string | null>(null);
 
+  const [exportedFileName, setExportedFileName] = useState('');
   const [exportStatus, setExportStatus] = useState<
     'IDLE' | 'LOADING' | 'SUCCESS' | 'FAILED'
   >('IDLE');
@@ -79,7 +80,7 @@ const TransactionsView = (props: TransactionsProps) => {
     if (exportStatus === 'SUCCESS' || exportStatus === 'FAILED') {
       setTimeout(() => {
         setExportStatus('IDLE');
-      }, 2000);
+      }, 3000);
     }
   }, [exportStatus]);
 
@@ -249,7 +250,9 @@ const TransactionsView = (props: TransactionsProps) => {
           />
         </View>
         {exportStatus === 'SUCCESS' ? (
-          <Info label="Transactions has been successfully exported to sushi_transactions.csv" />
+          <Info
+            label={`Transactions has been successfully exported to ${exportedFileName}`}
+          />
         ) : (
           <View style={styles.actionsContainer}>
             <Button
@@ -257,14 +260,40 @@ const TransactionsView = (props: TransactionsProps) => {
               onPress={() => {
                 if (exportStatus !== 'LOADING') {
                   setExportStatus('LOADING');
+                  const fileName =
+                    'transactions_' +
+                    formatDate(new Date().toISOString(), 'yyyyMMddHHmmss');
+                  setExportedFileName(`sushi_${fileName}.csv`);
                   createCSV(
-                    'transactions',
-                    recordToCSVString(filteredTransactionsArray),
+                    fileName,
+                    recordToCSVString(
+                      filteredTransactionsArray.map((t) => ({
+                        ...t,
+                        sourceWalletLabel: wallets[t.sourceWalletId]?.label,
+                        sourceWalletInitialAmount:
+                          wallets[t.sourceWalletId]?.initialAmount,
+                        ...(t.destinationWalletId
+                          ? {
+                              destinationWalletLabel:
+                                wallets[t.destinationWalletId]?.label || null,
+                              destinationWalletInitialAmount:
+                                wallets[t.destinationWalletId]?.initialAmount ||
+                                null,
+                            }
+                          : {
+                              destinationWalletLabel: null,
+                              destinationWalletInitialAmount: null,
+                            }),
+                      })),
+                    ),
                   )
                     .then(() => {
                       setExportStatus('SUCCESS');
                     })
-                    .catch(() => setExportStatus('FAILED'));
+                    .catch((e) => {
+                      console.log(e);
+                      setExportStatus('FAILED');
+                    });
                 }
               }}
               translationKey="EXPORT"
