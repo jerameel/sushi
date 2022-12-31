@@ -1,0 +1,3 @@
+- New insights section
+- General UX improvements
+- Fixes on export transactions
