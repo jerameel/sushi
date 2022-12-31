@@ -21,6 +21,12 @@ const useStyles = () => {
       justifyContent: 'center',
       alignItems: 'flex-start',
     },
+    headerRightAction: {
+      width: 40,
+      height: 40,
+      justifyContent: 'center',
+      alignItems: 'flex-end',
+    },
     content: {
       flex: 1,
     },

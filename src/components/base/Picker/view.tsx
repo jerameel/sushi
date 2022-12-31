@@ -15,6 +15,7 @@ const Picker = (props: PickerPrivateProps) => {
     label = '',
     placeholder,
     renderLabel,
+    renderActionButton,
   } = props;
 
   const { styles, colors } = useStyles(theme);
@@ -91,6 +92,14 @@ const Picker = (props: PickerPrivateProps) => {
                   </View>
                 </TouchableOpacity>
               ))}
+              {renderActionButton
+                ? renderActionButton(() => {
+                    if (onSelect) {
+                      onSelect(null);
+                    }
+                    setShowModal(false);
+                  })
+                : null}
             </ScrollView>
           </View>
         </View>

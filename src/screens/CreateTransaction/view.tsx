@@ -39,6 +39,7 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
   const walletOptions = toWalletOptions(wallets);
 
   const [category, setCategory] = useState('');
+
   const [sourceWalletId, setSourceWalletId] = useState<string | null>(null);
   const [destinationWalletId, setDestinationWalletId] = useState<string | null>(
     null,
@@ -59,6 +60,13 @@ const CreateTransactionView = (props: CreateTransactionProps) => {
       setTransactionType('OUT');
     }
   }, [category]);
+
+  useEffect(() => {
+    if (walletOptions.length === 1) {
+      // do something
+      setSourceWalletId(walletOptions[0].value);
+    }
+  }, [walletOptions]);
 
   return (
     <SafeAreaView style={styles.container}>

@@ -5,7 +5,7 @@ import { View, StatusBar, TouchableOpacity, SectionList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useStyles from './styles';
 import { TransactionFilter, TransactionsProps } from './props';
-import { Back } from 'components/base/SVG';
+import { Back, Filters } from 'components/base/SVG';
 import TransactionCard from 'components/module/TransactionCard';
 import { Transaction } from 'store/transactions';
 import DatePicker from 'components/module/DatePicker';
@@ -14,9 +14,13 @@ import { endOfDay, startOfDay } from 'date-fns';
 import TextInput from 'components/base/TextInput';
 import TextView from 'components/base/Text/view';
 import Button from 'components/base/Button';
+import ButtonView from 'components/base/Button/view';
 import { createCSV, recordToCSVString } from 'services/CSV';
 import Info from 'components/module/Info';
 import { formatDate } from 'utils/formatDate';
+import Picker from 'components/base/Picker';
+import { toWalletOptions } from './transforms';
+import useTranslationKey from 'utils/hooks/useTranslationKey';
 
 const isSearchTermMatch = (filter: TransactionFilter, t: Transaction) => {
   const filterSearchTerm = filter.searchTerm.toLowerCase();
@@ -41,13 +45,32 @@ const isDateRangeMatch = (filter: TransactionFilter, t: Transaction) => {
   return true;
 };
 
+const isAccountMatch = (filter: TransactionFilter, t: Transaction) => {
+  if (filter.accountId) {
+    return (
+      t.sourceWalletId === filter.accountId ||
+      t.destinationWalletId === filter.accountId
+    );
+  }
+
+  // no filter
+  return true;
+};
+
 const TransactionsView = (props: TransactionsProps) => {
   const { navigation, wallets, transactions, language } = props;
   const { styles, theme, colors } = useStyles();
 
+  const walletOptions = toWalletOptions(wallets);
+
+  const [shouldShowFilters, showFilters] = useState(false);
+
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
+
+  const [accountId, setAccountId] = useState<string | null>(null);
+
   const [exportStatus, setExportStatus] = useState<
     'IDLE' | 'LOADING' | 'SUCCESS' | 'FAILED'
   >('IDLE');
@@ -64,6 +87,7 @@ const TransactionsView = (props: TransactionsProps) => {
     startDate,
     endDate,
     searchTerm,
+    accountId,
   };
   const sortTransactionByDate = sortBy(
     (transaction: Transaction) => transaction.paidAt,
@@ -73,11 +97,13 @@ const TransactionsView = (props: TransactionsProps) => {
       Object.keys(transactions).map((key) => transactions[key]),
     ),
   );
+  const TEXT_SHOW_ALL = useTranslationKey('SHOW_ALL');
 
   const filteredTransactionsArray = sortedTransactionsArray.filter(
     allPass([
       partial(isSearchTermMatch, [filter]),
       partial(isDateRangeMatch, [filter]),
+      partial(isAccountMatch, [filter]),
     ]),
   );
 
@@ -99,6 +125,7 @@ const TransactionsView = (props: TransactionsProps) => {
         containerStyle={styles.transactionCard}
         key={transaction.id}
         category={transaction.category}
+        description={transaction.description}
         amount={transaction.amount}
         sourceWallet={sourceWallet.label}
         destinationWallet={destinationWallet?.label}
@@ -134,27 +161,77 @@ const TransactionsView = (props: TransactionsProps) => {
           theme={theme}
           translationKey="TRANSACTIONS"
         />
+        <TouchableOpacity
+          style={styles.headerRightAction}
+          activeOpacity={0.8}
+          onPress={() => {
+            showFilters((v) => !v);
+          }}>
+          <View style={{ flexDirection: 'row' }}>
+            <Filters
+              fill={shouldShowFilters ? colors.PRIMARY : colors.PRIMARY_TEXT}
+              width={24}
+              height={24}
+            />
+            {(searchTerm.length > 0 ||
+              accountId !== null ||
+              startDate !== null) && (
+              <View
+                style={{
+                  width: 8,
+                  height: 8,
+                  backgroundColor: colors.PRIMARY,
+                  borderRadius: 4,
+                }}
+              />
+            )}
+          </View>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.content}>
         <View style={styles.transactionsContainer}>
-          <TextInput
-            containerStyle={styles.textFieldContainer}
-            translationKey="SEARCH"
-            value={searchTerm}
-            onChangeText={(text) => setSearchTerm(text)}
-            theme={theme}
-          />
-          <DatePicker
-            containerStyle={styles.textFieldContainer}
-            labelTranslationKey="DATE_RANGE"
-            startDate={startDate}
-            setStartDate={setStartDate}
-            endDate={endDate}
-            setEndDate={setEndDate}
-            defaultLabelTranslationKey="SHOW_ALL"
-            theme={theme}
-          />
+          {shouldShowFilters && (
+            <>
+              <TextInput
+                containerStyle={styles.textFieldContainer}
+                translationKey="SEARCH"
+                value={searchTerm}
+                onChangeText={(text) => setSearchTerm(text)}
+                theme={theme}
+              />
+
+              <Picker
+                containerStyle={styles.textFieldContainer}
+                translationKey="ACCOUNT"
+                selectedValue={accountId || undefined}
+                onSelect={(value) => setAccountId(value)}
+                options={walletOptions}
+                theme={theme}
+                renderActionButton={(onPress) => (
+                  <ButtonView
+                    containerStyle={{ marginTop: 8 }}
+                    onPress={() => {
+                      onPress();
+                    }}
+                    label={TEXT_SHOW_ALL}
+                    outline
+                    theme={theme}
+                  />
+                )}
+              />
+              <DatePicker
+                containerStyle={styles.textFieldContainer}
+                labelTranslationKey="DATE_RANGE"
+                startDate={startDate}
+                setStartDate={setStartDate}
+                endDate={endDate}
+                setEndDate={setEndDate}
+                defaultLabelTranslationKey="SHOW_ALL"
+                theme={theme}
+              />
+            </>
+          )}
 
           <SectionList
             contentContainerStyle={styles.contentScroll}

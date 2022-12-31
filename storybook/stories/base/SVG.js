@@ -4,6 +4,7 @@ import { storiesOf } from '@storybook/react-native';
 import Text from '../../../src/components/base/Text/view';
 import {
   /* PLOP_INJECT_IMPORT */
+  Filters,
   Analytics,
   Category,
   Edit,
@@ -47,6 +48,9 @@ const SVGWrapper = ({ children, label }) => {
 storiesOf('base/SVGs', module).add('Summary', () => (
   <View style={styles.container}>
     {/* PLOP_INJECT_INSTANCE*/}
+    <SVGWrapper label="Filters">
+      <Filters fill="#000" />
+    </SVGWrapper>
     <SVGWrapper label="Analytics">
       <Analytics fill="#000" />
     </SVGWrapper>

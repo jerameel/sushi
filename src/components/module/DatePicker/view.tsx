@@ -133,6 +133,8 @@ const DatePicker = (props: DatePickerPrivateProps) => {
                     setStartDate(newDate);
                     if (setEndDate) {
                       setEndDate(null);
+                    } else {
+                      setShowModal(false);
                     }
                   } else {
                     if (setEndDate) {
@@ -143,6 +145,7 @@ const DatePicker = (props: DatePickerPrivateProps) => {
                         setEndDate(newDate);
                       }
                     }
+                    setShowModal(false);
                   }
                 }}
               />

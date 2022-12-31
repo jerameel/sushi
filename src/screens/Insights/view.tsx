@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { groupBy } from 'ramda';
+import { groupBy, sortBy } from 'ramda';
 import Text from 'components/base/Text';
 import {
   View,
@@ -32,9 +32,26 @@ const InsightsView = (props: InsightsProps) => {
   );
 
   const groupedByDayTransactions = groupByTransactionDay(transactionsArray);
+  const groupedByDayTransactionsKeys = Object.keys(groupedByDayTransactions);
 
-  const dailyTransactionAmountArray = Object.keys(groupedByDayTransactions).map(
-    (day) => {
+  const showLabel = (index: number) => {
+    if (groupedByDayTransactionsKeys.length % 2) {
+      return (
+        index === 0 ||
+        index === groupedByDayTransactionsKeys.length - 1 ||
+        index === (groupedByDayTransactionsKeys.length - 1) / 2
+      );
+    } else {
+      return (
+        index === 0 ||
+        index === groupedByDayTransactionsKeys.length - 2 ||
+        index === Math.floor((groupedByDayTransactionsKeys.length - 1) / 2)
+      );
+    }
+  };
+
+  const dailyTransactionAmountArray = groupedByDayTransactionsKeys.map(
+    (day, index) => {
       const incoming = groupedByDayTransactions[day].reduce(
         (accum, current) => {
           // Skip transfers on calculation and negative amount
@@ -57,7 +74,7 @@ const InsightsView = (props: InsightsProps) => {
       );
 
       return {
-        day,
+        day: showLabel(index) ? day : '',
         incoming,
         outgoing,
       };
@@ -91,6 +108,11 @@ const InsightsView = (props: InsightsProps) => {
   const categories = summedCategoryArray.filter(
     (c) => c.category !== 'Transfer',
   );
+
+  const sortedCategories = sortBy<{
+    category: string;
+    total: number;
+  }>((c) => -c.total)(categories);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -139,11 +161,6 @@ const InsightsView = (props: InsightsProps) => {
                       color: () => colors.POSITIVE, // optional
                       strokeWidth: 2, // optional
                     },
-                    // {
-                    //   data: dailyTransactionAmountArray.map((d) => d.outgoing),
-                    //   color: () => colors.NEGATIVE, // optional
-                    //   strokeWidth: 2, // optional
-                    // },
                   ],
                 }}
                 width={screenWidth - 64}
@@ -155,6 +172,9 @@ const InsightsView = (props: InsightsProps) => {
                   backgroundGradientFrom: colors.AREA_HIGHLIGHT,
                   backgroundGradientTo: colors.AREA_HIGHLIGHT,
                   color: (opacity = 1) => colors.SECONDARY_TEXT,
+                  fillShadowGradientFrom: colors.POSITIVE,
+                  fillShadowGradientFromOpacity: 0.2,
+                  fillShadowGradientToOpacity: 0,
                 }}
               />
             </View>
@@ -183,11 +203,6 @@ const InsightsView = (props: InsightsProps) => {
                       color: () => colors.NEGATIVE, // optional
                       strokeWidth: 2, // optional
                     },
-                    // {
-                    //   data: dailyTransactionAmountArray.map((d) => d.outgoing),
-                    //   color: () => colors.NEGATIVE, // optional
-                    //   strokeWidth: 2, // optional
-                    // },
                   ],
                 }}
                 width={screenWidth - 64}
@@ -199,6 +214,9 @@ const InsightsView = (props: InsightsProps) => {
                   backgroundGradientFrom: colors.AREA_HIGHLIGHT,
                   backgroundGradientTo: colors.AREA_HIGHLIGHT,
                   color: (opacity = 1) => colors.SECONDARY_TEXT,
+                  fillShadowGradientFrom: colors.NEGATIVE,
+                  fillShadowGradientFromOpacity: 0.2,
+                  fillShadowGradientToOpacity: 0,
                 }}
               />
             </View>
@@ -217,7 +235,7 @@ const InsightsView = (props: InsightsProps) => {
                 Total Transfers
               </TextView>
               <TextView variant="body" theme={theme}>
-                {formatCurrency(totalTransfer)}
+                {formatCurrency(Math.abs(totalTransfer))}
               </TextView>
             </View>
           )}
@@ -233,7 +251,7 @@ const InsightsView = (props: InsightsProps) => {
                 <TextView variant="subtitle" theme={theme}>
                   Categories
                 </TextView>
-                {categories.map((c) => (
+                {sortedCategories.map((c) => (
                   <View
                     key={c.category}
                     style={{
@@ -251,6 +269,7 @@ const InsightsView = (props: InsightsProps) => {
               </>
             </View>
           )}
+          <View style={{ height: 16 }} />
         </ScrollView>
       </View>
     </SafeAreaView>
