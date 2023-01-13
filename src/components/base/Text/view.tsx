@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text as RNText } from 'react-native';
 import useStyles from './style';
-import { TextProps } from './props';
+import { TextPrivateProps } from './props';
 
-const Text = (props: TextProps) => {
+const Text = (props: TextPrivateProps) => {
   const {
     containerStyle = {},
     style = {},

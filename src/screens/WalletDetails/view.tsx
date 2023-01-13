@@ -17,8 +17,7 @@ import { Transaction } from 'store/transactions';
 import TransactionCard from 'components/module/TransactionCard';
 import AlertModal from 'components/module/AlertModal';
 import { formatCurrency } from 'utils/formatCurrency';
-import SmartText from 'components/smart/SmartText';
-import SmartAlertModal from 'components/smart/SmartAlertModal';
+import TextView from 'components/base/Text/view';
 import { groupBy } from 'ramda';
 import { formatDate } from 'utils/formatDate';
 
@@ -136,7 +135,7 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
           }}>
           <Back fill={colors.PRIMARY_TEXT} width={24} height={24} />
         </TouchableOpacity>
-        <SmartText
+        <Text
           containerStyle={styles.headerTitleContainer}
           variant="title"
           theme={theme}
@@ -162,36 +161,32 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
       <View style={styles.content}>
         <View style={styles.detailsCard}>
           <View style={styles.detailsCardRow}>
-            <Text theme={theme}>{wallet.label}</Text>
-            <Text variant="subtitle" theme={theme}>
+            <TextView theme={theme}>{wallet.label}</TextView>
+            <TextView variant="subtitle" theme={theme}>
               {formatCurrency(currentBalance, { language })}
-            </Text>
+            </TextView>
           </View>
           <View style={styles.detailsCardRow}>
-            <SmartText
+            <Text
               variant="label"
               theme={theme}
               translationKey="INITIAL_BALANCE"
             />
-            <Text variant="body" theme={theme}>
+            <TextView variant="body" theme={theme}>
               {formatCurrency(wallet.initialAmount, { language })}
-            </Text>
+            </TextView>
           </View>
           <View style={styles.detailsCardRow}>
-            <SmartText variant="label" theme={theme} translationKey={'DEBIT'} />
-            <Text variant="body" theme={theme}>
+            <Text variant="label" theme={theme} translationKey={'DEBIT'} />
+            <TextView variant="body" theme={theme}>
               {formatCurrency(balanceBreakdown.income, { language })}
-            </Text>
+            </TextView>
           </View>
           <View style={styles.detailsCardRow}>
-            <SmartText
-              variant="label"
-              theme={theme}
-              translationKey={'CREDIT'}
-            />
-            <Text variant="body" theme={theme}>
+            <Text variant="label" theme={theme} translationKey={'CREDIT'} />
+            <TextView variant="body" theme={theme}>
               {formatCurrency(balanceBreakdown.expenses, { language })}
-            </Text>
+            </TextView>
           </View>
         </View>
         <View style={styles.transactionsContainer}>
@@ -200,16 +195,18 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
             sections={groupedTransactionsArray}
             keyExtractor={(item) => item.id}
             renderSectionHeader={({ section: { title } }) => (
-              <Text variant="subtitle" theme={theme} style={styles.dateText}>
+              <TextView
+                variant="subtitle"
+                theme={theme}
+                style={styles.dateText}>
                 {title}
-              </Text>
+              </TextView>
             )}
             renderItem={({ item }) => renderTransaction({ item: item })}
           />
         </View>
       </View>
-      <SmartAlertModal
-        theme={theme}
+      <AlertModal
         titleTranslationKey="DELETE_ACCOUNT"
         descriptionTranslationKey="DELETE_ACCOUNT_INFO"
         descriptionReplacementRecord={{

@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/react-native';
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import TextInput from '../../../src/components/base/TextInput';
+import TextInput from '../../../src/components/base/TextInput/view';
 import { COLORS } from '../../../src/theme';
 
 const styles = StyleSheet.create({

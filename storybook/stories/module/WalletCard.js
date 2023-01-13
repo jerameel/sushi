@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/react-native';
 import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import WalletCard from '../../../src/components/module/WalletCard';
+import WalletCard from '../../../src/components/module/WalletCard/view';
 import { COLORS } from '../../../src/theme';
 
 const styles = StyleSheet.create({

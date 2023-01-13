@@ -7,6 +7,7 @@ export type TransactionFilter = {
   startDate: Date | null;
   endDate: Date | null;
   searchTerm: string;
+  accountId: string | null;
 };
 
 export interface TransactionsPublicProps

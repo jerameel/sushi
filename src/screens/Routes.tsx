@@ -11,6 +11,7 @@ import WalletDetailsScreen from './WalletDetails';
 import TransactionDetailsScreen from './TransactionDetails';
 import SettingsScreen from './Settings';
 import TransactionsScreen from './Transactions';
+import InsightsScreen from './Insights';
 
 const MainStack = createNativeStackNavigator<MainStackParamList>();
 
@@ -64,6 +65,11 @@ const Routes = () => {
         options={{ headerShown: false }}
         name="SETTINGS"
         component={SettingsScreen}
+      />
+      <MainStack.Screen
+        options={{ headerShown: false }}
+        name="INSIGHTS"
+        component={InsightsScreen}
       />
     </MainStack.Navigator>
   );

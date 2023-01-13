@@ -4,8 +4,8 @@ import en_US from './en-US';
 const it_IT: Translation = {
   ...en_US,
   // DASHBOARD
-  CREDIT: 'Guadagni',
-  DEBIT: 'Spese',
+  CREDIT: 'Spese',
+  DEBIT: 'Guadagni',
   RECENT_TRANSACTIONS: 'Transazioni Recenti',
   MY_ACCOUNTS: 'I Miei Conti',
 

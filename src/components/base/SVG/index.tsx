@@ -1,4 +1,7 @@
 /* PLOP_INJECT_IMPORT */
+export { default as Filters } from './Filters';
+export { default as Insights } from './Insights';
+export { default as Category } from './Category';
 export { default as Edit } from './Edit';
 export { default as Close } from './Close';
 export { default as Settings } from './Settings';

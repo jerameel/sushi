@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import useStyles from './style';
 import { InfoProps } from './props';
-import Text from 'components/base/Text';
+import Text from 'components/base/Text/view';
 import { COLORS } from 'theme';
 
 const Info = (props: InfoProps) => {

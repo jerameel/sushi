@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import sortBy from 'ramda/es/sortBy';
 import reverse from 'ramda/es/reverse';
 import Text from 'components/base/Text';
@@ -13,16 +13,17 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import useStyles from './styles';
 import { HomeProps } from './props';
 import WalletCard from 'components/module/WalletCard';
-import { Settings } from 'components/base/SVG';
+import { Insights, DownLeft, Settings, UpRight } from 'components/base/SVG';
 import TransactionCard from 'components/module/TransactionCard';
-import BalanceBreakdown from 'components/module/BalanceBreakdown';
-import { Transaction } from 'store/transactions';
+import { Transaction, Transactions } from 'store/transactions';
 import { formatCurrency } from 'utils/formatCurrency';
-import SmartText from 'components/smart/SmartText';
+import TextView from 'components/base/Text/view';
 import { Translation } from 'types/Translation';
-import SmartButton from 'components/smart/SmartButton';
-import { groupBy } from 'ramda';
+import Button from 'components/base/Button';
+import { groupBy, pickBy } from 'ramda';
 import { formatDate } from 'utils/formatDate';
+import Chip from 'components/base/Chip';
+import useTranslationKey from 'utils/hooks/useTranslationKey';
 
 const SubHeader = (props: {
   label: keyof Translation;
@@ -32,15 +33,11 @@ const SubHeader = (props: {
   const { styles, theme } = useStyles();
   return (
     <View style={styles.contentHeader}>
-      <SmartText
-        variant="subtitle"
-        theme={theme}
-        translationKey={props.label}
-      />
+      <Text variant="subtitle" theme={theme} translationKey={props.label} />
 
       {!!props.actionText && (
         <TouchableOpacity onPress={props.action}>
-          <SmartText
+          <Text
             variant="label"
             style={styles.contentHeaderAction}
             theme={theme}
@@ -56,12 +53,35 @@ const HomeView = (props: HomeProps) => {
   const { navigation, wallets, transactions, language } = props;
   const { styles, theme, colors } = useStyles();
 
+  const TEXT_ALL = useTranslationKey('ALL');
+  const TEXT_DEBIT = useTranslationKey('DEBIT');
+  const TEXT_CREDIT = useTranslationKey('CREDIT');
+
+  const [filter, setFilter] = useState({
+    mode: 'ALL',
+  });
+
+  const filteredTransactionRecord: Transactions = pickBy((v: Transaction) => {
+    // ignore transfers on calculation
+    if (filter.mode === 'IN') {
+      return v.amount > 0 && !v.destinationWalletId;
+    }
+
+    if (filter.mode === 'OUT') {
+      return v.amount < 0 && !v.destinationWalletId;
+    }
+
+    return true;
+  }, transactions);
+
   const sortTransactionByDate = sortBy(
     (transaction: Transaction) => transaction.paidAt,
   );
   const sortedTransactionsArray = reverse(
     sortTransactionByDate(
-      Object.keys(transactions).map((key) => transactions[key]),
+      Object.keys(filteredTransactionRecord).map(
+        (key) => filteredTransactionRecord[key],
+      ),
     ),
   );
 
@@ -141,11 +161,29 @@ const HomeView = (props: HomeProps) => {
         barStyle={theme.base === 'Dark' ? 'light-content' : 'dark-content'}
       />
       <View style={styles.header}>
-        <View style={styles.headerActionContainer} />
+        <View style={styles.headerActionContainer}>
+          <TouchableOpacity
+            hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+            style={[
+              styles.headerActionContainer,
+              {
+                width: 40,
+                height: 40,
+                borderColor: colors.DIVIDER,
+                borderWidth: 1,
+                borderRadius: 20,
+              },
+            ]}
+            onPress={() => {
+              navigation.navigate('INSIGHTS');
+            }}>
+            <Insights width={20} height={20} fill={colors.PRIMARY_TEXT} />
+          </TouchableOpacity>
+        </View>
         <View style={styles.balanceContainer}>
-          <Text variant="title" theme={theme}>
+          <TextView variant="title" theme={theme}>
             {formatCurrency(currentBalance, { language })}
-          </Text>
+          </TextView>
         </View>
         <TouchableOpacity
           style={styles.headerActionContainer}
@@ -155,13 +193,32 @@ const HomeView = (props: HomeProps) => {
           <Settings width={24} height={24} fill={colors.PRIMARY_TEXT} />
         </TouchableOpacity>
       </View>
-      <BalanceBreakdown
+      <View style={styles.chipFilterContainer}>
+        <Chip
+          label={TEXT_ALL}
+          selected={filter.mode === 'ALL'}
+          onPress={() => setFilter({ mode: 'ALL' })}
+        />
+        <Chip
+          label={TEXT_DEBIT}
+          selected={filter.mode === 'IN'}
+          onPress={() => setFilter({ mode: 'IN' })}
+          icon={<DownLeft fill={colors.POSITIVE} width={16} height={16} />}
+        />
+        <Chip
+          label={TEXT_CREDIT}
+          selected={filter.mode === 'OUT'}
+          onPress={() => setFilter({ mode: 'OUT' })}
+          icon={<UpRight fill={colors.NEGATIVE} width={16} height={16} />}
+        />
+      </View>
+      {/* <BalanceBreakdown
         containerStyle={styles.breakdownContainer}
         income={balanceBreakdown.income}
         expenses={balanceBreakdown.expenses}
         theme={theme}
         language={language}
-      />
+      /> */}
       <View style={styles.content}>
         <View>
           <SubHeader label="MY_ACCOUNTS" />
@@ -170,19 +227,11 @@ const HomeView = (props: HomeProps) => {
               contentContainerStyle={styles.contentScroll}
               horizontal
               showsHorizontalScrollIndicator={false}>
-              <WalletCard
-                containerStyle={styles.walletCard}
-                key={'create_wallet'}
-                label={''}
-                balance={0}
-                onPress={() => navigation.navigate('CREATE_WALLET')}
-                template
-                theme={theme}
-                language={language}
-              />
               {walletsArray.map((wallet) => {
-                const walletTransactions = Object.keys(transactions)
-                  .map((key) => transactions[key])
+                const walletTransactions = Object.keys(
+                  filteredTransactionRecord,
+                )
+                  .map((key) => filteredTransactionRecord[key])
                   .filter(
                     (transaction) =>
                       transaction.sourceWalletId === wallet.id ||
@@ -216,6 +265,17 @@ const HomeView = (props: HomeProps) => {
                   />
                 );
               })}
+
+              <WalletCard
+                containerStyle={styles.walletCard}
+                key={'create_wallet'}
+                label={''}
+                balance={0}
+                onPress={() => navigation.navigate('CREATE_WALLET')}
+                template
+                theme={theme}
+                language={language}
+              />
             </ScrollView>
           </View>
         </View>
@@ -233,16 +293,19 @@ const HomeView = (props: HomeProps) => {
             sections={recentTransactions}
             keyExtractor={(item) => item.id}
             renderSectionHeader={({ section: { title } }) => (
-              <Text variant="subtitle" theme={theme} style={styles.dateText}>
+              <TextView
+                variant="subtitle"
+                theme={theme}
+                style={styles.dateText}>
                 {title}
-              </Text>
+              </TextView>
             )}
             renderItem={({ item }) => renderTransaction({ item: item })}
           />
         </View>
 
         <View style={styles.actionsContainer}>
-          <SmartButton
+          <Button
             outline
             onPress={() => navigation.navigate('CREATE_TRANSACTION')}
             translationKey="NEW_TRANSACTION"

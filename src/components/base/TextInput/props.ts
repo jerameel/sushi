@@ -1,8 +1,9 @@
 import React from 'react';
 import { KeyboardTypeOptions, ViewStyle } from 'react-native';
 import { Theme } from 'store/theme';
+import { TranslationKey } from 'types/Translation';
 
-export interface TextInputProps {
+export interface TextInputPrivateProps {
   containerStyle?: ViewStyle;
   theme?: Theme;
   style?: ViewStyle;
@@ -15,3 +16,7 @@ export interface TextInputProps {
   keyboardType?: KeyboardTypeOptions;
   maxLength?: number;
 }
+
+export type TextInputProps = {
+  translationKey: TranslationKey;
+};

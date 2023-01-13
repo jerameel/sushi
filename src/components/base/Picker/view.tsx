@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Modal, View, TouchableOpacity, ScrollView } from 'react-native';
-import Text from 'components/base/Text';
+import Text from 'components/base/Text/view';
 import useStyles from './style';
-import { PickerProps } from './props';
+import { PickerPrivateProps } from './props';
 import { Down, Close } from 'components/base/SVG';
 
-const Picker = (props: PickerProps) => {
+const Picker = (props: PickerPrivateProps) => {
   const {
     containerStyle = {},
     theme,
@@ -15,6 +15,7 @@ const Picker = (props: PickerProps) => {
     label = '',
     placeholder,
     renderLabel,
+    renderActionButton,
   } = props;
 
   const { styles, colors } = useStyles(theme);
@@ -91,6 +92,14 @@ const Picker = (props: PickerProps) => {
                   </View>
                 </TouchableOpacity>
               ))}
+              {renderActionButton
+                ? renderActionButton(() => {
+                    if (onSelect) {
+                      onSelect(null);
+                    }
+                    setShowModal(false);
+                  })
+                : null}
             </ScrollView>
           </View>
         </View>

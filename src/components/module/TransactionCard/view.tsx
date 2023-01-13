@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import Text from 'components/base/Text';
+import Text from 'components/base/Text/view';
 import useStyles from './style';
 import { TransactionCardProps } from './props';
 import { UpRight, DownLeft, UpDown } from 'components/base/SVG';
@@ -18,6 +18,7 @@ const TransactionCard = (props: TransactionCardProps) => {
     paidAt,
     onPress,
     language,
+    description,
   } = props;
 
   const { styles, colors } = useStyles(theme);
@@ -86,6 +87,15 @@ const TransactionCard = (props: TransactionCardProps) => {
             })}`}
           </Text>
         </View>
+        {(description || '').length > 0 && (
+          <Text
+            containerStyle={styles.rowColumnLeft}
+            style={{ color: colors.PLACE_HOLDER }}
+            variant="body"
+            theme={theme}>
+            {description as string}
+          </Text>
+        )}
         {/* {showDate && (
           <Text variant="label" style={styles.dateText} theme={theme}>
             {formatDate(createdAt)}

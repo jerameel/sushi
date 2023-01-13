@@ -1,7 +1,6 @@
-import { Translation } from 'types/Translation';
-
-const en_US: Translation = {
+const en_US = {
   // DASHBOARD
+  ALL: 'All',
   CREDIT: 'Credit',
   DEBIT: 'Debit',
   RECENT_TRANSACTIONS: 'Recent Transactions',
@@ -66,6 +65,9 @@ const en_US: Translation = {
   THEME: 'Theme',
   THEME_LIGHT: 'Light',
   THEME_DARK: 'Dark',
+
+  // Insights
+  INSIGHTS: 'Insights',
 };
 
 export default en_US;

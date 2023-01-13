@@ -5,5 +5,5 @@ const targetDirectory = `${RNFetchBlob.fs.dirs.DownloadDir}`;
 
 export const createCSV = (fileName: string, csvString: string) => {
   const pathToWrite = `${targetDirectory}/sushi_${fileName}.csv`;
-  return RNFetchBlob.fs.writeFile(pathToWrite, csvString, 'utf8');
+  return RNFetchBlob.fs.createFile(pathToWrite, csvString, 'utf8');
 };

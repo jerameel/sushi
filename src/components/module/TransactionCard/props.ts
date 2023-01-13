@@ -11,4 +11,5 @@ export interface TransactionCardProps {
   paidAt: string;
   onPress?: () => void;
   language: string;
+  description?: string;
 }

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Modal, View, TouchableOpacity } from 'react-native';
-import Text from 'components/base/Text';
+import Text from 'components/base/Text/view';
 import useStyles from './style';
-import { AlertModalProps } from './props';
+import { AlertModalPrivateProps } from './props';
 
-const AlertModal = (props: AlertModalProps) => {
+const AlertModal = (props: AlertModalPrivateProps) => {
   const {
     containerStyle = {},
     visible,

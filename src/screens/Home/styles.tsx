@@ -32,6 +32,12 @@ const useStyles = () => {
       marginTop: 16,
       marginBottom: 8,
     },
+    chipFilterContainer: {
+      flexDirection: 'row',
+      marginTop: 16,
+      marginBottom: 8,
+      paddingHorizontal: 8,
+    },
     content: {
       flex: 1,
     },

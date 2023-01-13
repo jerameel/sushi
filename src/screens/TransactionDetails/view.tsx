@@ -8,8 +8,7 @@ import { Back, Delete, Edit } from 'components/base/SVG';
 import AlertModal from 'components/module/AlertModal';
 import { formatCurrency } from 'utils/formatCurrency';
 import { formatDate } from 'utils/formatDate';
-import SmartText from 'components/smart/SmartText';
-import SmartAlertModal from 'components/smart/SmartAlertModal';
+import TextView from 'components/base/Text/view';
 
 const TransactionDetailsView = (props: TransactionDetailsProps) => {
   const {
@@ -63,7 +62,7 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
           }}>
           <Back fill={colors.PRIMARY_TEXT} width={24} height={24} />
         </TouchableOpacity>
-        <SmartText
+        <Text
           containerStyle={styles.headerTitleContainer}
           variant="title"
           theme={theme}
@@ -88,105 +87,105 @@ const TransactionDetailsView = (props: TransactionDetailsProps) => {
       </View>
       <View style={styles.content}>
         <View style={styles.amountCard}>
-          <Text
+          <TextView
             variant="subtitle"
             style={{ ...styles.amountText, color: config.color }}
             theme={theme}>
             {`${config.prefix}${formatCurrency(Math.abs(transaction.amount), {
               language,
             })}`}
-          </Text>
+          </TextView>
         </View>
         {transaction.description.length > 0 && (
-          <Text containerStyle={styles.descriptionContainer} theme={theme}>
+          <TextView containerStyle={styles.descriptionContainer} theme={theme}>
             {transaction.description}
-          </Text>
+          </TextView>
         )}
         <View style={styles.detailBorder} />
         <View style={styles.detailCard}>
-          <SmartText variant="label" theme={theme} translationKey="CATEGORY" />
-          <Text
+          <Text variant="label" theme={theme} translationKey="CATEGORY" />
+          <TextView
             variant="subtitle"
             containerStyle={styles.detailCardValue}
             theme={theme}>
             {transaction.category}
-          </Text>
+          </TextView>
         </View>
         <View style={styles.detailCard}>
-          <SmartText
+          <Text
             variant="label"
             theme={theme}
             translationKey={destinationWallet ? 'SOURCE_ACCOUNT' : 'ACCOUNT'}
           />
-          <Text
+          <TextView
             variant="subtitle"
             containerStyle={styles.detailCardValue}
             theme={theme}>
             {sourceWallet.label}
-          </Text>
+          </TextView>
         </View>
         {destinationWallet && (
           <View style={styles.detailCard}>
-            <SmartText
+            <Text
               variant="label"
               theme={theme}
               translationKey="DESTINATION_ACCOUNT"
             />
-            <Text
+            <TextView
               variant="subtitle"
               containerStyle={styles.detailCardValue}
               theme={theme}>
               {destinationWallet.label}
-            </Text>
+            </TextView>
           </View>
         )}
         <View style={styles.detailCard}>
-          <SmartText
+          <Text
             variant="label"
             theme={theme}
             translationKey="TRANSACTION_DATE"
           />
-          <Text
+          <TextView
             variant="subtitle"
             containerStyle={styles.detailCardValue}
             theme={theme}>
             {formatDate(transaction.paidAt)}
-          </Text>
+          </TextView>
         </View>
         <View style={styles.detailCard}>
-          <SmartText
+          <Text
             style={styles.detailCardHidden}
             variant="label"
             theme={theme}
             translationKey="DATE_CREATED"
           />
-          <Text
+          <TextView
             variant="subtitle"
             containerStyle={styles.detailCardValue}
             style={styles.detailCardHidden}
             theme={theme}>
             {formatDate(transaction.createdAt)}
-          </Text>
+          </TextView>
         </View>
         {!!transaction.updatedAt && (
           <View style={styles.detailCard}>
-            <SmartText
+            <Text
               style={styles.detailCardHidden}
               variant="label"
               theme={theme}
               translationKey="DATE_UPDATED"
             />
-            <Text
+            <TextView
               variant="subtitle"
               containerStyle={styles.detailCardValue}
               style={styles.detailCardHidden}
               theme={theme}>
               {formatDate(transaction.updatedAt)}
-            </Text>
+            </TextView>
           </View>
         )}
       </View>
-      <SmartAlertModal
+      <AlertModal
         theme={theme}
         titleTranslationKey="DELETE_TRANSACTION"
         descriptionTranslationKey="DELETE_TRANSACTION_INFO"
