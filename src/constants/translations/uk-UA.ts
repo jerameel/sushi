@@ -4,6 +4,7 @@ import en_US from './en-US';
 const uk_UA: Translation = {
   ...en_US,
   // DASHBOARD
+  ALL: 'Все',
   CREDIT: 'Кредит',
   DEBIT: 'Дебет',
   RECENT_TRANSACTIONS: 'Останні Транзакції',
@@ -68,6 +69,9 @@ const uk_UA: Translation = {
   THEME: 'Тема',
   THEME_LIGHT: 'Світла',
   THEME_DARK: 'Темна',
+
+  // Insights
+  INSIGHTS: 'Статистика',
 };
 
 export default uk_UA;
