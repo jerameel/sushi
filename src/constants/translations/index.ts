@@ -9,6 +9,7 @@ import pt_BR from './pt-BR';
 import ru_RU from './ru-RU';
 import uk_UA from './uk-UA';
 import de_DE from './de-DE';
+import id_ID from './id-ID';
 
 export const TRANSLATIONS = {
   'ar-AR': ar_AR,
@@ -22,4 +23,5 @@ export const TRANSLATIONS = {
   'ru-RU': ru_RU,
   'uk-UA': uk_UA,
   'de-DE': de_DE,
+  'id-ID': id_ID,
 };
