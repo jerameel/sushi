@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install npm dependencies
-        run: npm install
+        run: npm ci
   generate-aab:
     needs: setup-node
     runs-on: ubuntu-latest
@@ -22,7 +22,7 @@ jobs:
           echo "${{secrets.ANDROID_KEYSTORE}}" > android/app/sushi.keystore.encoded
           base64 -d android/app/sushi.keystore.encoded > android/app/sushi.keystore
       - name: Install npm dependencies
-        run: npm install
+        run: npm ci
       - name: Build Release AAB
         run: npm run android:release
       - name: Upload AAB Artifact
@@ -36,7 +36,7 @@ jobs:
     steps: 
       - uses: actions/checkout@v2
       - name: Install npm dependencies
-        run: npm install
+        run: npm ci
       - name: Build Debug APK
         run: npm run android:debug
       - name: Upload APK Artifact
