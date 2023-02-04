@@ -17,4 +17,5 @@ export type MainStackParamList = {
   };
   SETTINGS?: {};
   INSIGHTS?: {};
+  FILTERS?: {};
 };

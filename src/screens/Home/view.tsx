@@ -24,6 +24,8 @@ import { groupBy, pickBy } from 'ramda';
 import { formatDate } from 'utils/formatDate';
 import Chip from 'components/base/Chip';
 import useTranslationKey from 'utils/hooks/useTranslationKey';
+import useFilteredTransactions from 'utils/hooks/useFilteredTransactions';
+import FilterButton from 'components/module/FilterButton';
 
 const SubHeader = (props: {
   label: keyof Translation;
@@ -53,49 +55,20 @@ const HomeView = (props: HomeProps) => {
   const { navigation, wallets, transactions, language } = props;
   const { styles, theme, colors } = useStyles();
 
-  const TEXT_ALL = useTranslationKey('ALL');
-  const TEXT_DEBIT = useTranslationKey('DEBIT');
-  const TEXT_CREDIT = useTranslationKey('CREDIT');
+  const { filteredTransactions, dailyFilteredTransactions } =
+    useFilteredTransactions();
+
+  const [TEXT_ALL] = useTranslationKey(['ALL']);
+  const [TEXT_DEBIT] = useTranslationKey(['DEBIT']);
+  const [TEXT_CREDIT] = useTranslationKey(['CREDIT']);
 
   const [filter, setFilter] = useState({
     mode: 'ALL',
   });
 
-  const filteredTransactionRecord: Transactions = pickBy((v: Transaction) => {
-    // ignore transfers on calculation
-    if (filter.mode === 'IN') {
-      return v.amount > 0 && !v.destinationWalletId;
-    }
+  const recentTransactions = dailyFilteredTransactions.slice(0, 3);
 
-    if (filter.mode === 'OUT') {
-      return v.amount < 0 && !v.destinationWalletId;
-    }
-
-    return true;
-  }, transactions);
-
-  const sortTransactionByDate = sortBy(
-    (transaction: Transaction) => transaction.paidAt,
-  );
-  const sortedTransactionsArray = reverse(
-    sortTransactionByDate(
-      Object.keys(filteredTransactionRecord).map(
-        (key) => filteredTransactionRecord[key],
-      ),
-    ),
-  );
-
-  const groupByDate = groupBy((transaction: Transaction) =>
-    formatDate(transaction.paidAt, 'MMMM d yyyy'),
-  );
-
-  const groupedTransactionsArray = Object.entries(
-    groupByDate(sortedTransactionsArray),
-  ).map(([title, data]) => ({ title, data }));
-
-  const recentTransactions = groupedTransactionsArray.slice(0, 3);
-
-  const balanceBreakdown = sortedTransactionsArray.reduce(
+  const balanceBreakdown = filteredTransactions.reduce(
     (accum, transaction) => {
       // ignore transfers on calculation
       if (!transaction.destinationWalletId) {
@@ -185,6 +158,11 @@ const HomeView = (props: HomeProps) => {
             {formatCurrency(currentBalance, { language })}
           </TextView>
         </View>
+        <FilterButton
+          onPress={() => {
+            navigation.navigate('FILTERS');
+          }}
+        />
         <TouchableOpacity
           style={styles.headerActionContainer}
           onPress={() => {
@@ -193,33 +171,8 @@ const HomeView = (props: HomeProps) => {
           <Settings width={24} height={24} fill={colors.PRIMARY_TEXT} />
         </TouchableOpacity>
       </View>
-      <View style={styles.chipFilterContainer}>
-        <Chip
-          label={TEXT_ALL}
-          selected={filter.mode === 'ALL'}
-          onPress={() => setFilter({ mode: 'ALL' })}
-        />
-        <Chip
-          label={TEXT_DEBIT}
-          selected={filter.mode === 'IN'}
-          onPress={() => setFilter({ mode: 'IN' })}
-          icon={<DownLeft fill={colors.POSITIVE} width={16} height={16} />}
-        />
-        <Chip
-          label={TEXT_CREDIT}
-          selected={filter.mode === 'OUT'}
-          onPress={() => setFilter({ mode: 'OUT' })}
-          icon={<UpRight fill={colors.NEGATIVE} width={16} height={16} />}
-        />
-      </View>
-      {/* <BalanceBreakdown
-        containerStyle={styles.breakdownContainer}
-        income={balanceBreakdown.income}
-        expenses={balanceBreakdown.expenses}
-        theme={theme}
-        language={language}
-      /> */}
-      <View style={styles.content}>
+
+      <ScrollView style={styles.content}>
         <View>
           <SubHeader label="MY_ACCOUNTS" />
           <View style={styles.walletsScrollContainer}>
@@ -228,15 +181,11 @@ const HomeView = (props: HomeProps) => {
               horizontal
               showsHorizontalScrollIndicator={false}>
               {walletsArray.map((wallet) => {
-                const walletTransactions = Object.keys(
-                  filteredTransactionRecord,
-                )
-                  .map((key) => filteredTransactionRecord[key])
-                  .filter(
-                    (transaction) =>
-                      transaction.sourceWalletId === wallet.id ||
-                      transaction.destinationWalletId === wallet.id,
-                  );
+                const walletTransactions = filteredTransactions.filter(
+                  (transaction) =>
+                    transaction.sourceWalletId === wallet.id ||
+                    transaction.destinationWalletId === wallet.id,
+                );
                 const totalTransactionAmount = walletTransactions.reduce(
                   (currentTotal: number, transaction) => {
                     if (transaction.destinationWalletId === wallet.id) {
@@ -289,29 +238,30 @@ const HomeView = (props: HomeProps) => {
             }}
           />
           <SectionList
+            scrollEnabled={false}
             contentContainerStyle={styles.contentScroll}
             sections={recentTransactions}
             keyExtractor={(item) => item.id}
-            renderSectionHeader={({ section: { title } }) => (
+            renderSectionHeader={({ section: { day } }) => (
               <TextView
                 variant="subtitle"
                 theme={theme}
                 style={styles.dateText}>
-                {title}
+                {day}
               </TextView>
             )}
             renderItem={({ item }) => renderTransaction({ item: item })}
           />
         </View>
-
-        <View style={styles.actionsContainer}>
-          <Button
-            outline
-            onPress={() => navigation.navigate('CREATE_TRANSACTION')}
-            translationKey="NEW_TRANSACTION"
-            theme={theme}
-          />
-        </View>
+        <View style={{ height: 32 }} />
+      </ScrollView>
+      <View style={styles.actionsContainer}>
+        <Button
+          outline
+          onPress={() => navigation.navigate('CREATE_TRANSACTION')}
+          translationKey="NEW_TRANSACTION"
+          theme={theme}
+        />
       </View>
     </SafeAreaView>
   );

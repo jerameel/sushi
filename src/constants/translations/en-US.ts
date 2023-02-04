@@ -18,6 +18,7 @@ const en_US = {
 
   // ACCOUNT DETAILS
   ACCOUNT_DETAILS: 'Account Details',
+  CURRENT_BALANCE: 'Current Balance',
   INITIAL_BALANCE: 'Initial Balance',
   DELETE_ACCOUNT: 'Delete Account?',
   DELETE_ACCOUNT_INFO:
@@ -52,9 +53,6 @@ const en_US = {
 
   // Transactions
   TRANSACTIONS: 'Transactions',
-  SEARCH: 'Search',
-  DATE_RANGE: 'Date Range',
-  SHOW_ALL: 'Show All',
   EXPORT: 'Export',
 
   // SETTINGS
@@ -68,6 +66,18 @@ const en_US = {
 
   // Insights
   INSIGHTS: 'Insights',
+
+  // Filters
+  FILTERS: 'Filters',
+  SEARCH: 'Search',
+  SEARCH_TERM: 'Search Term',
+  SEARCH_DESCRIPTION:
+    'This searches for similar text in the description or category of a transaction.',
+  DATE_RANGE: 'Date Range',
+  SHOW_ALL: 'Show All',
+  TRANSACTION_TYPE: 'Transaction Type',
+  RESET_FILTER: 'Reset',
+  APPLY_FILTER: 'Apply Filters',
 };
 
 export default en_US;

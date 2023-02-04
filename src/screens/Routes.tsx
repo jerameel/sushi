@@ -12,6 +12,7 @@ import TransactionDetailsScreen from './TransactionDetails';
 import SettingsScreen from './Settings';
 import TransactionsScreen from './Transactions';
 import InsightsScreen from './Insights';
+import FiltersScreen from './Filters';
 
 const MainStack = createNativeStackNavigator<MainStackParamList>();
 
@@ -70,6 +71,11 @@ const Routes = () => {
         options={{ headerShown: false }}
         name="INSIGHTS"
         component={InsightsScreen}
+      />
+      <MainStack.Screen
+        options={{ headerShown: false }}
+        name="FILTERS"
+        component={FiltersScreen}
       />
     </MainStack.Navigator>
   );

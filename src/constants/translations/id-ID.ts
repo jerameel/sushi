@@ -1,4 +1,8 @@
-const id_ID = {
+import { Translation } from 'types/Translation';
+import en_US from './en-US';
+
+const id_ID: Translation = {
+  ...en_US,
   // DASHBOARD
   ALL: 'Semua',
   CREDIT: 'Credit',
@@ -45,8 +49,7 @@ const id_ID = {
   DATE_CREATED: 'Tanggal Diciptakan',
   DATE_UPDATED: 'Tanggal Diperbarui',
   DELETE_TRANSACTION: 'Hapus Transaksi?',
-  DELETE_TRANSACTION_INFO:
-    'Ini akan secara permanen menghapus transaksi.',
+  DELETE_TRANSACTION_INFO: 'Ini akan secara permanen menghapus transaksi.',
   KEEP: 'Simpan',
   DELETE: 'Hapus',
 

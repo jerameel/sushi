@@ -1,14 +1,6 @@
 import React, { useState } from 'react';
-import sortBy from 'ramda/es/sortBy';
-import reverse from 'ramda/es/reverse';
 import Text from 'components/base/Text';
-import {
-  ScrollView,
-  View,
-  StatusBar,
-  TouchableOpacity,
-  SectionList,
-} from 'react-native';
+import { View, StatusBar, TouchableOpacity, SectionList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useStyles from './styles';
 import { WalletDetailsProps } from './props';
@@ -18,21 +10,23 @@ import TransactionCard from 'components/module/TransactionCard';
 import AlertModal from 'components/module/AlertModal';
 import { formatCurrency } from 'utils/formatCurrency';
 import TextView from 'components/base/Text/view';
-import { groupBy } from 'ramda';
-import { formatDate } from 'utils/formatDate';
+import useFilteredTransactions from 'utils/hooks/useFilteredTransactions';
+import FilterButton from 'components/module/FilterButton';
 
 const WalletDetailsView = (props: WalletDetailsProps) => {
-  const { navigation, wallet, transactions, wallets, deleteWallet, language } =
-    props;
+  const { navigation, wallet, wallets, deleteWallet, language } = props;
   const { styles, theme, colors } = useStyles();
 
-  const walletTransactions = Object.keys(transactions)
-    .map((key) => transactions[key])
-    .filter(
-      (transaction) =>
-        transaction.sourceWalletId === wallet.id ||
-        transaction.destinationWalletId === wallet.id,
-    );
+  const { filteredTransactions, dailyFilteredTransactions } =
+    useFilteredTransactions({
+      accountId: wallet.id,
+    });
+
+  const walletTransactions = filteredTransactions.filter(
+    (transaction) =>
+      transaction.sourceWalletId === wallet.id ||
+      transaction.destinationWalletId === wallet.id,
+  );
 
   const balanceBreakdown = walletTransactions.reduce(
     (accum, transaction) => {
@@ -77,22 +71,6 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
 
   const currentBalance =
     wallet.initialAmount + balanceBreakdown.income - balanceBreakdown.expenses;
-
-  const sortTransactionByDate = sortBy(
-    (transaction: Transaction) => transaction.paidAt,
-  );
-
-  const sortedTransactionsArray = reverse(
-    sortTransactionByDate(walletTransactions),
-  );
-
-  const groupByDate = groupBy((transaction: Transaction) =>
-    formatDate(transaction.paidAt, 'MMMM d yyyy'),
-  );
-
-  const groupedTransactionsArray = Object.entries(
-    groupByDate(sortedTransactionsArray),
-  ).map(([title, data]) => ({ title, data }));
 
   const renderTransaction = ({ item: transaction }: { item: Transaction }) => {
     const sourceWallet = wallets[transaction.sourceWalletId];
@@ -141,27 +119,51 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
           theme={theme}
           translationKey="ACCOUNT_DETAILS"
         />
-        <TouchableOpacity
-          style={styles.headerRightAction}
+        <FilterButton
           onPress={() => {
-            navigation.navigate('EDIT_WALLET', {
-              walletId: wallet.id,
-            });
-          }}>
-          <Edit fill={colors.PRIMARY_TEXT} width={24} height={24} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.headerRightAction}
-          onPress={() => {
-            setShowDelete(true);
-          }}>
-          <Delete fill={colors.PRIMARY_TEXT} width={24} height={24} />
-        </TouchableOpacity>
+            navigation.navigate('FILTERS');
+          }}
+        />
       </View>
       <View style={styles.content}>
         <View style={styles.detailsCard}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginBottom: 8,
+              borderBottomWidth: 1,
+              borderBottomColor: colors.DIVIDER,
+            }}>
+            <TextView theme={theme} variant="subtitle">
+              {wallet.label}
+            </TextView>
+            <View style={{ flexDirection: 'row' }}>
+              <TouchableOpacity
+                style={styles.headerRightAction}
+                onPress={() => {
+                  navigation.navigate('EDIT_WALLET', {
+                    walletId: wallet.id,
+                  });
+                }}>
+                <Edit fill={colors.PRIMARY_TEXT} width={24} height={24} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.headerRightAction}
+                onPress={() => {
+                  setShowDelete(true);
+                }}>
+                <Delete fill={colors.PRIMARY_TEXT} width={24} height={24} />
+              </TouchableOpacity>
+            </View>
+          </View>
           <View style={styles.detailsCardRow}>
-            <TextView theme={theme}>{wallet.label}</TextView>
+            <Text
+              variant="label"
+              theme={theme}
+              translationKey="CURRENT_BALANCE"
+            />
             <TextView variant="subtitle" theme={theme}>
               {formatCurrency(currentBalance, { language })}
             </TextView>
@@ -169,6 +171,7 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
           <View style={styles.detailsCardRow}>
             <Text
               variant="label"
+              style={{ color: colors.SECONDARY_TEXT }}
               theme={theme}
               translationKey="INITIAL_BALANCE"
             />
@@ -177,13 +180,23 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
             </TextView>
           </View>
           <View style={styles.detailsCardRow}>
-            <Text variant="label" theme={theme} translationKey={'DEBIT'} />
+            <Text
+              variant="label"
+              theme={theme}
+              style={{ color: colors.SECONDARY_TEXT }}
+              translationKey={'DEBIT'}
+            />
             <TextView variant="body" theme={theme}>
               {formatCurrency(balanceBreakdown.income, { language })}
             </TextView>
           </View>
           <View style={styles.detailsCardRow}>
-            <Text variant="label" theme={theme} translationKey={'CREDIT'} />
+            <Text
+              variant="label"
+              theme={theme}
+              style={{ color: colors.SECONDARY_TEXT }}
+              translationKey={'CREDIT'}
+            />
             <TextView variant="body" theme={theme}>
               {formatCurrency(balanceBreakdown.expenses, { language })}
             </TextView>
@@ -192,14 +205,14 @@ const WalletDetailsView = (props: WalletDetailsProps) => {
         <View style={styles.transactionsContainer}>
           <SectionList
             contentContainerStyle={styles.contentScroll}
-            sections={groupedTransactionsArray}
+            sections={dailyFilteredTransactions}
             keyExtractor={(item) => item.id}
-            renderSectionHeader={({ section: { title } }) => (
+            renderSectionHeader={({ section: { day } }) => (
               <TextView
                 variant="subtitle"
                 theme={theme}
                 style={styles.dateText}>
-                {title}
+                {day}
               </TextView>
             )}
             renderItem={({ item }) => renderTransaction({ item: item })}

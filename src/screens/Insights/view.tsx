@@ -18,6 +18,10 @@ import TextView from 'components/base/Text/view';
 import { formatCurrency } from 'utils/formatCurrency';
 import { formatDate } from 'utils/formatDate';
 import { LineChart } from 'react-native-chart-kit';
+import useFilteredTransactions from 'utils/hooks/useFilteredTransactions';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store';
+import FilterButton from 'components/module/FilterButton';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -25,24 +29,13 @@ const InsightsView = (props: InsightsProps) => {
   const { navigation, wallets, transactions, language } = props;
   const { styles, theme, colors } = useStyles();
 
-  const transactionsArray = Object.values(transactions);
+  const filters = useSelector((state: RootState) => state.filters);
+  const { filteredTransactions, dailyFilteredTransactions } =
+    useFilteredTransactions();
 
-  const groupByTransactionDay = groupBy((transaction: Transaction) =>
-    formatDate(transaction.paidAt, 'dd MMM yyyy'),
+  const groupedByDayTransactionsKeys = dailyFilteredTransactions.map(
+    (t) => t.day,
   );
-
-  const groupedByDayTransactions = groupByTransactionDay(transactionsArray);
-  const groupedByDayTransactionsKeys = Object.keys(groupedByDayTransactions);
-  const dailyTransactions = groupedByDayTransactionsKeys.map((k) => ({
-    day: k,
-    transactions: groupedByDayTransactions[k],
-  }));
-
-  const sortByDay = sortBy(
-    (countedWalletId: typeof dailyTransactions[number]) => -countedWalletId.day,
-  );
-
-  const sortedDailyTransactions = sortByDay(dailyTransactions);
 
   const showLabel = (index: number) => {
     if (groupedByDayTransactionsKeys.length % 2) {
@@ -60,8 +53,8 @@ const InsightsView = (props: InsightsProps) => {
     }
   };
 
-  const dailyTransactionAmountLineData = sortedDailyTransactions.map(
-    ({ day, transactions: currentTransactions }, index) => {
+  const dailyTransactionAmountLineData = dailyFilteredTransactions.map(
+    ({ day, data: currentTransactions }, index) => {
       const incoming = currentTransactions.reduce((accum, current) => {
         // Skip transfers on calculation and negative amount
         if (current.destinationWalletId || current.amount < 0) {
@@ -89,7 +82,8 @@ const InsightsView = (props: InsightsProps) => {
     (transaction: Transaction) => transaction.category,
   );
 
-  const groupedByCategoryTransactions = groupByCategoryName(transactionsArray);
+  const groupedByCategoryTransactions =
+    groupByCategoryName(filteredTransactions);
 
   const summedCategoryArray = Object.keys(groupedByCategoryTransactions).map(
     (category) => {
@@ -138,97 +132,106 @@ const InsightsView = (props: InsightsProps) => {
           theme={theme}
           translationKey="INSIGHTS"
         />
+        <FilterButton
+          onPress={() => {
+            navigation.navigate('FILTERS');
+          }}
+        />
       </View>
       <View style={styles.content}>
         <ScrollView style={styles.contentScroll}>
-          {dailyTransactionAmountLineData.length > 0 && (
-            <View
-              style={{
-                backgroundColor: colors.AREA_HIGHLIGHT,
-                padding: 16,
-                borderRadius: 10,
-                marginTop: 8,
-                flexDirection: 'column',
-              }}>
-              <Text
-                containerStyle={{ marginBottom: 8 }}
-                variant="subtitle"
-                translationKey="DEBIT"
-              />
+          {dailyTransactionAmountLineData.length > 0 &&
+            (filters.transactionType === 'DEBIT' ||
+              filters.transactionType === null) && (
+              <View
+                style={{
+                  backgroundColor: colors.AREA_HIGHLIGHT,
+                  padding: 16,
+                  borderRadius: 10,
+                  marginTop: 8,
+                  flexDirection: 'column',
+                }}>
+                <Text
+                  containerStyle={{ marginBottom: 8 }}
+                  variant="subtitle"
+                  translationKey="DEBIT"
+                />
 
-              <LineChart
-                data={{
-                  labels: dailyTransactionAmountLineData.map((d) => d.day),
-                  datasets: [
-                    {
-                      data: dailyTransactionAmountLineData.map(
-                        (d) => d.incoming,
-                      ),
-                      color: () => colors.POSITIVE, // optional
-                      strokeWidth: 2, // optional
-                    },
-                  ],
-                }}
-                width={screenWidth - 64}
-                height={220}
-                withVerticalLines={false}
-                withHorizontalLines={false}
-                withOuterLines={true}
-                chartConfig={{
-                  backgroundGradientFrom: colors.AREA_HIGHLIGHT,
-                  backgroundGradientTo: colors.AREA_HIGHLIGHT,
-                  color: (opacity = 1) => colors.SECONDARY_TEXT,
-                  // fillShadowGradientFrom: colors.POSITIVE,
-                  fillShadowGradientFromOpacity: 0,
-                  fillShadowGradientToOpacity: 0,
-                }}
-              />
-            </View>
-          )}
-          {dailyTransactionAmountLineData.length > 0 && (
-            <View
-              style={{
-                backgroundColor: colors.AREA_HIGHLIGHT,
-                padding: 16,
-                borderRadius: 10,
-                marginTop: 8,
-                flexDirection: 'column',
-              }}>
-              <Text
-                containerStyle={{ marginBottom: 8 }}
-                variant="subtitle"
-                translationKey="CREDIT"
-              />
+                <LineChart
+                  data={{
+                    labels: dailyTransactionAmountLineData.map((d) => d.day),
+                    datasets: [
+                      {
+                        data: dailyTransactionAmountLineData.map(
+                          (d) => d.incoming,
+                        ),
+                        color: () => colors.POSITIVE, // optional
+                        strokeWidth: 2, // optional
+                      },
+                    ],
+                  }}
+                  width={screenWidth - 64}
+                  height={220}
+                  withVerticalLines={false}
+                  withHorizontalLines={false}
+                  withOuterLines={true}
+                  chartConfig={{
+                    backgroundGradientFrom: colors.AREA_HIGHLIGHT,
+                    backgroundGradientTo: colors.AREA_HIGHLIGHT,
+                    color: (opacity = 1) => colors.SECONDARY_TEXT,
+                    // fillShadowGradientFrom: colors.POSITIVE,
+                    fillShadowGradientFromOpacity: 0,
+                    fillShadowGradientToOpacity: 0,
+                  }}
+                />
+              </View>
+            )}
+          {dailyTransactionAmountLineData.length > 0 &&
+            (filters.transactionType === 'CREDIT' ||
+              filters.transactionType === null) && (
+              <View
+                style={{
+                  backgroundColor: colors.AREA_HIGHLIGHT,
+                  padding: 16,
+                  borderRadius: 10,
+                  marginTop: 8,
+                  flexDirection: 'column',
+                }}>
+                <Text
+                  containerStyle={{ marginBottom: 8 }}
+                  variant="subtitle"
+                  translationKey="CREDIT"
+                />
 
-              <LineChart
-                data={{
-                  labels: dailyTransactionAmountLineData.map((d) => d.day),
-                  datasets: [
-                    {
-                      data: dailyTransactionAmountLineData.map(
-                        (d) => d.outgoing,
-                      ),
-                      color: () => colors.NEGATIVE, // optional
-                      strokeWidth: 2, // optional
-                    },
-                  ],
-                }}
-                width={screenWidth - 64}
-                height={220}
-                withVerticalLines={false}
-                withHorizontalLines={false}
-                withOuterLines={true}
-                chartConfig={{
-                  backgroundGradientFrom: colors.AREA_HIGHLIGHT,
-                  backgroundGradientTo: colors.AREA_HIGHLIGHT,
-                  color: (opacity = 1) => colors.SECONDARY_TEXT,
-                  // fillShadowGradientFrom: colors.NEGATIVE,
-                  fillShadowGradientFromOpacity: 0,
-                  fillShadowGradientToOpacity: 0,
-                }}
-              />
-            </View>
-          )}
+                <LineChart
+                  data={{
+                    labels: dailyTransactionAmountLineData.map((d) => d.day),
+                    datasets: [
+                      {
+                        data: dailyTransactionAmountLineData.map(
+                          (d) => d.outgoing,
+                        ),
+                        color: () => colors.NEGATIVE, // optional
+                        strokeWidth: 2, // optional
+                      },
+                    ],
+                  }}
+                  width={screenWidth - 64}
+                  height={220}
+                  withVerticalLines={false}
+                  withHorizontalLines={false}
+                  withOuterLines={true}
+                  chartConfig={{
+                    backgroundGradientFrom: colors.AREA_HIGHLIGHT,
+                    backgroundGradientTo: colors.AREA_HIGHLIGHT,
+                    color: (opacity = 1) => colors.SECONDARY_TEXT,
+                    // fillShadowGradientFrom: colors.NEGATIVE,
+                    fillShadowGradientFromOpacity: 0,
+                    fillShadowGradientToOpacity: 0,
+                  }}
+                />
+              </View>
+            )}
           {totalTransfer !== null && (
             <View
               style={{
@@ -277,7 +280,7 @@ const InsightsView = (props: InsightsProps) => {
               </>
             </View>
           )}
-          <View style={{ height: 16 }} />
+          <View style={{ height: 32 }} />
         </ScrollView>
       </View>
     </SafeAreaView>
