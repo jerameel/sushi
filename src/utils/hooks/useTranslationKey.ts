@@ -3,10 +3,11 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'store';
 import { TranslationKey } from 'types/Translation';
 
-const useTranslationKey = (translationKey: TranslationKey) => {
+const useTranslationKey = (translationKeys: TranslationKey[]) => {
   const language = useSelector((state: RootState) => state.language.selected);
+  const translations = TRANSLATIONS[language];
 
-  return TRANSLATIONS[language][translationKey];
+  return translationKeys.map((k) => translations[k]);
 };
 
 export default useTranslationKey;

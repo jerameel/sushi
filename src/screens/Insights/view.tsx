@@ -277,7 +277,7 @@ const InsightsView = (props: InsightsProps) => {
               </>
             </View>
           )}
-          <View style={{ height: 16 }} />
+          <View style={{ height: 32 }} />
         </ScrollView>
       </View>
     </SafeAreaView>

@@ -98,7 +98,7 @@ const TransactionsView = (props: TransactionsProps) => {
       Object.keys(transactions).map((key) => transactions[key]),
     ),
   );
-  const TEXT_SHOW_ALL = useTranslationKey('SHOW_ALL');
+  const [TEXT_SHOW_ALL] = useTranslationKey(['SHOW_ALL']);
 
   const filteredTransactionsArray = sortedTransactionsArray.filter(
     allPass([
@@ -166,7 +166,8 @@ const TransactionsView = (props: TransactionsProps) => {
           style={styles.headerRightAction}
           activeOpacity={0.8}
           onPress={() => {
-            showFilters((v) => !v);
+            // showFilters((v) => !v);
+            navigation.navigate('FILTERS');
           }}>
           <View style={{ flexDirection: 'row' }}>
             <Filters

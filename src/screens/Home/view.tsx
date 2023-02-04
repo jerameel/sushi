@@ -53,9 +53,9 @@ const HomeView = (props: HomeProps) => {
   const { navigation, wallets, transactions, language } = props;
   const { styles, theme, colors } = useStyles();
 
-  const TEXT_ALL = useTranslationKey('ALL');
-  const TEXT_DEBIT = useTranslationKey('DEBIT');
-  const TEXT_CREDIT = useTranslationKey('CREDIT');
+  const [TEXT_ALL] = useTranslationKey(['ALL']);
+  const [TEXT_DEBIT] = useTranslationKey(['DEBIT']);
+  const [TEXT_CREDIT] = useTranslationKey(['CREDIT']);
 
   const [filter, setFilter] = useState({
     mode: 'ALL',
@@ -193,33 +193,27 @@ const HomeView = (props: HomeProps) => {
           <Settings width={24} height={24} fill={colors.PRIMARY_TEXT} />
         </TouchableOpacity>
       </View>
-      <View style={styles.chipFilterContainer}>
-        <Chip
-          label={TEXT_ALL}
-          selected={filter.mode === 'ALL'}
-          onPress={() => setFilter({ mode: 'ALL' })}
-        />
-        <Chip
-          label={TEXT_DEBIT}
-          selected={filter.mode === 'IN'}
-          onPress={() => setFilter({ mode: 'IN' })}
-          icon={<DownLeft fill={colors.POSITIVE} width={16} height={16} />}
-        />
-        <Chip
-          label={TEXT_CREDIT}
-          selected={filter.mode === 'OUT'}
-          onPress={() => setFilter({ mode: 'OUT' })}
-          icon={<UpRight fill={colors.NEGATIVE} width={16} height={16} />}
-        />
-      </View>
-      {/* <BalanceBreakdown
-        containerStyle={styles.breakdownContainer}
-        income={balanceBreakdown.income}
-        expenses={balanceBreakdown.expenses}
-        theme={theme}
-        language={language}
-      /> */}
-      <View style={styles.content}>
+
+      <ScrollView style={styles.content}>
+        <View style={styles.chipFilterContainer}>
+          <Chip
+            label={TEXT_ALL}
+            selected={filter.mode === 'ALL'}
+            onPress={() => setFilter({ mode: 'ALL' })}
+          />
+          <Chip
+            label={TEXT_DEBIT}
+            selected={filter.mode === 'IN'}
+            onPress={() => setFilter({ mode: 'IN' })}
+            icon={<DownLeft fill={colors.POSITIVE} width={16} height={16} />}
+          />
+          <Chip
+            label={TEXT_CREDIT}
+            selected={filter.mode === 'OUT'}
+            onPress={() => setFilter({ mode: 'OUT' })}
+            icon={<UpRight fill={colors.NEGATIVE} width={16} height={16} />}
+          />
+        </View>
         <View>
           <SubHeader label="MY_ACCOUNTS" />
           <View style={styles.walletsScrollContainer}>
@@ -289,6 +283,7 @@ const HomeView = (props: HomeProps) => {
             }}
           />
           <SectionList
+            scrollEnabled={false}
             contentContainerStyle={styles.contentScroll}
             sections={recentTransactions}
             keyExtractor={(item) => item.id}
@@ -303,15 +298,15 @@ const HomeView = (props: HomeProps) => {
             renderItem={({ item }) => renderTransaction({ item: item })}
           />
         </View>
-
-        <View style={styles.actionsContainer}>
-          <Button
-            outline
-            onPress={() => navigation.navigate('CREATE_TRANSACTION')}
-            translationKey="NEW_TRANSACTION"
-            theme={theme}
-          />
-        </View>
+        <View style={{ height: 32 }} />
+      </ScrollView>
+      <View style={styles.actionsContainer}>
+        <Button
+          outline
+          onPress={() => navigation.navigate('CREATE_TRANSACTION')}
+          translationKey="NEW_TRANSACTION"
+          theme={theme}
+        />
       </View>
     </SafeAreaView>
   );
