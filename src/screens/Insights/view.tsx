@@ -33,6 +33,16 @@ const InsightsView = (props: InsightsProps) => {
 
   const groupedByDayTransactions = groupByTransactionDay(transactionsArray);
   const groupedByDayTransactionsKeys = Object.keys(groupedByDayTransactions);
+  const dailyTransactions = groupedByDayTransactionsKeys.map((k) => ({
+    day: k,
+    transactions: groupedByDayTransactions[k],
+  }));
+
+  const sortByDay = sortBy(
+    (countedWalletId: typeof dailyTransactions[number]) => -countedWalletId.day,
+  );
+
+  const sortedDailyTransactions = sortByDay(dailyTransactions);
 
   const showLabel = (index: number) => {
     if (groupedByDayTransactionsKeys.length % 2) {
@@ -50,33 +60,27 @@ const InsightsView = (props: InsightsProps) => {
     }
   };
 
-  const dailyTransactionAmountArray = groupedByDayTransactionsKeys.map(
-    (day, index) => {
-      const incoming = groupedByDayTransactions[day].reduce(
-        (accum, current) => {
-          // Skip transfers on calculation and negative amount
-          if (current.destinationWalletId || current.amount < 0) {
-            return accum;
-          }
-          return accum + current.amount;
-        },
-        0,
-      );
-      const outgoing = groupedByDayTransactions[day].reduce(
-        (accum, current) => {
-          // Skip transfers on calculation and positive amount
-          if (current.destinationWalletId || current.amount > 0) {
-            return accum;
-          }
-          return accum + current.amount;
-        },
-        0,
-      );
+  const dailyTransactionAmountLineData = sortedDailyTransactions.map(
+    ({ day, transactions: currentTransactions }, index) => {
+      const incoming = currentTransactions.reduce((accum, current) => {
+        // Skip transfers on calculation and negative amount
+        if (current.destinationWalletId || current.amount < 0) {
+          return accum;
+        }
+        return accum + current.amount;
+      }, 0);
+      const outgoing = currentTransactions.reduce((accum, current) => {
+        // Skip transfers on calculation and positive amount
+        if (current.destinationWalletId || current.amount > 0) {
+          return accum;
+        }
+        return accum + current.amount;
+      }, 0);
 
       return {
         day: showLabel(index) ? day : '',
         incoming,
-        outgoing,
+        outgoing: Math.abs(outgoing),
       };
     },
   );
@@ -137,7 +141,7 @@ const InsightsView = (props: InsightsProps) => {
       </View>
       <View style={styles.content}>
         <ScrollView style={styles.contentScroll}>
-          {dailyTransactionAmountArray.length > 0 && (
+          {dailyTransactionAmountLineData.length > 0 && (
             <View
               style={{
                 backgroundColor: colors.AREA_HIGHLIGHT,
@@ -154,10 +158,12 @@ const InsightsView = (props: InsightsProps) => {
 
               <LineChart
                 data={{
-                  labels: dailyTransactionAmountArray.map((d) => d.day),
+                  labels: dailyTransactionAmountLineData.map((d) => d.day),
                   datasets: [
                     {
-                      data: dailyTransactionAmountArray.map((d) => d.incoming),
+                      data: dailyTransactionAmountLineData.map(
+                        (d) => d.incoming,
+                      ),
                       color: () => colors.POSITIVE, // optional
                       strokeWidth: 2, // optional
                     },
@@ -172,14 +178,14 @@ const InsightsView = (props: InsightsProps) => {
                   backgroundGradientFrom: colors.AREA_HIGHLIGHT,
                   backgroundGradientTo: colors.AREA_HIGHLIGHT,
                   color: (opacity = 1) => colors.SECONDARY_TEXT,
-                  fillShadowGradientFrom: colors.POSITIVE,
-                  fillShadowGradientFromOpacity: 0.2,
+                  // fillShadowGradientFrom: colors.POSITIVE,
+                  fillShadowGradientFromOpacity: 0,
                   fillShadowGradientToOpacity: 0,
                 }}
               />
             </View>
           )}
-          {dailyTransactionAmountArray.length > 0 && (
+          {dailyTransactionAmountLineData.length > 0 && (
             <View
               style={{
                 backgroundColor: colors.AREA_HIGHLIGHT,
@@ -196,10 +202,12 @@ const InsightsView = (props: InsightsProps) => {
 
               <LineChart
                 data={{
-                  labels: dailyTransactionAmountArray.map((d) => d.day),
+                  labels: dailyTransactionAmountLineData.map((d) => d.day),
                   datasets: [
                     {
-                      data: dailyTransactionAmountArray.map((d) => d.outgoing),
+                      data: dailyTransactionAmountLineData.map(
+                        (d) => d.outgoing,
+                      ),
                       color: () => colors.NEGATIVE, // optional
                       strokeWidth: 2, // optional
                     },
@@ -214,8 +222,8 @@ const InsightsView = (props: InsightsProps) => {
                   backgroundGradientFrom: colors.AREA_HIGHLIGHT,
                   backgroundGradientTo: colors.AREA_HIGHLIGHT,
                   color: (opacity = 1) => colors.SECONDARY_TEXT,
-                  fillShadowGradientFrom: colors.NEGATIVE,
-                  fillShadowGradientFromOpacity: 0.2,
+                  // fillShadowGradientFrom: colors.NEGATIVE,
+                  fillShadowGradientFromOpacity: 0,
                   fillShadowGradientToOpacity: 0,
                 }}
               />
