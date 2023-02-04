@@ -53,14 +53,6 @@ const HomeView = (props: HomeProps) => {
   const { filteredTransactions, dailyFilteredTransactions } =
     useFilteredTransactions();
 
-  const [TEXT_ALL] = useTranslationKey(['ALL']);
-  const [TEXT_DEBIT] = useTranslationKey(['DEBIT']);
-  const [TEXT_CREDIT] = useTranslationKey(['CREDIT']);
-
-  const [filter, setFilter] = useState({
-    mode: 'ALL',
-  });
-
   const recentTransactions = dailyFilteredTransactions.slice(0, 3);
 
   const balanceBreakdown = filteredTransactions.reduce(
@@ -126,7 +118,7 @@ const HomeView = (props: HomeProps) => {
     <SafeAreaView style={styles.container}>
       <StatusBar
         backgroundColor={colors.BACKGROUND}
-        barStyle={theme.base === 'Dark' ? 'light-content' : 'dark-content'}
+        barStyle={colors.STATUS_BAR}
       />
       <View style={styles.header}>
         <View style={styles.headerActionContainer}>

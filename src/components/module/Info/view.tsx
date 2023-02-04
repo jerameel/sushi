@@ -11,7 +11,10 @@ const Info = (props: InfoProps) => {
   const { styles, colors } = useStyles(theme);
   return (
     <View style={[styles.container, containerStyle]}>
-      <Text variant="body" style={{ color: COLORS.LIGHT.AREA_HIGHLIGHT }}>
+      <Text
+        theme={theme}
+        variant="body"
+        style={{ color: COLORS.LIGHT.AREA_HIGHLIGHT }}>
         {label || ''}
       </Text>
     </View>

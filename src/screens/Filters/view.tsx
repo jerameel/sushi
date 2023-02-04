@@ -55,10 +55,12 @@ const FiltersView = (props: FiltersProps) => {
     'DEBIT' | 'CREDIT' | null
   >(filters.transactionType);
 
-  const [TEXT_SHOW_ALL] = useTranslationKey(['SHOW_ALL']);
-  const [TEXT_ALL] = useTranslationKey(['ALL']);
-  const [TEXT_DEBIT] = useTranslationKey(['DEBIT']);
-  const [TEXT_CREDIT] = useTranslationKey(['CREDIT']);
+  const [TEXT_SHOW_ALL, TEXT_ALL, TEXT_DEBIT, TEXT_CREDIT] = useTranslationKey([
+    'SHOW_ALL',
+    'ALL',
+    'DEBIT',
+    'CREDIT',
+  ]);
 
   const applyFilters = (selectedFilters: Filters) => {
     dispatch(applyFiltersAction(selectedFilters));
@@ -68,7 +70,7 @@ const FiltersView = (props: FiltersProps) => {
     <SafeAreaView style={STYLES.CONTAINER}>
       <StatusBar
         backgroundColor={colors.BACKGROUND}
-        barStyle={theme.base === 'Dark' ? 'light-content' : 'dark-content'}
+        barStyle={colors.STATUS_BAR}
       />
       <View style={STYLES.HEADER}>
         <Text

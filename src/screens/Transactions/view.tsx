@@ -65,7 +65,7 @@ const TransactionsView = (props: TransactionsProps) => {
     <SafeAreaView style={styles.container}>
       <StatusBar
         backgroundColor={colors.BACKGROUND}
-        barStyle={theme.base === 'Dark' ? 'light-content' : 'dark-content'}
+        barStyle={colors.STATUS_BAR}
       />
       <View style={styles.header}>
         <TouchableOpacity
@@ -107,6 +107,7 @@ const TransactionsView = (props: TransactionsProps) => {
         </View>
         {exportStatus === 'SUCCESS' ? (
           <Info
+            theme={theme}
             label={`Transactions has been successfully exported to ${exportedFileName}`}
           />
         ) : (
