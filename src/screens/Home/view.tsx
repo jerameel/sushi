@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import sortBy from 'ramda/es/sortBy';
-import reverse from 'ramda/es/reverse';
 import Text from 'components/base/Text';
 import {
   ScrollView,
@@ -13,16 +11,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import useStyles from './styles';
 import { HomeProps } from './props';
 import WalletCard from 'components/module/WalletCard';
-import { Insights, DownLeft, Settings, UpRight } from 'components/base/SVG';
+import { Insights, Settings } from 'components/base/SVG';
 import TransactionCard from 'components/module/TransactionCard';
-import { Transaction, Transactions } from 'store/transactions';
+import { Transaction } from 'store/transactions';
 import { formatCurrency } from 'utils/formatCurrency';
 import TextView from 'components/base/Text/view';
 import { Translation } from 'types/Translation';
 import Button from 'components/base/Button';
-import { groupBy, pickBy } from 'ramda';
-import { formatDate } from 'utils/formatDate';
-import Chip from 'components/base/Chip';
 import useTranslationKey from 'utils/hooks/useTranslationKey';
 import useFilteredTransactions from 'utils/hooks/useFilteredTransactions';
 import FilterButton from 'components/module/FilterButton';

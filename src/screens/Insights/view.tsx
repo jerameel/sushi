@@ -53,30 +53,35 @@ const InsightsView = (props: InsightsProps) => {
     }
   };
 
-  const dailyTransactionAmountLineData = dailyFilteredTransactions.map(
-    ({ day, data: currentTransactions }, index) => {
-      const incoming = currentTransactions.reduce((accum, current) => {
-        // Skip transfers on calculation and negative amount
-        if (current.destinationWalletId || current.amount < 0) {
-          return accum;
-        }
-        return accum + current.amount;
-      }, 0);
-      const outgoing = currentTransactions.reduce((accum, current) => {
-        // Skip transfers on calculation and positive amount
-        if (current.destinationWalletId || current.amount > 0) {
-          return accum;
-        }
-        return accum + current.amount;
-      }, 0);
-
-      return {
-        day: showLabel(index) ? day : '',
-        incoming,
-        outgoing: Math.abs(outgoing),
-      };
-    },
+  const sortByDay = sortBy(
+    (countedWalletId: typeof dailyFilteredTransactions[number]) =>
+      new Date(countedWalletId.day).getTime(),
   );
+
+  const dailyTransactionAmountLineData = sortByDay(
+    dailyFilteredTransactions,
+  ).map(({ day, data: currentTransactions }, index) => {
+    const incoming = currentTransactions.reduce((accum, current) => {
+      // Skip transfers on calculation and negative amount
+      if (current.destinationWalletId || current.amount < 0) {
+        return accum;
+      }
+      return accum + current.amount;
+    }, 0);
+    const outgoing = currentTransactions.reduce((accum, current) => {
+      // Skip transfers on calculation and positive amount
+      if (current.destinationWalletId || current.amount > 0) {
+        return accum;
+      }
+      return accum + current.amount;
+    }, 0);
+
+    return {
+      day: showLabel(index) ? formatDate(day, 'MMM dd yyyy') : '',
+      incoming,
+      outgoing: Math.abs(outgoing),
+    };
+  });
 
   const groupByCategoryName = groupBy(
     (transaction: Transaction) => transaction.category,

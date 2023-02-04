@@ -62,8 +62,8 @@ const useFilteredTransactions = (input?: UseFilteredTransactionsInput) => {
     ...(input || {}),
   };
 
-  const sortTransactionByDate = sortBy(
-    (transaction: Transaction) => transaction.paidAt,
+  const sortTransactionByDate = sortBy((transaction: Transaction) =>
+    new Date(transaction.paidAt).getTime(),
   );
   const sortedTransactionsArray = reverse(
     sortTransactionByDate(
@@ -90,7 +90,7 @@ const useFilteredTransactions = (input?: UseFilteredTransactionsInput) => {
 
   const sortByDay = sortBy(
     (countedWalletId: typeof dailyFilteredTransactions[number]) =>
-      -countedWalletId.day,
+      -new Date(countedWalletId.day).getTime(),
   );
 
   const sortedDailyTransactions = sortByDay(dailyFilteredTransactions);
