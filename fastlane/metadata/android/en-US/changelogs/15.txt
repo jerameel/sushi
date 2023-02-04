@@ -1,0 +1,2 @@
+- Global filters
+- New theme "Wasabi"
