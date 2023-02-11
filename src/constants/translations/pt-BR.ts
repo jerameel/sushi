@@ -4,8 +4,9 @@ import en_US from './en-US';
 const pt_BR: Translation = {
   ...en_US,
   // DASHBOARD
-  CREDIT: 'Crédito',
-  DEBIT: 'Débito',
+  ALL: 'Todas',
+  CREDIT: 'Saída',
+  DEBIT: 'Entrada',
   RECENT_TRANSACTIONS: 'Transações recentes',
   MY_ACCOUNTS: 'Minhas Contas',
 
@@ -21,6 +22,7 @@ const pt_BR: Translation = {
 
   // ACCOUNT DETAILS
   ACCOUNT_DETAILS: 'Detalhes da Conta',
+  CURRENT_BALANCE: 'Saldo Atual',
   INITIAL_BALANCE: 'Saldo Inicial',
   DELETE_ACCOUNT: 'Excluir Conta?',
   DELETE_ACCOUNT_INFO:
@@ -55,9 +57,6 @@ const pt_BR: Translation = {
 
   // Transactions
   TRANSACTIONS: 'Transações',
-  SEARCH: 'Procurar',
-  DATE_RANGE: 'Período',
-  SHOW_ALL: 'Mostrar Tudo',
   EXPORT: 'Exportar',
 
   // SETTINGS
@@ -68,6 +67,22 @@ const pt_BR: Translation = {
   THEME: 'Tema',
   THEME_LIGHT: 'Claro',
   THEME_DARK: 'Escuro',
+  THEME_WASABI: 'Wasabi',
+
+  // Insights
+  INSIGHTS: 'Insights',
+
+  // Filters
+  FILTERS: 'Filtros',
+  SEARCH: 'Procurar',
+  SEARCH_TERM: 'Termo de busca',
+  SEARCH_DESCRIPTION:
+    'Busca por texto semelhante na descrição ou categoria de uma transação.',
+  DATE_RANGE: 'Período',
+  SHOW_ALL: 'Mostrar Tudo',
+  TRANSACTION_TYPE: 'Tipo de transação',
+  RESET_FILTER: 'Redefinir',
+  APPLY_FILTER: 'Aplicar Filtros',
 };
 
 export default pt_BR;

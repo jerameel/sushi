@@ -127,7 +127,7 @@ const DatePicker = (props: DatePickerPrivateProps) => {
                     : {}),
                 }}
                 onDayPress={(day) => {
-                  const newDate = new Date(day.dateString);
+                  const newDate = new Date(day.year, day.month-1, day.day);
                   // reset or start date
                   if ((startDate && endDate) || !startDate || !setEndDate) {
                     setStartDate(newDate);
