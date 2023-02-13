@@ -1,4 +1,7 @@
-const en_US = {
+import { Translation } from 'types/Translation';
+import en_US from './en-US';
+
+const ca_CA = {
   // DASHBOARD
   ALL: 'Tots',
   CREDIT: 'Crèdit',
