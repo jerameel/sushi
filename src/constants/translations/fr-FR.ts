@@ -6,28 +6,28 @@ const fr_FR: Translation = {
   // DASHBOARD
   CREDIT: 'Crédit',
   DEBIT: 'Débit',
-  RECENT_TRANSACTIONS: 'Transazioni Recenti',
-  MY_ACCOUNTS: 'I Miei Conti',
+  RECENT_TRANSACTIONS: 'Transactions récentes',
+  MY_ACCOUNTS: 'Mes comptes',
 
   // ADD ACCOUNT
-  ADD_ACCOUNT: 'Aggiungi Conto',
-  ACCOUNT_NAME: 'Nome Conto',
-  INITIAL_AMOUNT: 'Importo Iniziale',
-  CREATE_ACCOUNT: 'Crea Conto',
+  ADD_ACCOUNT: 'Ajouter un Compte',
+  ACCOUNT_NAME: 'Intitulé du Compte',
+  INITIAL_AMOUNT: 'Montant Initial',
+  CREATE_ACCOUNT: 'Créer un Compte',
 
   // EDIT ACCOUNT
-  EDIT_ACCOUNT: 'Modifica Conto',
-  UPDATE_ACCOUNT: 'Aggiorna Conto',
+  EDIT_ACCOUNT: 'Modifier le compte',
+  UPDATE_ACCOUNT: 'Mettre à jour le compte',
 
   // ACCOUNT DETAILS
-  ACCOUNT_DETAILS: 'Dettagli Account',
-  INITIAL_BALANCE: 'Bilancio Iniziale',
-  DELETE_ACCOUNT: 'Elimina Account?',
+  ACCOUNT_DETAILS: 'Détails du Compte',
+  INITIAL_BALANCE: 'Balance Initiale',
+  DELETE_ACCOUNT: 'Supprimer le Compte ?',
   DELETE_ACCOUNT_INFO:
-    'Questo eliminerà definitivamente il conto {{accountName}} comprese {{transactionCount}} transazioni collegate.',
+    'Cela va supprimer définitivement le compte {{accountName}} ainsi que {{transactionCount}} transactions liées.',
 
   // NEW TRANSACTION
-  NEW_TRANSACTION: 'Nuova Transazione',
+  NEW_TRANSACTION: 'Nouvelle Transaction',
   CREATE_TRANSACTION: 'Crea Transazione',
   CATEGORY: 'Categoria',
   SOURCE_ACCOUNT: 'Conto Di Origine',
