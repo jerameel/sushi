@@ -16,8 +16,8 @@ const fr_FR: Translation = {
   CREATE_ACCOUNT: 'Créer un Compte',
 
   // EDIT ACCOUNT
-  EDIT_ACCOUNT: 'Modifier le compte',
-  UPDATE_ACCOUNT: 'Mettre à jour le compte',
+  EDIT_ACCOUNT: 'Modifier le Compte',
+  UPDATE_ACCOUNT: 'Mettre à jour le Compte',
 
   // ACCOUNT DETAILS
   ACCOUNT_DETAILS: 'Détails du Compte',
@@ -28,43 +28,59 @@ const fr_FR: Translation = {
 
   // NEW TRANSACTION
   NEW_TRANSACTION: 'Nouvelle Transaction',
-  CREATE_TRANSACTION: 'Crea Transazione',
-  CATEGORY: 'Categoria',
-  SOURCE_ACCOUNT: 'Conto Di Origine',
-  DESTINATION_ACCOUNT: 'Conto Di Destinazione',
-  TRANSFER: 'Trasferimento',
-  SHORT_DESCRIPTION: 'Breve Descrizione',
-  AMOUNT: 'Importo',
+  CREATE_TRANSACTION: 'Ajouter une Transaction',
+  CATEGORY: 'Catégorie',
+  SOURCE_ACCOUNT: 'Compte d'origine',
+  DESTINATION_ACCOUNT: 'Compte de destination',
+  TRANSFER: 'Transférer',
+  SHORT_DESCRIPTION: 'Description Courte',
+  AMOUNT: 'Montant',
 
   // EDIT TRANSACTION
-  EDIT_TRANSACTION: 'Modifica Transazione',
-  UPDATE_TRANSACTION: 'Aggiorna Transazione',
+  EDIT_TRANSACTION: 'Modifier la Transaction',
+  UPDATE_TRANSACTION: 'Mettre à jour la Transaction',
 
   // TRANSACTION DETAILS
-  TRANSACTION_DETAILS: 'Dettagli Transazione',
-  ACCOUNT: 'Conto',
-  DATE_CREATED: 'Data Di Creazione',
-  DATE_UPDATED: 'Data Di Aggiornamento',
-  DELETE_TRANSACTION: 'Eliminare La Transazione?',
-  DELETE_TRANSACTION_INFO: 'Questo eliminerà definitivamente la transazione.',
-  KEEP: 'Mantieni',
-  DELETE: 'Elimina',
+  TRANSACTION_DETAILS: 'Détails de la Transaction',
+  ACCOUNT: 'Compte',
+  DATE_CREATED: 'Date de Création',
+  DATE_UPDATED: 'Date de Modification',
+  DELETE_TRANSACTION: 'Supprimer la Transaction ?',
+  DELETE_TRANSACTION_INFO: 'Cela va supprimer définitivement la Transaction',
+  KEEP: 'Conserver',
+  DELETE: 'Supprimer',
 
   // Transactions
-  TRANSACTIONS: 'Transazioni',
-  SEARCH: 'Ricerca',
-  DATE_RANGE: 'Intervallo Di Date',
-  SHOW_ALL: 'Mostra Tutto',
-  EXPORT: 'Export',
+  TRANSACTIONS: 'Transactions',
+  SEARCH: 'Rechercher',
+  DATE_RANGE: 'Plage de date',
+  SHOW_ALL: 'Tout montrer',
+  EXPORT: 'Exporter',
 
   // SETTINGS
-  SETTINGS: 'Impostazioni',
-  TRANSLATION_NAME: 'Italiano (IT)',
-  CURRENCY: 'Valuta',
-  LANGUAGE: 'Lingua',
-  THEME: 'Tema',
-  THEME_LIGHT: 'Chiaro',
-  THEME_DARK: 'Scuro',
+  SETTINGS: 'Réglages',
+  TRANSLATION_NAME: 'Français (FR)',
+  CURRENCY: 'Monnaie',
+  LANGUAGE: 'Langue',
+  THEME: 'Thème',
+  THEME_LIGHT: 'Clair',
+  THEME_DARK: 'Sombre',
+  THEME_WASABI: 'Wasabi',
+
+  // Insights
+  INSIGHTS: 'Insights',
+
+  // Filters
+  FILTERS: 'Filtres',
+  SEARCH: 'Rechercher',
+  SEARCH_TERM: 'Rechercher un terme',
+  SEARCH_DESCRIPTION:
+    'La recherche se fait sur des termes similaires dans la description, catégorie ou transaction.',
+  DATE_RANGE: 'Plage de date',
+  SHOW_ALL: 'Tout montrer',
+  TRANSACTION_TYPE: 'Type de Transaction',
+  RESET_FILTER: 'Réinitialiser',
+  APPLY_FILTER: 'Appliquer les filtres',
 };
 
-export default it_IT;
+export default fr_FR;
