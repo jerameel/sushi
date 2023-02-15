@@ -8,6 +8,7 @@ import { Back } from 'components/base/SVG';
 import Picker from 'components/base/Picker';
 import { TRANSLATIONS } from 'constants/translations';
 import Text from 'components/base/Text';
+import useTranslationKey from 'utils/hooks/useTranslationKey';
 
 const LANGUAGE_OPTIONS = Object.keys(TRANSLATIONS).map((value) => {
   const typedValue = value as keyof typeof TRANSLATIONS;
@@ -29,6 +30,9 @@ const SettingsView = (props: SettingsProps) => {
   } = props;
   const { styles, theme, colors } = useStyles();
 
+  const [TEXT_THEME_LIGHT, TEXT_THEME_DARK, TEXT_THEME_WASABI] =
+    useTranslationKey(['THEME_LIGHT', 'THEME_DARK', 'THEME_WASABI']);
+
   const numbroLanguages = numbro.languages();
   const currencyLanguageOptions = Object.keys(numbroLanguages).reduce(
     (accum: { label: string; value: string }[], key: string) => {
@@ -48,7 +52,7 @@ const SettingsView = (props: SettingsProps) => {
     <SafeAreaView style={styles.container}>
       <StatusBar
         backgroundColor={colors.BACKGROUND}
-        barStyle={theme.base === 'Dark' ? 'light-content' : 'dark-content'}
+        barStyle={colors.STATUS_BAR}
       />
       <View style={styles.header}>
         <TouchableOpacity
@@ -95,16 +99,16 @@ const SettingsView = (props: SettingsProps) => {
             }}
             options={[
               {
-                label:
-                  TRANSLATIONS[selectedLanguage as keyof typeof TRANSLATIONS]
-                    .THEME_LIGHT,
+                label: TEXT_THEME_LIGHT,
                 value: 'Light',
               },
               {
-                label:
-                  TRANSLATIONS[selectedLanguage as keyof typeof TRANSLATIONS]
-                    .THEME_DARK,
+                label: TEXT_THEME_DARK,
                 value: 'Dark',
+              },
+              {
+                label: TEXT_THEME_WASABI,
+                value: 'Wasabi',
               },
             ]}
             theme={theme}

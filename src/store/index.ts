@@ -20,6 +20,7 @@ import transactionsReducer from './transactions';
 import currencyReducer from './currency';
 import languageReducer from './language';
 import Migrations from './migration';
+import filtersReducer from './filters';
 
 const rootReducer = combineReducers({
   theme: themeReducer,
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   transactions: transactionsReducer,
   currency: currencyReducer,
   language: languageReducer,
+  filters: filtersReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

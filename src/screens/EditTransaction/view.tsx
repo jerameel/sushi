@@ -69,7 +69,7 @@ const EditTransactionView = (props: EditTransactionProps) => {
     <SafeAreaView style={styles.container}>
       <StatusBar
         backgroundColor={colors.BACKGROUND}
-        barStyle={theme.base === 'Dark' ? 'light-content' : 'dark-content'}
+        barStyle={colors.STATUS_BAR}
       />
       <View style={styles.header}>
         <TouchableOpacity

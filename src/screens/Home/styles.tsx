@@ -13,6 +13,7 @@ const useStyles = () => {
       paddingBottom: 8,
       marginHorizontal: 8,
       flexDirection: 'row',
+      alignItems: 'center',
       borderBottomWidth: 1,
       borderBottomColor: colors.DIVIDER,
     },
@@ -64,6 +65,11 @@ const useStyles = () => {
     },
     transactionsContainer: {
       flex: 1,
+      marginTop: 16,
+      marginHorizontal: 16,
+      borderWidth: 1,
+      borderColor: colors.DIVIDER,
+      borderRadius: 10,
     },
     transactionCard: {
       marginTop: 8,
