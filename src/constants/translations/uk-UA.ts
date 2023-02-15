@@ -22,6 +22,7 @@ const uk_UA: Translation = {
 
   // ACCOUNT DETAILS
   ACCOUNT_DETAILS: 'Деталі Рахунку',
+  CURRENT_BALANCE: 'Поточний Баланс',
   INITIAL_BALANCE: 'Початковий Баланс',
   DELETE_ACCOUNT: 'Видалити Рахунок?',
   DELETE_ACCOUNT_INFO:
@@ -56,9 +57,6 @@ const uk_UA: Translation = {
 
   // Transactions
   TRANSACTIONS: 'Транзакції',
-  SEARCH: 'Пошук',
-  DATE_RANGE: 'Проміжок Часу',
-  SHOW_ALL: 'Показати Всі',
   EXPORT: 'Експорт',
 
   // SETTINGS
@@ -69,9 +67,22 @@ const uk_UA: Translation = {
   THEME: 'Тема',
   THEME_LIGHT: 'Світла',
   THEME_DARK: 'Темна',
+  THEME_WASABI: 'Васабі',
 
   // Insights
   INSIGHTS: 'Статистика',
+
+  // Filters
+  FILTERS: 'Фільтри',
+  SEARCH: 'Пошук',
+  SEARCH_TERM: 'Пошуковий запит',
+  SEARCH_DESCRIPTION:
+    'Для пошуку тексту в описі або категорії транзацкії.',
+  DATE_RANGE: 'Проміжок Часу',
+  SHOW_ALL: 'Показати Всі',
+  TRANSACTION_TYPE: 'Тип транзацкії',
+  RESET_FILTER: 'Скинути',
+  APPLY_FILTER: 'Застосувати фільтри',
 };
 
 export default uk_UA;
