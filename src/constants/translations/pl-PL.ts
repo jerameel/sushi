@@ -1,9 +1,6 @@
-import { Translation } from 'types/Translation';
-import en_US from './en-US';
-
-const pl_PL: Translation = {
-  ...en_US,
+const pl_PL = {
   // DASHBOARD
+  ALL: 'Wszystko',
   CREDIT: 'Wydatki',
   DEBIT: 'Przychody',
   RECENT_TRANSACTIONS: 'Ostatnia aktywność',
@@ -21,6 +18,7 @@ const pl_PL: Translation = {
 
   // ACCOUNT DETAILS
   ACCOUNT_DETAILS: 'Informacje o koncie',
+  CURRENT_BALANCE: 'Obecne saldo',
   INITIAL_BALANCE: 'Saldo początkowe',
   DELETE_ACCOUNT: 'Usunąć konto?',
   DELETE_ACCOUNT_INFO:
@@ -28,12 +26,12 @@ const pl_PL: Translation = {
 
   // NEW TRANSACTION
   NEW_TRANSACTION: 'Nowa transakcja',
-  CREATE_TRANSACTION: 'Zaakceptuj transakcję',
+  CREATE_TRANSACTION: 'Utwórz transakcję',
   CATEGORY: 'Kategoria',
   SOURCE_ACCOUNT: 'Z konta',
   DESTINATION_ACCOUNT: 'Na konto',
   TRANSFER: 'Przelew',
-  SHORT_DESCRIPTION: 'Opis',
+  SHORT_DESCRIPTION: 'Krótki opis',
   AMOUNT: 'Kwota',
 
   // EDIT TRANSACTION
@@ -43,6 +41,8 @@ const pl_PL: Translation = {
   // TRANSACTION DETAILS
   TRANSACTION_DETAILS: 'Informacje o transakcji',
   ACCOUNT: 'Konto',
+  TRANSACTION_DATE: 'Data transakcji',
+  TRANSACTION_TIME: 'Czas transakcji',
   DATE_CREATED: 'Data utworzenia',
   DATE_UPDATED: 'Data aktualizacji',
   DELETE_TRANSACTION: 'Usunąć transakcję?',
@@ -52,10 +52,7 @@ const pl_PL: Translation = {
 
   // Transactions
   TRANSACTIONS: 'Transakcje',
-  SEARCH: 'Wyszukaj',
-  DATE_RANGE: 'Okres',
-  SHOW_ALL: 'Pokaż wszystkie',
-  EXPORT: 'Export',
+  EXPORT: 'Eksportuj',
 
   // SETTINGS
   SETTINGS: 'Ustawienia',
@@ -65,6 +62,22 @@ const pl_PL: Translation = {
   THEME: 'Motyw',
   THEME_LIGHT: 'Jasny',
   THEME_DARK: 'Ciemny',
+  THEME_WASABI: 'Wasabi',
+
+  // Insights
+  INSIGHTS: 'Analiza',
+
+  // Filters
+  FILTERS: 'Filtry',
+  SEARCH: 'Szukaj',
+  SEARCH_TERM: 'Wyszukaj frazę',
+  SEARCH_DESCRIPTION:
+    'Wyszukuje podobne frazy w opisach bądź nazwach kategorii transakcji.',
+  DATE_RANGE: 'Okres',
+  SHOW_ALL: 'Pokaż wszystkie',
+  TRANSACTION_TYPE: 'Typ transakcji',
+  RESET_FILTER: 'Wyczyść filtry',
+  APPLY_FILTER: 'Zastosuj filtry',
 };
 
 export default pl_PL;
